@@ -20,7 +20,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove($move);
   }
 
-
   public function test_game_does_not_start_already_over()
   {
     $this->assertFalse($this->game->isOver());
@@ -31,32 +30,11 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->isValidMove(PlayerMove::forX(0, 0));
   }
 
-  public function test_making_X_move_twice_in_a_row_is_invalid()
-  {
-    $this->game->makeMove(PlayerMove::forX(0, 0));
-    $moveIsValid = $this->game->isValidMove(PlayerMove::forX(1, 0));
-    $this->assertFalse($moveIsValid);
-  }
-
-  public function test_playing_where_someone_has_played_is_invalid()
-  {
-    $this->game->makeMove(PlayerMove::forX(0, 0));
-    $this->assertFalse($this->game->isValidMove(PlayerMove::forO(0, 0)));
-  }
-
   public function test_playing_an_invalid_move_throws_an_exception()
   {
     $this->setExpectedException(IllegalMoveException::class);
     $this->game->makeMove(PlayerMove::forX(0, 0));
     $this->game->makeMove(PlayerMove::forO(0, 0));
-  }
-
-  public function test_playing_where_you_played_before_is_invalid()
-  {
-    $this->setExpectedException(IllegalMoveException::class);
-    $this->game->makeMove(PlayerMove::forX(0, 0));
-    $this->game->makeMove(PlayerMove::forO(0, 1));
-    $this->game->makeMove(PlayerMove::forX(0, 0));
   }
 
   public function test_game_is_over_after_nine_moves_made()
@@ -74,19 +52,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->game->isOver());
   }
   
-  
-
-  public function test_game_is_won_if_X_takes_top_row()
-  {
-    $this->game->makeMove(PlayerMove::forX(-1, -1));
-    $this->game->makeMove(PlayerMove::forO( 0,  0));
-    $this->game->makeMove(PlayerMove::forX(-1,  0));
-    $this->game->makeMove(PlayerMove::forO( 0,  1));
-    $this->game->makeMove(PlayerMove::forX(-1,  1));
-
-    $this->assertTrue($this->game->hasWinner());
-  }
-
   public function test_game_has_no_winner_at_start()
   {
     $this->assertFalse($this->game->hasWinner());
