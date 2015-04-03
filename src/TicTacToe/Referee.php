@@ -123,9 +123,17 @@ class Referee {
 
   public function winnerIsO($moveHistory)
   {
-    return $this->checkOHasWonTopRow($moveHistory);
-  }
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isO() && $move->getRow() == 0) {
+        $marks++;
+      }
+    }
 
+    $OHasWonMiddleRow = $marks == 3;
+
+    return $OHasWonMiddleRow || $this->checkOHasWonTopRow($moveHistory);
+  }
 
 }
 
