@@ -5,7 +5,10 @@ namespace JSK\TicTacToe;
 
 class Move {
 
-  /** @var  string */
+  const X = 'X';
+  const O = 'O';
+
+  /** @var  int */
   private $player;
   /** @var  int */
   private $x;
@@ -13,7 +16,7 @@ class Move {
   private $y;
 
   /**
-   * @param $player string
+   * @param $player int
    * @param $x int
    * @param $y int
    */
@@ -29,7 +32,7 @@ class Move {
    * @return Move
    */
   public static function forX($x, $y) {
-    return new Move('X', $x, $y);
+    return new Move(self::X, $x, $y);
   }
 
   /**
@@ -38,7 +41,7 @@ class Move {
    * @return Move
    */
   public static function forO($x, $y) {
-    return new Move('O', $x, $y);
+    return new Move(self::O, $x, $y);
   }
 
   /**
@@ -46,7 +49,7 @@ class Move {
    */
   public function isX()
   {
-    return $this->player == 'X';
+    return $this->player == self::X;
   }
 
   /**

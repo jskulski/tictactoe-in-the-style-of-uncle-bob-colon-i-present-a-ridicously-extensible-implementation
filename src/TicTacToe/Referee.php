@@ -5,6 +5,7 @@ namespace JSK\TicTacToe;
 
 
 class Referee {
+
   /**
    * @param Move $move
    * @return bool
