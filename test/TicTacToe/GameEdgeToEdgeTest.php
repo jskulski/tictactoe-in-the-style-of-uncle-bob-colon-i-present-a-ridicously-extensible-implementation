@@ -18,7 +18,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $game = new Game();
 
     $game->makeMove(Move::forX(-1, -1));
-    $game->makeMove(Move::forO('O', -1,  0));
+    $game->makeMove(Move::forO(-1,  0));
     $game->makeMove(Move::forX(-1,  1));
     $game->makeMove(Move::forO( 0, -1));
     $game->makeMove(Move::forX( 0,  0));
@@ -57,5 +57,11 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($moveIsValid);
   }
 
+  public function test_playing_where_someone_has_played_is_invalid()
+  {
+    $game = new Game();
+    $game->makeMove(Move::forX(0, 0));
+    $this->assertFalse($game->isValidMove(Move::forO(0, 0)));
+  }
 
 }

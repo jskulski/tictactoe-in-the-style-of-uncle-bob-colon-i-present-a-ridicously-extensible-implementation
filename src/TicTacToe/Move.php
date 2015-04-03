@@ -15,7 +15,6 @@ class Move {
     return new Move('O', $x, $y);
   }
 
-
   /**
    * return True
    */
