@@ -3,12 +3,20 @@
 
 namespace JSK\TicTacToe;
 
+
 class Game {
 
   /** @var  Move */
   private $lastMove;
   /** @var  boolean */
   private $gameState_isOver = false;
+  /** @var  Referee */
+  private $referee;
+
+  function __construct()
+  {
+    $this->referee = new Referee();
+  }
 
   public function makeMove(Move $move)
   {
@@ -27,14 +35,10 @@ class Game {
 
   public function isValidMove(Move $move)
   {
-    if ($this->lastMove && $move->getX() == $this->lastMove->getX() && $move->getY() == $this->lastMove->getY()) {
-      return false;
-    }
-
-    if ($move->isX() && $this->lastMove && $this->lastMove->isX()) {
-      return false;
-    }
-    return true;
+    if (!$this->lastMove)
+      $this->lastMove = Move::forO(4,4);
+    return $this->referee->makeCall($move, $this->lastMove);
   }
+
 
 }

@@ -12,16 +12,31 @@ class Move {
   /** @var  int */
   private $y;
 
+  /**
+   * @param $player string
+   * @param $x int
+   * @param $y int
+   */
   private function __construct($player, $x, $y) {
     $this->player = $player;
     $this->x = $x;
     $this->y = $y;
   }
 
+  /**
+   * @param $x int
+   * @param $y int
+   * @return Move
+   */
   public static function forX($x, $y) {
     return new Move('X', $x, $y);
   }
 
+  /**
+   * @param $x int
+   * @param $y int
+   * @return Move
+   */
   public static function forO($x, $y) {
     return new Move('O', $x, $y);
   }
