@@ -188,9 +188,15 @@ class Referee {
   private function checkOHasWonBottomRow(array $moveHistory)
   {
     $marks = 0;
-    foreach ($moveHistory as $move) {
-      if ($move->isO() && $move->getRow() == 1) {
-        $marks++;
+    $filteredMoveHistory = $moveHistory;
+
+    $filteredMoveHistory = array_filter($moveHistory, function($move) { return $move->isO(); });
+
+    foreach ($filteredMoveHistory as $move) {
+      if ($move->isO()) {
+        if ($move->getRow() == 1) {
+          $marks++;
+        }
       }
     }
     return $marks == 3;
