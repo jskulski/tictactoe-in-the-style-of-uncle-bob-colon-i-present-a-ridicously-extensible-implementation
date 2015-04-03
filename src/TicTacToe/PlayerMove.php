@@ -11,37 +11,37 @@ class PlayerMove implements Move {
   /** @var  int */
   private $player;
   /** @var  int */
-  private $x;
+  private $row;
   /** @var  int */
-  private $y;
+  private $column;
 
   /**
    * @param $player int
-   * @param $x int
-   * @param $y int
+   * @param $row int
+   * @param $column int
    */
-  private function __construct($player, $x, $y) {
+  private function __construct($player, $row, $column) {
     $this->player = $player;
-    $this->x = $x;
-    $this->y = $y;
+    $this->row = $row;
+    $this->column = $column;
   }
 
   /**
-   * @param $x int
-   * @param $y int
+   * @param $row int
+   * @param $column int
    * @return PlayerMove
    */
-  public static function forX($x, $y) {
-    return new PlayerMove(self::X, $x, $y);
+  public static function forX($row, $column) {
+    return new PlayerMove(self::X, $row, $column);
   }
 
   /**
-   * @param $x int
-   * @param $y int
+   * @param $row int
+   * @param $column int
    * @return PlayerMove
    */
-  public static function forO($x, $y) {
-    return new PlayerMove(self::O, $x, $y);
+  public static function forO($row, $column) {
+    return new PlayerMove(self::O, $row, $column);
   }
 
   /**
@@ -63,17 +63,17 @@ class PlayerMove implements Move {
   /**
    * @return int
    */
-  public function getX()
+  public function getRow()
   {
-    return $this->x;
+    return $this->row;
   }
 
   /**
    * @return int
    */
-  public function getY()
+  public function getColumn()
   {
-    return $this->y;
+    return $this->column;
   }
 
   /**
@@ -82,7 +82,7 @@ class PlayerMove implements Move {
    */
   public function equals(Move $that)
   {
-    return  $this->getX() == $that->getX() && $this->getY() == $that->getY();
+    return  $this->getRow() == $that->getRow() && $this->getColumn() == $that->getColumn();
   }
 
   /**

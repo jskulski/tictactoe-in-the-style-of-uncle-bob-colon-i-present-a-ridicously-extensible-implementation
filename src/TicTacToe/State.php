@@ -9,8 +9,7 @@ class State {
   /** @var  Move[] */
   private $moveHistory;
 
-  public function __construct() {
-  }
+  public function __construct() { }
 
   /**
    * @return Move[]

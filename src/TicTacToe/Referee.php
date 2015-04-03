@@ -87,7 +87,7 @@ class Referee {
   {
     $marks = 0;
     foreach ($moveHistory as $move) {
-      if ($move->isX() && $move->getX() == -1) {
+      if ($move->isX() && $move->getRow() == -1) {
         $marks++;
       }
     }

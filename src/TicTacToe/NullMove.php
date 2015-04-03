@@ -6,23 +6,23 @@ namespace JSK\TicTacToe;
 
 class NullMove implements Move {
 
-  const NULL_X_MARKER = -999;
-  const NULL_Y_MARKER = -999;
+  const NULL_ROW_MARKER = -999;
+  const NULL_COLUMN_MARKER = -999;
 
   /**
    * @return int
    */
-  public function getX()
+  public function getRow()
   {
-    return self::NULL_X_MARKER;
+    return self::NULL_ROW_MARKER;
   }
 
   /**
    * @return int
    */
-  public function getY()
+  public function getColumn()
   {
-    return self::NULL_Y_MARKER;
+    return self::NULL_COLUMN_MARKER;
   }
 
   /**

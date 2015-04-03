@@ -9,12 +9,12 @@ interface Move {
   /**
    * @return int
    */
-  public function getX();
+  public function getRow();
 
   /**
    * @return int
    */
-  public function getY();
+  public function getColumn();
 
   /**
    * @return bool
