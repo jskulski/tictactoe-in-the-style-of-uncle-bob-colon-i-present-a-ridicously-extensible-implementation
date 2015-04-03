@@ -11,7 +11,7 @@ class Game {
     
   }
 
-  public function isGameOver()
+  public function isOver()
   {
     return true;
   }
