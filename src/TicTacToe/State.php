@@ -7,20 +7,20 @@ namespace JSK\TicTacToe;
 class State {
 
   /** @var  Move[] */
-  private $lastMoves;
+  private $moveHistory;
   /** @var  boolean */
   private $gameState_isOver = false;
 
   public function __construct() {
-    $this->lastMoves = array(new NullMove());
+    $this->moveHistory = array(new NullMove());
   }
 
   /**
    * @return Move
    */
-  public function getLastMoves()
+  public function getMoveHistory()
   {
-    return $this->lastMoves;
+    return $this->moveHistory;
   }
 
   public function isOver()
@@ -33,7 +33,7 @@ class State {
    * @return State
    */
   public function updateState(Move $move) {
-    $this->lastMoves[] = $move;
+    $this->moveHistory[] = $move;
     $this->gameState_isOver = true;
   }
 }
