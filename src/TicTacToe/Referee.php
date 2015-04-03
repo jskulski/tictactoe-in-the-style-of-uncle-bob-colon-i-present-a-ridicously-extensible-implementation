@@ -75,7 +75,11 @@ class Referee {
   private function getLastMove(array $moveHistory)
   {
     $last = count($moveHistory) - 1;
-    return $moveHistory[$last];
+    if ($last >= 0)
+      $lastMove = $moveHistory[$last];
+    else
+      $lastMove = new NullMove();
+    return $lastMove;
   }
 
   /**

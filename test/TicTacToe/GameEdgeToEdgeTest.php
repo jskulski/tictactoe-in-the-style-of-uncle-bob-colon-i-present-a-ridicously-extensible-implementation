@@ -9,9 +9,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   /** @var  Game */
   private $game;
 
-  /**
-   *
-   */
   public function setUp() {
     $factory = new Factory();
     $this->game = $factory->createGame();
@@ -23,6 +20,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove($move);
   }
 
+
   public function test_game_does_not_start_already_over()
   {
     $this->assertFalse($this->game->isOver());
@@ -31,12 +29,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   public function test_game_can_evaluate_move()
   {
     $this->game->isValidMove(PlayerMove::forX(0, 0));
-  }
-
-  public function test_X_in_center_is_valid_move()
-  {
-    $moveIsValid = $this->game->isValidMove(PlayerMove::forX(0, 0));
-    $this->assertTrue($moveIsValid);
   }
 
   public function test_making_X_move_twice_in_a_row_is_invalid()
