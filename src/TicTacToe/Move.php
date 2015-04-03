@@ -68,4 +68,13 @@ class Move {
     return $this->y;
   }
 
+  /**
+   * @param Move $that
+   * @return bool
+   */
+  public function equals(Move $that)
+  {
+    return  $this->getX() == $that->getX() && $this->getY() == $that->getY();
+  }
+
 }

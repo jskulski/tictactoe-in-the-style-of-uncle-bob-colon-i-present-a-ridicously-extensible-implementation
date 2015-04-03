@@ -12,7 +12,7 @@ class Referee {
    */
   public function makeCall(Move $move, Move $lastMove)
   {
-    if ($lastMove && $move->getX() == $lastMove->getX() && $move->getY() == $lastMove->getY()) {
+    if ($move->equals($lastMove)) {
       return false;
     }
 
