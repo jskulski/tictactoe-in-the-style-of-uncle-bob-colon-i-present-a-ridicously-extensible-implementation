@@ -132,7 +132,8 @@ class Referee {
   {
     return
       $this->checkOHasWonTopRow($moveHistory) ||
-      $this->checkOHasWonMiddleRow($moveHistory);
+      $this->checkOHasWonMiddleRow($moveHistory) ||
+      $this->checkOHasWonBottomRow($moveHistory);
   }
 
   /**
@@ -174,6 +175,21 @@ class Referee {
     $marks = 0;
     foreach ($moveHistory as $move) {
       if ($move->isX() && $move->getRow() == 1) {
+        $marks++;
+      }
+    }
+    return $marks == 3;
+  }
+
+  /**
+   * @param Move[] $moveHistory
+   * @return bool
+   */
+  private function checkOHasWonBottomRow(array $moveHistory)
+  {
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isO() && $move->getRow() == 1) {
         $marks++;
       }
     }

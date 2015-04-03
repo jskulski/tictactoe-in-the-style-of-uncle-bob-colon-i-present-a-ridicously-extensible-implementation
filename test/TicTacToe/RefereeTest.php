@@ -127,6 +127,19 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->target->winnerIsX($moveHistory));
   }
 
+  public function test_O_is_winner_if_they_mark_all_bottom_row()
+  {
+    $moveHistory = array(
+      PlayerMove::forX( 0,  0),
+      PlayerMove::forO( 1, -1),
+      PlayerMove::forX( 0, -1),
+      PlayerMove::forO( 1,  0),
+      PlayerMove::forX(-1,  1),
+      PlayerMove::forO( 1,  1)
+    );
+    $this->assertTrue($this->target->hasWinner($moveHistory));
+    $this->assertTrue($this->target->winnerIsO($moveHistory));
+  }
 
 
 }
