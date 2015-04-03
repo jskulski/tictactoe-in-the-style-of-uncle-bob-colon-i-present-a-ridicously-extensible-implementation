@@ -41,7 +41,17 @@ class Game {
 
   public function hasWinner()
   {
-    return $this->state->isOver();
+    /** @var Move[] $moveHistory */
+    $moveHistory = $this->state->getMoveHistory();
+
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isX() && $move->getX() == -1) {
+        $marks++;
+      }
+    }
+
+    return $marks == 3;
   }
 
 

@@ -100,5 +100,11 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($this->game->hasWinner());
   }
 
+  public function test_game_has_no_winner_after_first_move()
+  {
+    $this->game->makeMove(PlayerMove::forX(0, 0));
+    $this->assertFalse($this->game->hasWinner());
+  }
+
 
 }

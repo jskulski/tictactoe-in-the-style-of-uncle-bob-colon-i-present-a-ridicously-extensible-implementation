@@ -25,7 +25,8 @@ class State {
 
   public function isOver()
   {
-    return $this->gameState_isOver;
+    $isBoardFull = count($this->getMoveHistory()) == 10;
+    return $isBoardFull;
   }
 
   /**
