@@ -11,7 +11,6 @@ class Game {
   /** @var  State */
   private $state;
 
-
   function __construct()
   {
     $this->state = new State();
@@ -43,16 +42,9 @@ class Game {
   {
     /** @var Move[] $moveHistory */
     $moveHistory = $this->state->getMoveHistory();
-
-    $marks = 0;
-    foreach ($moveHistory as $move) {
-      if ($move->isX() && $move->getX() == -1) {
-        $marks++;
-      }
-    }
-
-    return $marks == 3;
+    return $this->referee->hasWinner($moveHistory);
   }
+
 
 
 }

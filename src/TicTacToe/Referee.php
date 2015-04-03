@@ -25,6 +25,16 @@ class Referee {
     return true;
   }
 
+
+  /**
+   * @param Move[] $moveHistory
+   * @return bool
+   */
+  public function hasWinner(array $moveHistory)
+  {
+    return $this->checkXHasWonTopRow($moveHistory);
+  }
+
   /**
    * @param Move $move
    * @param Move[] $moveHistory
@@ -39,6 +49,7 @@ class Referee {
     }
     return false;
   }
+
 
   /**
    * @param Move $move
@@ -66,6 +77,21 @@ class Referee {
   {
     $last = count($moveHistory) - 1;
     return $moveHistory[$last];
+  }
+
+  /**
+   * @param Move[] $moveHistory
+   * @return bool
+   */
+  private function checkXHasWonTopRow($moveHistory)
+  {
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isX() && $move->getX() == -1) {
+        $marks++;
+      }
+    }
+    return $marks == 3;
   }
 
 }
