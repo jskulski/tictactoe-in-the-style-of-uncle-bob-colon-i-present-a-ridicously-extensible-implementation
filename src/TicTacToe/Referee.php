@@ -32,7 +32,7 @@ class Referee {
    */
   public function hasWinner(array $moveHistory)
   {
-    return $this->winnerIsX($moveHistory);
+    return $this->winnerIsX($moveHistory) || $this->winnerIsO($moveHistory);
   }
 
   /**
@@ -98,6 +98,21 @@ class Referee {
   }
 
   /**
+   * @param Move[] $moveHistory
+   * @return bool
+   */
+  private function checkOHasWonTopRow(array $moveHistory)
+  {
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isO() && $move->getRow() == -1) {
+        $marks++;
+      }
+    }
+    return $marks == 3;
+  }
+
+  /**
    * @param array $moveHistory
    * @return bool
    */
@@ -105,6 +120,12 @@ class Referee {
   {
      return $this->checkXHasWonTopRow($moveHistory);
   }
+
+  public function winnerIsO($moveHistory)
+  {
+    return $this->checkOHasWonTopRow($moveHistory);
+  }
+
 
 }
 
