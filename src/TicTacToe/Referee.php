@@ -50,6 +50,10 @@ class Referee {
       return true;
     }
 
+    if ($move->isO() && $lastMove->isO()) {
+      return true;
+    }
+
     return false;
   }
 

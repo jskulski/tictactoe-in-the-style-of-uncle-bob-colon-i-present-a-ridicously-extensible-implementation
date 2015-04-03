@@ -20,6 +20,10 @@ interface Move {
    * @return bool
    */
   public function isX();
+  /**
+   * @return bool
+   */
+  public function isO();
 
   /**
    * @return bool

@@ -53,6 +53,14 @@ class PlayerMove implements Move {
   }
 
   /**
+   * @return bool
+   */
+  public function isO()
+  {
+    return $this->player == self::O;
+  }
+
+  /**
    * @return int
    */
   public function getX()

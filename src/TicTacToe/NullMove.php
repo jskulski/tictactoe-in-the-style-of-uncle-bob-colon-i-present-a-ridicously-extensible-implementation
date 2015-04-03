@@ -34,6 +34,14 @@ class NullMove implements Move {
   }
 
   /**
+   * @return bool
+   */
+  public function isO()
+  {
+    return false;
+  }
+
+  /**
    * @param Move $that
    * @return bool
    */
