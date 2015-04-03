@@ -8,19 +8,16 @@ class State {
 
   /** @var  Move[] */
   private $moveHistory;
-  /** @var  boolean */
-  private $gameState_isOver = false;
 
   public function __construct() {
-    $this->moveHistory = array(new NullMove());
   }
 
   /**
-   * @return Move
+   * @return Move[]
    */
   public function getMoveHistory()
   {
-    return $this->moveHistory;
+    return $this->moveHistory ? $this->moveHistory : array(new NullMove());
   }
 
   public function isOver()
@@ -34,8 +31,9 @@ class State {
    * @return State
    */
   public function updateState(Move $move) {
-    $this->moveHistory[] = $move;
-    $this->gameState_isOver = true;
+    $moveHistory = $this->getMoveHistory();
+    array_push($moveHistory, $move);
+    $this->moveHistory = $moveHistory;
   }
 }
 
