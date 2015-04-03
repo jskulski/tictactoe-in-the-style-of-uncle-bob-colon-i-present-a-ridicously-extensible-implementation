@@ -50,7 +50,6 @@ class Referee {
     return false;
   }
 
-
   /**
    * @param Move $move
    * @param Move $lastMove

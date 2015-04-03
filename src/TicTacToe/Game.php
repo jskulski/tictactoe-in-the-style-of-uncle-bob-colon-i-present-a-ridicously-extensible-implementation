@@ -11,10 +11,10 @@ class Game {
   /** @var  State */
   private $state;
 
-  function __construct()
+  function __construct($referee = null)
   {
     $this->state = new State();
-    $this->referee = new Referee();
+    $this->referee = $referee ? $referee : new Referee();
   }
 
   public function makeMove(Move $move)
