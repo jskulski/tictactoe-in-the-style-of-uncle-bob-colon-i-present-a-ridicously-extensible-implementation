@@ -64,4 +64,12 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($game->isValidMove(Move::forO(0, 0)));
   }
 
+  public function test_playing_an_invalid_move_throws_an_exception()
+  {
+    $this->setExpectedException(IllegalMoveException::class);
+    $game = new Game();
+    $game->makeMove(Move::forX(0, 0));
+    $game->makeMove(Move::forO(0, 0));
+  }
+
 }

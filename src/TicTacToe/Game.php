@@ -12,6 +12,10 @@ class Game {
 
   public function makeMove(Move $move)
   {
+    if (!$this->isValidMove($move)) {
+      throw new IllegalMoveException('This is not a valid move');
+    }
+
     $this->lastMove = $move;
     $this->gameState_isOver = true;
   }
@@ -23,7 +27,11 @@ class Game {
 
   public function isValidMove(Move $move)
   {
-    if ($this->lastMove && $this->lastMove->isX()) {
+    if ($this->lastMove && $move->getX() == $this->lastMove->getX() && $move->getY() == $this->lastMove->getY()) {
+      return false;
+    }
+
+    if ($move->isX() && $this->lastMove && $this->lastMove->isX()) {
       return false;
     }
     return true;
