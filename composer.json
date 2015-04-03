@@ -1,0 +1,16 @@
+{
+    "name": "trulia/stash-jenkins-thing-butt",
+    "description": "Recieves a POST from stash when a merge happens and notifies jenkins to build something butt",
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {"JSK\\": "src/"}
+    },
+    "authors": [
+        {
+            "name": "Jon Skulski",
+            "email": "jskulski@gmail.com"
+        }
+    ]
+}
