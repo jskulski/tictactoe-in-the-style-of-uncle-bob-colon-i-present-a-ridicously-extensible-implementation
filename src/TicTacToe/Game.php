@@ -20,4 +20,8 @@ class Game {
     return $this->gameState_isOver;
   }
 
+  public function isValidMove(Move $move)
+  {
+  }
+
 }
