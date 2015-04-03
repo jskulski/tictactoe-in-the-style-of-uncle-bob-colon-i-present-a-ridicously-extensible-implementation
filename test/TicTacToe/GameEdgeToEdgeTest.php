@@ -52,8 +52,8 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   public function test_making_X_move_twice_in_a_row_is_invalid()
   {
     $game = new Game();
-    $game->makeMove(new Move('X', 0, 0));
-    $moveIsValid = $game->isValidMove(new Move('X', 1, 0));
+    $game->makeMove(Move::forX(0,0));
+    $moveIsValid = $game->isValidMove(Move::forX(1, 0));
     $this->assertFalse($moveIsValid);
   }
 
