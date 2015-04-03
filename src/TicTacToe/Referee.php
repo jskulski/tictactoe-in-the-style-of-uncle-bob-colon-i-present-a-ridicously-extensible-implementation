@@ -17,7 +17,7 @@ class Referee {
       return false;
     };
 
-    $lastMove = $lastMoves[0];
+    $lastMove = $this->getLatestMove($lastMoves);
     if ($this->playerOfMoveIsSameAsLastMove($move, $lastMove)) {
       return false;
     }
@@ -32,9 +32,10 @@ class Referee {
    */
   private function moveHasBeenMade(Move $move, array $lastMoves)
   {
-    $lastMove = $lastMoves[0];
-    if ($move->equals($lastMove)) {
-      return true;
+    forEach($lastMoves as $lastMove) {
+      if ($move->equals($lastMove)) {
+        return true;
+      }
     }
     return false;
   }
@@ -55,6 +56,16 @@ class Referee {
     }
 
     return false;
+  }
+
+  /**
+   * @param Move[] $lastMoves
+   * @return Move
+   */
+  private function getLatestMove(array $lastMoves)
+  {
+    $last = count($lastMoves) - 1;
+    return $lastMoves[$last];
   }
 
 }

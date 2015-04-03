@@ -34,8 +34,9 @@ class Game {
 
   public function isValidMove(Move $move)
   {
-    $lastMove = $this->state->getLastMoves();
-    return $this->referee->makeCall($move, $lastMove);
+    /** @var Move[] $lastMoves */
+    $lastMoves = $this->state->getLastMoves();
+    return $this->referee->makeCall($move, $lastMoves);
   }
 
 

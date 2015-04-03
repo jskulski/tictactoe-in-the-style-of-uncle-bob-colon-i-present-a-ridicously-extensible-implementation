@@ -56,7 +56,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
 
   public function test_making_X_move_twice_in_a_row_is_invalid()
   {
-    $this->game->makeMove(PlayerMove::forX(0,0));
+    $this->game->makeMove(PlayerMove::forX(0, 0));
     $moveIsValid = $this->game->isValidMove(PlayerMove::forX(1, 0));
     $this->assertFalse($moveIsValid);
   }
@@ -74,13 +74,13 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove(PlayerMove::forO(0, 0));
   }
 
-//  public function test_playing_where_you_played_before_is_invalid()
-//  {
-//    $this->setExpectedException(IllegalMoveException::class);
-//    $this->game->makeMove(PlayerMove::forX(0, 0));
-//    $this->game->makeMove(PlayerMove::forO(0, 1));
-//    $this->game->makeMove(PlayerMove::forX(0, 0));
-//  }
+  public function test_playing_where_you_played_before_is_invalid()
+  {
+    $this->setExpectedException(IllegalMoveException::class);
+    $this->game->makeMove(PlayerMove::forX(0, 0));
+    $this->game->makeMove(PlayerMove::forO(0, 1));
+    $this->game->makeMove(PlayerMove::forX(0, 0));
+  }
 
 
 }

@@ -33,7 +33,7 @@ class State {
    * @return State
    */
   public function updateState(Move $move) {
-    $this->lastMoves[0] = $move;
+    $this->lastMoves[] = $move;
     $this->gameState_isOver = true;
   }
 }
