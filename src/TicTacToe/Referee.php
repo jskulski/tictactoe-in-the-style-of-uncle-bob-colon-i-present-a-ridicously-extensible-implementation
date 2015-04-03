@@ -8,16 +8,16 @@ class Referee {
 
   /**
    * @param Move $move
-   * @param Move[] $lastMoves
+   * @param Move[] $moveHistory
    * @return bool
    */
-  public function makeCall(Move $move, array $lastMoves)
+  public function makeCall(Move $move, array $moveHistory)
   {
-    if ($this->moveHasBeenMade($move, $lastMoves)) {
+    if ($this->moveHasBeenMade($move, $moveHistory)) {
       return false;
     };
 
-    $lastMove = $this->getLatestMove($lastMoves);
+    $lastMove = $this->getLastMove($moveHistory);
     if ($this->playerOfMoveIsSameAsLastMove($move, $lastMove)) {
       return false;
     }
@@ -27,13 +27,13 @@ class Referee {
 
   /**
    * @param Move $move
-   * @param Move[] $lastMoves
+   * @param Move[] $moveHistory
    * @return bool
    */
-  private function moveHasBeenMade(Move $move, array $lastMoves)
+  private function moveHasBeenMade(Move $move, array $moveHistory)
   {
-    forEach($lastMoves as $lastMove) {
-      if ($move->equals($lastMove)) {
+    forEach($moveHistory as $priorMove) {
+      if ($move->equals($priorMove)) {
         return true;
       }
     }
@@ -59,13 +59,13 @@ class Referee {
   }
 
   /**
-   * @param Move[] $lastMoves
+   * @param Move[] $moveHistory
    * @return Move
    */
-  private function getLatestMove(array $lastMoves)
+  private function getLastMove(array $moveHistory)
   {
-    $last = count($lastMoves) - 1;
-    return $lastMoves[$last];
+    $last = count($moveHistory) - 1;
+    return $moveHistory[$last];
   }
 
 }
