@@ -9,7 +9,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   public function test_can_make_move()
   {
     $game = new Game();
-    $move = new Move(2, 3);
+    $move = Move::forX(2, 3);
     $game->makeMove($move);
   }
 
