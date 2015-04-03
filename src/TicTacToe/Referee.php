@@ -118,7 +118,9 @@ class Referee {
    */
   public function winnerIsX(array $moveHistory)
   {
-     return $this->checkXHasWonTopRow($moveHistory);
+     return
+       $this->checkXHasWonTopRow($moveHistory) ||
+       $this->checkXHasWonMiddleRow($moveHistory);
   }
 
   public function winnerIsO($moveHistory)
@@ -142,5 +144,15 @@ class Referee {
     return $marks == 3;
   }
 
+  private function checkXHasWonMiddleRow($moveHistory)
+  {
+    $marks = 0;
+    foreach ($moveHistory as $move) {
+      if ($move->isX() && $move->getRow() == 0) {
+        $marks++;
+      }
+    }
+    return $marks == 3;
+  }
 }
 
