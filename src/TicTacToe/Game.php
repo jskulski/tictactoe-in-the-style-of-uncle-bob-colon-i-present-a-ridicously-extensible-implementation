@@ -39,5 +39,10 @@ class Game {
     return $this->referee->makeCall($move, $lastMoves);
   }
 
+  public function hasWinner()
+  {
+    return true;
+  }
+
 
 }

@@ -23,21 +23,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove($move);
   }
 
-  public function test_game_is_over_after_nine_moves_made()
-  {
-    $this->game->makeMove(PlayerMove::forX(-1, -1));
-    $this->game->makeMove(PlayerMove::forO(-1,  0));
-    $this->game->makeMove(PlayerMove::forX(-1,  1));
-    $this->game->makeMove(PlayerMove::forO( 0, -1));
-    $this->game->makeMove(PlayerMove::forX( 0,  0));
-    $this->game->makeMove(PlayerMove::forO( 0,  1));
-    $this->game->makeMove(PlayerMove::forX( 1, -1));
-    $this->game->makeMove(PlayerMove::forO( 1,  1));
-    $this->game->makeMove(PlayerMove::forX( 1,  0));
-
-    $this->assertTrue($this->game->isOver());
-  }
-
   public function test_game_does_not_start_already_over()
   {
     $this->assertFalse($this->game->isOver());
@@ -82,12 +67,30 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove(PlayerMove::forX(0, 0));
   }
 
-  public function test_game_can_be_created_in_any_valid_state()
+  public function test_game_is_over_after_nine_moves_made()
   {
-//    $game = new Game($gameStateXHasWon);
-//    $this->assertTrue(
-//      $game->isOver()
-//    );
+    $this->game->makeMove(PlayerMove::forX(-1, -1));
+    $this->game->makeMove(PlayerMove::forO(-1,  0));
+    $this->game->makeMove(PlayerMove::forX(-1,  1));
+    $this->game->makeMove(PlayerMove::forO( 0, -1));
+    $this->game->makeMove(PlayerMove::forX( 0,  0));
+    $this->game->makeMove(PlayerMove::forO( 0,  1));
+    $this->game->makeMove(PlayerMove::forX( 1, -1));
+    $this->game->makeMove(PlayerMove::forO( 1,  1));
+    $this->game->makeMove(PlayerMove::forX( 1,  0));
+
+    $this->assertTrue($this->game->isOver());
+  }
+
+  public function test_game_is_won_if_X_takes_top_row()
+  {
+    $this->game->makeMove(PlayerMove::forX(-1, -1));
+    $this->game->makeMove(PlayerMove::forO( 0,  0));
+    $this->game->makeMove(PlayerMove::forX(-1,  0));
+    $this->game->makeMove(PlayerMove::forO( 0,  1));
+    $this->game->makeMove(PlayerMove::forX(-1,  1));
+
+    $this->assertTrue($this->game->hasWinner());
   }
 
 
