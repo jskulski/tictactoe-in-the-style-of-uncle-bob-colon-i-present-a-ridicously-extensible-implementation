@@ -3,7 +3,6 @@
 
 namespace JSK\TicTacToe;
 
-
 class Game {
 
   /** @var  Move */

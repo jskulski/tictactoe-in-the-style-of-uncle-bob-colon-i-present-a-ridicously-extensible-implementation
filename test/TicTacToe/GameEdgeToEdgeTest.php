@@ -17,15 +17,15 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   {
     $game = new Game();
 
-    $game->makeMove(new Move('X', -1, -1));
-    $game->makeMove(new Move('O', -1,  0));
-    $game->makeMove(new Move('X', -1,  1));
-    $game->makeMove(new Move('O',  0, -1));
-    $game->makeMove(new Move('X',  0,  0));
-    $game->makeMove(new Move('O',  0,  1));
-    $game->makeMove(new Move('X',  1, -1));
-    $game->makeMove(new Move('O',  1,  1));
-    $game->makeMove(new Move('X',  1,  0));
+    $game->makeMove(Move::forX(-1, -1));
+    $game->makeMove(Move::forO('O', -1,  0));
+    $game->makeMove(Move::forX(-1,  1));
+    $game->makeMove(Move::forO( 0, -1));
+    $game->makeMove(Move::forX( 0,  0));
+    $game->makeMove(Move::forO( 0,  1));
+    $game->makeMove(Move::forX( 1, -1));
+    $game->makeMove(Move::forO( 1,  1));
+    $game->makeMove(Move::forX( 1,  0));
 
     $this->assertTrue($game->isOver());
   }
@@ -39,13 +39,13 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   public function test_game_can_evaluate_move()
   {
     $game = new Game();
-    $game->isValidMove(new Move('X', 0, 0));
+    $game->isValidMove(Move::forX(0, 0));
   }
 
   public function test_X_in_center_is_valid_move()
   {
     $game = new Game();
-    $moveIsValid = $game->isValidMove(new Move('X', 0, 0));
+    $moveIsValid = $game->isValidMove(Move::forX(0, 0));
     $this->assertTrue($moveIsValid);
   }
 

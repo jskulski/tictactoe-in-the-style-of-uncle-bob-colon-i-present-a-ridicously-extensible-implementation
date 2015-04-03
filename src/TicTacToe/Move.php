@@ -9,6 +9,10 @@ class Move {
     return new Move('X', $x, $y);
   }
 
+  public static function forO($x, $y) {
+    return new Move('O', $x, $y);
+  }
+
 
   /**
    * return True
