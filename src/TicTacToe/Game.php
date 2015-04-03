@@ -41,7 +41,7 @@ class Game {
 
   public function hasWinner()
   {
-    return true;
+    return $this->state->isOver();
   }
 
 

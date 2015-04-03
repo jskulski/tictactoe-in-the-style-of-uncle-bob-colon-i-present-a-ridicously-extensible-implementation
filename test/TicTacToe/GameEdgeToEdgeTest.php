@@ -81,6 +81,8 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertTrue($this->game->isOver());
   }
+  
+  
 
   public function test_game_is_won_if_X_takes_top_row()
   {
@@ -91,6 +93,11 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove(PlayerMove::forX(-1,  1));
 
     $this->assertTrue($this->game->hasWinner());
+  }
+
+  public function test_game_has_no_winner_at_start()
+  {
+    $this->assertFalse($this->game->hasWinner());
   }
 
 
