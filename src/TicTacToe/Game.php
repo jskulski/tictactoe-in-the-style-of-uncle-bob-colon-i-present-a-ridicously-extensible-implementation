@@ -16,9 +16,10 @@ class Game {
   function __construct()
   {
     $this->referee = new Referee();
+    $this->lastMove = new NullMove();
   }
 
-  public function makeMove(Move $move)
+  public function makeMove(PlayerMove $move)
   {
     if (!$this->isValidMove($move)) {
       throw new IllegalMoveException('This is not a valid move');
@@ -33,10 +34,8 @@ class Game {
     return $this->gameState_isOver;
   }
 
-  public function isValidMove(Move $move)
+  public function isValidMove(PlayerMove $move)
   {
-    if (!$this->lastMove)
-      $this->lastMove = Move::forO(4,4);
     return $this->referee->makeCall($move, $this->lastMove);
   }
 

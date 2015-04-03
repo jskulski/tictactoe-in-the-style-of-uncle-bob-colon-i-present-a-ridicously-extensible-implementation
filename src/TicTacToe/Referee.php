@@ -7,7 +7,7 @@ namespace JSK\TicTacToe;
 class Referee {
 
   /**
-   * @param Move $move
+   * @param PlayerMove $move
    * @return bool
    */
   public function makeCall(Move $move, Move $lastMove)
@@ -16,9 +16,10 @@ class Referee {
       return false;
     }
 
-    if ($move->isX() && $lastMove && $lastMove->isX()) {
+    if ($move->isX() && $lastMove->isX()) {
       return false;
     }
+
     return true;
   }
 
