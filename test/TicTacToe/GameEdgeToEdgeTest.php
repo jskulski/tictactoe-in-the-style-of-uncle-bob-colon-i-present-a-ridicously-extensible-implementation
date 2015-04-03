@@ -82,5 +82,13 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove(PlayerMove::forX(0, 0));
   }
 
+  public function test_game_can_be_created_in_any_valid_state()
+  {
+//    $game = new Game($gameStateXHasWon);
+//    $this->assertTrue(
+//      $game->isOver()
+//    );
+  }
+
 
 }
