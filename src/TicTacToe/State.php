@@ -28,7 +28,6 @@ class State {
     return $this->gameState_isOver;
   }
 
-
   /**
    * @param Move
    * @return State
