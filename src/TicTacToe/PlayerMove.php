@@ -77,4 +77,11 @@ class PlayerMove implements Move {
     return  $this->getX() == $that->getX() && $this->getY() == $that->getY();
   }
 
+  /**
+   * @return bool
+   */
+  public function isNullObject()
+  {
+    return false;
+  }
 }

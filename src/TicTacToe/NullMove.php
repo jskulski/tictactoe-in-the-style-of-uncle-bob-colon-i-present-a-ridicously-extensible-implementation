@@ -33,4 +33,20 @@ class NullMove implements Move {
     return false;
   }
 
+  /**
+   * @param Move $that
+   * @return bool
+   */
+  public function equals(Move $that)
+  {
+    return $that->isNullObject();
+  }
+
+  /**
+   * @return bool
+   */
+  public function isNullObject()
+  {
+    return true;
+  }
 }

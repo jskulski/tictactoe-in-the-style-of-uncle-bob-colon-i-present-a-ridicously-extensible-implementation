@@ -21,4 +21,9 @@ interface Move {
    */
   public function isX();
 
+  /**
+   * @return bool
+   */
+  public function isNullObject();
+
 }
