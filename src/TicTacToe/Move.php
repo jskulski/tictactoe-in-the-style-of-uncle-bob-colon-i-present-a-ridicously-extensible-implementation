@@ -25,9 +25,10 @@ interface Move {
    */
   public function isO();
 
-  /**
-   * @return bool
-   */
+  /** @return bool */
   public function isNullObject();
+
+  /** @return bool */
+  public function equals(Move $move);
 
 }

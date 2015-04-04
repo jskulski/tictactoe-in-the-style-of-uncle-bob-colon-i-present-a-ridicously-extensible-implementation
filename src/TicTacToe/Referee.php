@@ -52,6 +52,7 @@ class Referee {
   private function moveHasBeenMade(Move $move, array $moveHistory)
   {
     forEach($moveHistory as $priorMove) {
+      /** @var $priorMove Move */
       if ($move->equals($priorMove)) {
         return true;
       }
@@ -133,7 +134,8 @@ class Referee {
        $this->checkXHasWonBottomRow($moveHistory)    ||
        $this->checkXHasWonLeftColumn($moveHistory)   ||
        $this->checkXHasWonMiddleColumn($moveHistory) ||
-       $this->checkXHasWonRightColumn($moveHistory);
+       $this->checkXHasWonRightColumn($moveHistory)  ||
+       $this->checkXHasWonLeftToRightDiagonal($moveHistory);
   }
 
   /**
@@ -148,7 +150,8 @@ class Referee {
       $this->checkOHasWonBottomRow($moveHistory) ||
       $this->checkOHasWonLeftColumn($moveHistory)   ||
       $this->checkOHasWonMiddleColumn($moveHistory) ||
-      $this->checkOHasWonRightColumn($moveHistory);
+      $this->checkOHasWonRightColumn($moveHistory) ||
+      $this->checkOHasWonLeftToRightDiagonal($moveHistory);
   }
 
   /**
@@ -221,6 +224,16 @@ class Referee {
   private function checkOHasWonRightColumn($moveHistory)
   {
     return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInRightColumn()->count() == 3;
+  }
+
+  private function checkXHasWonLeftToRightDiagonal($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInLeftToRightDiagonal()->count() == 3;
+  }
+
+  private function checkOHasWonLeftToRightDiagonal($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInLeftToRightDiagonal()->count() == 3;
   }
 
 }

@@ -38,7 +38,10 @@ class MoveFilterer {
    */
   public function movesByO()
   {
-    $filtered = array_filter($this->moves, function($move) { return $move->isO(); });
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return $move->isO();
+    });
     return new MoveFilterer($filtered);
   }
 
@@ -47,7 +50,10 @@ class MoveFilterer {
    */
   public function movesByX()
   {
-    $filtered = array_filter($this->moves, function($move) { return $move->isX(); });
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return $move->isX();
+    });
     return new MoveFilterer($filtered);
   }
 
@@ -79,6 +85,7 @@ class MoveFilterer {
   private function movesInRow($row)
   {
     $filtered = array_filter($this->moves, function($move) use ($row) {
+      /** @var $move Move */
       return $move->getRow() == $row;
     });
     return new MoveFilterer($filtered);
@@ -91,7 +98,23 @@ class MoveFilterer {
   private function movesInColumn($column)
   {
     $filtered = array_filter($this->moves, function($move) use ($column) {
+      /** @var $move Move */
       return $move->getColumn() == $column;
+    });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @return MoveFilterer
+   */
+  public function movesInLeftToRightDiagonal()
+  {
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return
+        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
+        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
+        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
     });
     return new MoveFilterer($filtered);
   }
