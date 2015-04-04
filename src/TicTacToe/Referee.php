@@ -187,20 +187,46 @@ class Referee {
    */
   private function checkOHasWonBottomRow(array $moveHistory)
   {
-    $marks = 0;
-    $filteredMoveHistory = $moveHistory;
-
-    $filteredMoveHistory = array_filter($moveHistory, function($move) { return $move->isO(); });
-
-    foreach ($filteredMoveHistory as $move) {
-      if ($move->isO()) {
-        if ($move->getRow() == 1) {
-          $marks++;
-        }
-      }
-    }
-    return $marks == 3;
+    $filterer = new MoveFilterer($moveHistory);
+    return $filterer->movesByO()->movesInBottomRow()->count() == 3;
   }
 
+}
+
+class MoveFilterer {
+
+  /** @var  Move[] */
+  private $moves;
+
+  /**
+   * @param $moves Move[]
+   */
+  function __construct(array $moves)
+  {
+    $this->moves = $moves;
+  }
+
+  /**
+   * @return MoveFilterer
+   */
+  public function movesByO()
+  {
+    $filtered = array_filter($this->moves, function($move) { return $move->isO(); });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @return MoveFilterer
+   */
+  public function movesInBottomRow()
+  {
+    $filtered = array_filter($this->moves, function($move) { return $move->getRow() == 1; });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @return int
+   */
+  public function count() {  return count($this->moves); }
 }
 
