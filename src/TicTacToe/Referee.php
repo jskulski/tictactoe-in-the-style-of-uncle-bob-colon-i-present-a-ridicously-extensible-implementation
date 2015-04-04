@@ -5,6 +5,15 @@ namespace JSK\TicTacToe;
 
 
 class Referee {
+  /**
+   * @var MoveFilterer
+   */
+  private $moveFilterer;
+
+  function __construct()
+  {
+    $this->moveFilterer = new MoveFilterer();
+  }
 
   /**
    * @param Move $move
@@ -172,13 +181,7 @@ class Referee {
    */
   private function checkXHasWonBottomRow(array $moveHistory)
   {
-    $marks = 0;
-    foreach ($moveHistory as $move) {
-      if ($move->isX() && $move->getRow() == 1) {
-        $marks++;
-      }
-    }
-    return $marks == 3;
+    return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInBottomRow()->count() == 3;
   }
 
   /**
@@ -187,8 +190,7 @@ class Referee {
    */
   private function checkOHasWonBottomRow(array $moveHistory)
   {
-    $filterer = new MoveFilterer($moveHistory);
-    return $filterer->movesByO()->movesInBottomRow()->count() == 3;
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInBottomRow()->count() == 3;
   }
 
 }
@@ -201,9 +203,17 @@ class MoveFilterer {
   /**
    * @param $moves Move[]
    */
-  function __construct(array $moves)
-  {
+  function __construct($moves = array()) {
     $this->moves = $moves;
+  }
+
+  /**
+   * @param Move[] $moves
+   * @return MoveFilterer
+   */
+  public function filter(array $moves)
+  {
+    return new MoveFilterer($moves);
   }
 
   /**
@@ -212,6 +222,15 @@ class MoveFilterer {
   public function movesByO()
   {
     $filtered = array_filter($this->moves, function($move) { return $move->isO(); });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @return MoveFilterer
+   */
+  public function movesByX()
+  {
+    $filtered = array_filter($this->moves, function($move) { return $move->isX(); });
     return new MoveFilterer($filtered);
   }
 
@@ -228,5 +247,6 @@ class MoveFilterer {
    * @return int
    */
   public function count() {  return count($this->moves); }
+
 }
 
