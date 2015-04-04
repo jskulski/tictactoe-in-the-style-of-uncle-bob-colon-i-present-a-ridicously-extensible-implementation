@@ -10,6 +10,10 @@ class MoveFilterer {
   const MIDDLE_ROW =  0;
   const BOTTOM_ROW =  1;
 
+  const LEFT_COLUMN   = -1;
+  const MIDDLE_COLUMN =  0;
+  const RIGHT_COLUMN  =  1;
+
   /** @var  Move[] */
   private $moves;
 
@@ -55,6 +59,14 @@ class MoveFilterer {
   /** @return MoveFilterer */
   public function movesInBottomRow() { return $this->movesInRow(self::BOTTOM_ROW); }
 
+  /** @return MoveFilterer */
+  public function movesInLeftColumn()   { return $this->movesInColumn(self::LEFT_COLUMN); }
+  /** @return MoveFilterer */
+  public function movesInMiddleColumn() { return $this->movesInColumn(self::MIDDLE_COLUMN); }
+  /** @return MoveFilterer */
+  public function movesInRightRow()     { return $this->movesInColumn(self::RIGHT_COLUMN); }
+
+
   /**
    * @return int
    */
@@ -68,6 +80,18 @@ class MoveFilterer {
   {
     $filtered = array_filter($this->moves, function($move) use ($row) {
       return $move->getRow() == $row;
+    });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @param $column int
+   * @return MoveFilterer
+   */
+  private function movesInColumn($column)
+  {
+    $filtered = array_filter($this->moves, function($move) use ($column) {
+      return $move->getColumn() == $column;
     });
     return new MoveFilterer($filtered);
   }
