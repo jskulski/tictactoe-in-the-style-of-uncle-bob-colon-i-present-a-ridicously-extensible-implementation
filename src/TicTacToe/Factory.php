@@ -8,6 +8,10 @@ class Factory {
 
   /** @var  Referee */
   private $referee;
+  /** @var  Game */
+  private $game;
+  /** @var  MoveFilterer */
+  private $moveFilterer;
 
   /**
    * @return Game;
@@ -20,8 +24,16 @@ class Factory {
   public function createReferee()
   {
     if (!$this->referee) {
-      $this->referee = new Referee();
+      $this->referee = new Referee($this->createMoveFilterer());
     }
     return $this->referee;
+  }
+
+  public function createMoveFilterer()
+  {
+    if (!$this->moveFilterer) {
+      $this->moveFilterer= new MoveFilterer();
+    }
+    return $this->moveFilterer;
   }
 }

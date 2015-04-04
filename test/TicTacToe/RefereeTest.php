@@ -11,7 +11,7 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
 
   protected function setUp()
   {
-    $this->target = new Referee();
+    $this->target = new Referee(new MoveFilterer());
   }
 
   public function test_X_in_the_center_is_valid_on_empty_board()

@@ -23,6 +23,8 @@ class RefereeSpy extends Referee {
   /** @var  Move */
   private $move;
 
+  function __construct() { }
+
   /**
    * @param Move $move
    * @param array $moveHistory
