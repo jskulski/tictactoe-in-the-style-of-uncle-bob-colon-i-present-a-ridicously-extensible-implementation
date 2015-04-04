@@ -38,15 +38,4 @@ class Game {
     return $this->referee->makeCall($move, $lastMoves);
   }
 
-  /**
-   * @return bool
-   */
-  public function hasWinner()
-  {
-    /** @var Move[] $moveHistory */
-    $moveHistory = $this->state->getMoveHistory();
-    return $this->referee->hasWinner($moveHistory);
-  }
-
-
 }
