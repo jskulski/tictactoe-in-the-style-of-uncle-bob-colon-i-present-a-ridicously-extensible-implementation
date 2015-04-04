@@ -128,10 +128,10 @@ class Referee {
   public function winnerIsX(array $moveHistory)
   {
      return
-       $this->checkXHasWonTopRow($moveHistory)     ||
-       $this->checkXHasWonMiddleRow($moveHistory)  ||
-       $this->checkXHasWonBottomRow($moveHistory)  ||
-       $this->checkXHasWonLeftColumn($moveHistory) ||
+       $this->checkXHasWonTopRow($moveHistory)       ||
+       $this->checkXHasWonMiddleRow($moveHistory)    ||
+       $this->checkXHasWonBottomRow($moveHistory)    ||
+       $this->checkXHasWonLeftColumn($moveHistory)   ||
        $this->checkXHasWonMiddleColumn($moveHistory) ||
        $this->checkXHasWonRightColumn($moveHistory);
   }
@@ -145,7 +145,10 @@ class Referee {
     return
       $this->checkOHasWonTopRow($moveHistory) ||
       $this->checkOHasWonMiddleRow($moveHistory) ||
-      $this->checkOHasWonBottomRow($moveHistory);
+      $this->checkOHasWonBottomRow($moveHistory) ||
+      $this->checkOHasWonLeftColumn($moveHistory)   ||
+      $this->checkOHasWonMiddleColumn($moveHistory) ||
+      $this->checkOHasWonRightColumn($moveHistory);
   }
 
   /**
@@ -203,6 +206,21 @@ class Referee {
   private function checkXHasWonRightColumn($moveHistory)
   {
     return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInRightColumn()->count() == 3;
+  }
+
+  private function checkOHasWonLeftColumn($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInLeftColumn()->count() == 3;
+  }
+
+  private function checkOHasWonMiddleColumn($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInMiddleColumn()->count() == 3;
+  }
+
+  private function checkOHasWonRightColumn($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInRightColumn()->count() == 3;
   }
 
 }
