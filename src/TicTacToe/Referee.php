@@ -166,13 +166,7 @@ class Referee {
    */
   private function checkXHasWonMiddleRow(array $moveHistory)
   {
-    $marks = 0;
-    foreach ($moveHistory as $move) {
-      if ($move->isX() && $move->getRow() == 0) {
-        $marks++;
-      }
-    }
-    return $marks == 3;
+    return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInMiddleRow()->count() == 3;
   }
 
   /**
@@ -234,19 +228,29 @@ class MoveFilterer {
     return new MoveFilterer($filtered);
   }
 
-  /**
-   * @return MoveFilterer
-   */
-  public function movesInBottomRow()
-  {
-    $filtered = array_filter($this->moves, function($move) { return $move->getRow() == 1; });
-    return new MoveFilterer($filtered);
-  }
+
+  /** @return MoveFilterer */
+  public function movesInTopRow()    { return $this->movesInRow(-1); }
+  /** @return MoveFilterer */
+  public function movesInMiddleRow() { return $this->movesInRow( 0); }
+  /** @return MoveFilterer */
+  public function movesInBottomRow() { return $this->movesInRow( 1); }
 
   /**
    * @return int
    */
   public function count() {  return count($this->moves); }
 
+  /**
+   * @param $row int
+   * @return MoveFilterer
+   */
+  private function movesInRow($row)
+  {
+    $filtered = array_filter($this->moves, function($move) use ($row) {
+      return $move->getRow() == $row;
+    });
+    return new MoveFilterer($filtered);
+  }
 }
 
