@@ -129,13 +129,14 @@ class Referee {
   public function winnerIsX(array $moveHistory)
   {
      return
-       $this->checkXHasWonTopRow($moveHistory)       ||
-       $this->checkXHasWonMiddleRow($moveHistory)    ||
-       $this->checkXHasWonBottomRow($moveHistory)    ||
-       $this->checkXHasWonLeftColumn($moveHistory)   ||
-       $this->checkXHasWonMiddleColumn($moveHistory) ||
-       $this->checkXHasWonRightColumn($moveHistory)  ||
-       $this->checkXHasWonLeftToRightDiagonal($moveHistory);
+       $this->checkXHasWonTopRow($moveHistory)
+       || $this->checkXHasWonMiddleRow($moveHistory)
+       || $this->checkXHasWonBottomRow($moveHistory)
+       || $this->checkXHasWonLeftColumn($moveHistory)
+       || $this->checkXHasWonMiddleColumn($moveHistory)
+       || $this->checkXHasWonRightColumn($moveHistory)
+       || $this->checkXHasWonLeftToRightDiagonal($moveHistory)
+       || $this->checkXHasWonRightToLeftDiagonal($moveHistory);
   }
 
   /**
@@ -145,13 +146,14 @@ class Referee {
   public function winnerIsO(array $moveHistory)
   {
     return
-      $this->checkOHasWonTopRow($moveHistory) ||
-      $this->checkOHasWonMiddleRow($moveHistory) ||
-      $this->checkOHasWonBottomRow($moveHistory) ||
-      $this->checkOHasWonLeftColumn($moveHistory)   ||
-      $this->checkOHasWonMiddleColumn($moveHistory) ||
-      $this->checkOHasWonRightColumn($moveHistory) ||
-      $this->checkOHasWonLeftToRightDiagonal($moveHistory);
+      $this->checkOHasWonTopRow($moveHistory)
+      || $this->checkOHasWonMiddleRow($moveHistory)
+      || $this->checkOHasWonBottomRow($moveHistory)
+      || $this->checkOHasWonLeftColumn($moveHistory)
+      || $this->checkOHasWonMiddleColumn($moveHistory)
+      || $this->checkOHasWonRightColumn($moveHistory)
+      || $this->checkOHasWonLeftToRightDiagonal($moveHistory)
+      || $this->checkOHasWonRightToLeftDiagonal($moveHistory);
   }
 
   /**
@@ -234,6 +236,16 @@ class Referee {
   private function checkOHasWonLeftToRightDiagonal($moveHistory)
   {
     return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInLeftToRightDiagonal()->count() == 3;
+  }
+
+  private function checkXHasWonRightToLeftDiagonal($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInRightToLeftDiagonal()->count() == 3;
+  }
+
+  private function checkOHasWonRightToLeftDiagonal($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInRightToLeftDiagonal()->count() == 3;
   }
 
 }

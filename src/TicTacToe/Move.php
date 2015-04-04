@@ -6,23 +6,16 @@ namespace JSK\TicTacToe;
 
 interface Move {
 
-  /**
-   * @return int
-   */
+  /** @return int */
   public function getRow();
 
-  /**
-   * @return int
-   */
+  /** @return int */
   public function getColumn();
 
-  /**
-   * @return bool
-   */
+  /** @return bool */
   public function isX();
-  /**
-   * @return bool
-   */
+
+  /** @return bool */
   public function isO();
 
   /** @return bool */

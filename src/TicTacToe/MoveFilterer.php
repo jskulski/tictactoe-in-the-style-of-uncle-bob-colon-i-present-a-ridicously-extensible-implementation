@@ -118,5 +118,17 @@ class MoveFilterer {
     });
     return new MoveFilterer($filtered);
   }
+
+  public function movesInRightToLeftDiagonal()
+  {
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return
+        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
+        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
+        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
+    });
+    return new MoveFilterer($filtered);
+  }
 }
 

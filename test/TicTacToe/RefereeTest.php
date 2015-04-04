@@ -249,5 +249,30 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->target->winnerIsO($moveHistory));
   }
 
+  public function test_X_is_winner_for_right_to_left_diagonal()
+  {
+    $moveHistory = array(
+      PlayerMove::forX(-1,  1),
+      new NullMove(),
+      PlayerMove::forX( 0,  0),
+      new NullMove(),
+      PlayerMove::forX( 1, -1)
+    );
+    $this->assertTrue($this->target->hasWinner($moveHistory));
+    $this->assertTrue($this->target->winnerIsX($moveHistory));
+  }
 
+  public function test_O_is_winner_for_right_to_left_diagonal()
+  {
+    $moveHistory = array(
+      new NullMove(),
+      PlayerMove::forO(-1,  1),
+      new NullMove(),
+      PlayerMove::forO( 0,  0),
+      new NullMove(),
+      PlayerMove::forO( 1, -1)
+    );
+    $this->assertTrue($this->target->hasWinner($moveHistory));
+    $this->assertTrue($this->target->winnerIsO($moveHistory));
+  }
 }
