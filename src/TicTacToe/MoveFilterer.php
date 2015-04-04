@@ -64,7 +64,7 @@ class MoveFilterer {
   /** @return MoveFilterer */
   public function movesInMiddleColumn() { return $this->movesInColumn(self::MIDDLE_COLUMN); }
   /** @return MoveFilterer */
-  public function movesInRightRow()     { return $this->movesInColumn(self::RIGHT_COLUMN); }
+  public function movesInRightColumn()  { return $this->movesInColumn(self::RIGHT_COLUMN); }
 
 
   /**

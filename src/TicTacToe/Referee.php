@@ -132,7 +132,8 @@ class Referee {
        $this->checkXHasWonMiddleRow($moveHistory)  ||
        $this->checkXHasWonBottomRow($moveHistory)  ||
        $this->checkXHasWonLeftColumn($moveHistory) ||
-       $this->checkXHasWonMiddleColumn($moveHistory);
+       $this->checkXHasWonMiddleColumn($moveHistory) ||
+       $this->checkXHasWonRightColumn($moveHistory);
   }
 
   /**
@@ -199,6 +200,10 @@ class Referee {
     return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInMiddleColumn()->count() == 3;
   }
 
+  private function checkXHasWonRightColumn($moveHistory)
+  {
+    return $this->moveFilterer->filter($moveHistory)->movesByX()->movesInRightColumn()->count() == 3;
+  }
 
 }
 
