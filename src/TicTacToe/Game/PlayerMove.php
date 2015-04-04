@@ -1,7 +1,7 @@
 <?php
 
 
-namespace JSK\TicTacToe;
+namespace JSK\TicTacToe\Game;
 
 class PlayerMove implements Move {
 

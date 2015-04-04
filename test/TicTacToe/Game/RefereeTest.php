@@ -1,7 +1,7 @@
 <?php
 
 
-namespace JSK\TicTacToe;
+namespace JSK\TicTacToe\Game;
 
 
 class RefereeTest extends \PHPUnit_Framework_TestCase {

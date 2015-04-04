@@ -12,5 +12,8 @@
             "name": "Jon Skulski",
             "email": "jskulski@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "wp-cli/php-cli-tools": "v0.10.4"
+    }
 }
