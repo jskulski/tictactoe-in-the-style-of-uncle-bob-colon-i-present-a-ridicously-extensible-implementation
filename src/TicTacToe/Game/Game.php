@@ -26,6 +26,11 @@ class Game {
     $this->state->updateState($move);
   }
 
+  public function getState()
+  {
+    return $this->state;
+  }
+
   public function isOver()
   {
     return $this->state->isOver();

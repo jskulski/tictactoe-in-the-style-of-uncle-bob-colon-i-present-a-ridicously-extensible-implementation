@@ -8,6 +8,8 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 0);
 ini_set('html_errors', 0);
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
-\JSK\TicTacToe\Game\CLI
+$factory = new \JSK\TicTacToe\Game\Factory();
+$app = new \JSK\TicTacToe\CLI\MakeRocketGo($factory);
+$app->run();

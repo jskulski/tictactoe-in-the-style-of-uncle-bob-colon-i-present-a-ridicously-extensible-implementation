@@ -14,6 +14,7 @@
         }
     ],
     "require": {
-        "wp-cli/php-cli-tools": "v0.10.4"
+        "wp-cli/php-cli-tools": "v0.10.4",
+        "slim/slim": "2.6.2"
     }
 }

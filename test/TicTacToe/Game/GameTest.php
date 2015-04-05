@@ -6,7 +6,6 @@ namespace JSK\TicTacToe\Game;
 
 class GameTest extends \PHPUnit_Framework_TestCase {
 
-
   public function test_game_checks_with_referee_to_see_if_move_is_valid()
   {
     $refereeSpy = new RefereeSpy();
