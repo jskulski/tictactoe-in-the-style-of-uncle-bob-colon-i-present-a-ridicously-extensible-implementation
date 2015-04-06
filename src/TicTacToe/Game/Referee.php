@@ -26,8 +26,7 @@ class Referee {
       return false;
     };
 
-    if ($move->getRow() < -1 || $move->getRow() > 1
-        || $move->getColumn() < -1 || $move->getColumn() > 1) {
+    if ($this->moveIsOffBoard($move)) {
       return false;
     }
 
@@ -273,6 +272,17 @@ class Referee {
   private function checkOHasWonRightToLeftDiagonal($moveHistory)
   {
     return $this->moveFilterer->filter($moveHistory)->movesByO()->movesInRightToLeftDiagonal()->count() == 3;
+  }
+
+  /**
+   * @param Move $move
+   * @return bool
+   */
+  private function moveIsOffBoard(Move $move)
+  {
+    $inValidRow = $move->getRow() >= -1 && $move->getRow() <= 1;
+    $inValidColumn = $move->getColumn() >= -1 && $move->getColumn() <= 1;
+    return !($inValidRow && $inValidColumn);
   }
 
 }
