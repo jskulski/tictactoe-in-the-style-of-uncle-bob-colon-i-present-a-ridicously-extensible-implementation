@@ -19,8 +19,12 @@ class StateTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(array(), $moves);
   }
 
-
-
-
+  public function test_that_move_performed_is_stored_in_move_history()
+  {
+    $move = PlayerMove::forX(1, 1);
+    $this->target->updateState($move);
+    $moveHistory = $this->target->getMoveHistory();
+    $this->assertEquals($move, $moveHistory[0]);
+  }
 
 }

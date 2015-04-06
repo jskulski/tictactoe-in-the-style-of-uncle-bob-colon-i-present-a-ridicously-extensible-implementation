@@ -26,6 +26,11 @@ class Referee {
       return false;
     };
 
+    if ($move->getRow() < -1 || $move->getRow() > 1
+        || $move->getColumn() < -1 || $move->getColumn() > 1) {
+      return false;
+    }
+
     $lastMove = $this->getLastMove($moveHistory);
     if ($this->playerOfMoveIsSameAsLastMove($move, $lastMove)) {
       return false;
@@ -91,8 +96,6 @@ class Referee {
       $lastMove = new NullMove();
     return $lastMove;
   }
-
-
 
   /**
    * @param array $moveHistory

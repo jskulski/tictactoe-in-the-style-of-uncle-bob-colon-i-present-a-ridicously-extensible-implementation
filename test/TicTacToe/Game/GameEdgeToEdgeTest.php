@@ -46,5 +46,4 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->game->isOver());
   }
 
-
 }

@@ -14,6 +14,8 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->target = new Referee(new MoveFilterer());
   }
 
+
+
   public function test_X_in_the_center_is_valid_on_empty_board()
   {
     $moveHistory = array();
@@ -21,6 +23,35 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
       $this->target->makeCall(PlayerMove::forX(0, 0), $moveHistory)
     );
   }
+
+  public function test_that_move_in_row_above_top_is_invalid()
+  {
+    $moveHistory = array();
+    $move = PlayerMove::forX(-2, 0);
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
+  }
+
+  public function test_that_move_in_row_below_bottom_is_invalid()
+  {
+    $moveHistory = array();
+    $move = PlayerMove::forX(2, 0);
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
+  }
+
+  public function test_that_move_left_of_left_column_is_invalid()
+  {
+    $moveHistory = array();
+    $move = PlayerMove::forX(0, -2);
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
+  }
+
+  public function test_that_move_right_of_right_column_is_invalid()
+  {
+    $moveHistory = array();
+    $move = PlayerMove::forX(0, 2);
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
+  }
+
 
   public function test_making_X_move_twice_in_a_row_is_invalid()
   {
