@@ -16,12 +16,12 @@ class State {
    */
   public function getMoveHistory()
   {
-    return $this->moveHistory ? $this->moveHistory : array(new NullMove());
+    return $this->moveHistory ? $this->moveHistory : array();
   }
 
   public function isOver()
   {
-    $isBoardFull = count($this->getMoveHistory()) == 10;
+    $isBoardFull = count($this->getMoveHistory()) == 9;
     return $isBoardFull;
   }
 
