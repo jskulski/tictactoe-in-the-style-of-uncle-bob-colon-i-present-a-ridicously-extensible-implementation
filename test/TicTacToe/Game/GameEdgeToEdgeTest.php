@@ -30,7 +30,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function test_game_where_X_wins_top_row_has_expected_outcome() {
-
     $moves = array(
       PlayerMove::forX(-1, -1),
       PlayerMove::forO( 0,  0),
@@ -39,12 +38,22 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
       PlayerMove::forX(-1,  1)
     );
 
-    $state = new State();
-    foreach ($moves as $move) {
-      $state = $this->game->makeMoveWithState($move, $state);
-    }
+    $this->playMoves($this->game, $moves);
   }
 
+  /**
+   * @param Game $game
+   * @param Move[] $moves
+   * @throws IllegalMoveException
+   */
+  private function playMoves(Game $game, array $moves)
+  {
+    $state = new State();
+    foreach ($moves as $move) {
+      $state = $game->makeMoveWithState($move, $state);
+    }
+    return $state;
+  }
 
 
 }
