@@ -76,7 +76,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
   {
     $state = new State();
     foreach ($moves as $move) {
-      $state = $game->makeMoveWithState($move, $state);
+      $state = $game->makeMove($move, $state);
     }
     return $state;
   }

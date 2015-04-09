@@ -14,8 +14,7 @@ class Game {
     $this->referee = $referee;
   }
 
-
-  public function makeMoveWithState(Move $move, State $state)
+  public function makeMove(Move $move, State $state)
   {
     if (!$this->isValidMove($move, $state)) {
       throw new IllegalMoveException('This is not a valid move');
