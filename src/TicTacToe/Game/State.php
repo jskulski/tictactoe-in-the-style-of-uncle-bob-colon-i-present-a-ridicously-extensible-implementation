@@ -28,7 +28,16 @@ class State {
     return $isBoardFull || $hasWinner;
   }
 
-  public function setWinnerIsX($winnerIsX) { $this->winnerIsX = $winnerIsX; }
+  /**
+   * @param $winnerIsX boolean
+   */
+  public function setWinnerIsX($winnerIsX) {
+    $this->winnerIsX = $winnerIsX;
+  }
+
+  /**
+   * @return bool
+   */
   public function winnerIsX() { return $this->winnerIsX; }
 
   public function winnerIsO()

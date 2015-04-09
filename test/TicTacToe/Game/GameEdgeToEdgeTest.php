@@ -14,22 +14,24 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game = $factory->createGame();
   }
 
-  public function test_game_is_over_after_nine_moves_made()
+  public function test_tied_game_is_over_after_nine_moves_made()
   {
     $moves = array(
       PlayerMove::forX(-1, -1),
-      PlayerMove::forO(-1,  0),
-      PlayerMove::forX(-1,  1),
+      PlayerMove::forO(-1,  1),
+      PlayerMove::forX(-1,  0),
       PlayerMove::forO( 0, -1),
-      PlayerMove::forX( 0,  0),
-      PlayerMove::forO( 0,  1),
+      PlayerMove::forX( 0,  1),
+      PlayerMove::forO( 0,  0),
       PlayerMove::forX( 1, -1),
-      PlayerMove::forO( 1,  1),
-      PlayerMove::forX( 1,  0)
+      PlayerMove::forO( 1,  0),
+      PlayerMove::forX( 1,  1),
     );
     $state = $this->playMoves($this->game, $moves);
 
     $this->assertTrue($state->isOver());
+    $this->assertFalse($state->winnerIsX());
+    $this->assertFalse($state->winnerIsO());
   }
 
   public function test_game_where_X_wins_top_row_has_expected_outcome() {
