@@ -25,6 +25,21 @@ class GameTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($move, $moveHistory[0]);
   }
 
+  public function test_game_returns_expected_state_object_on_second_play_too()
+  {
+    $target = new Game(new RefereeSpy(), new State());
+    $move = PlayerMove::forX(0, 0);
+    $move2 = PlayerMove::forO(0, 1);
+
+    $state = new State();
+    $state = $target->makeMove($move, $state);
+    $state = $target->makeMove($move2, $state);
+    $moveHistory = $state->getMoveHistory();
+
+    $this->assertEquals($move, $moveHistory[0]);
+    $this->assertEquals($move2, $moveHistory[1]);
+  }
+
   public function test_game_can_evaluate_move()
   {
     $target = new Game(new RefereeSpy(), new State());

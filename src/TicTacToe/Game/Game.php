@@ -17,14 +17,26 @@ class Game {
     $this->referee = $referee;
   }
 
-  public function makeMove(Move $move)
+  public function makeMove(Move $move, State $state = null)
   {
-    if (!$this->isValidMove($move)) {
-      throw new IllegalMoveException('This is not a valid move');
-    }
+    if ($state) {
+      $this->state = $state;
 
-    $this->state->updateState($move);
-    return $this->state;
+      if (!$this->isValidMove($move)) {
+        throw new IllegalMoveException('This is not a valid move');
+      }
+
+      $this->state->updateState($move);
+      return $this->state;
+    }
+    else {
+      if (!$this->isValidMove($move)) {
+        throw new IllegalMoveException('This is not a valid move');
+      }
+
+      $this->state->updateState($move);
+      return $this->state;
+    }
   }
 
   public function isOver()
