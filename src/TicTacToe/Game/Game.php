@@ -20,11 +20,7 @@ class Game {
       throw new IllegalMoveException('This is not a valid move');
     }
 
-    $state->addMoveToMoveHistory($move);
-
-    $moveHistory = $state->getMoveHistory();
-    $state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
-    $state->setWinnerIsO($this->referee->winnerIsO($moveHistory));
+    $state = $this->createNewState($move, $state);
 
     return $state;
   }
@@ -34,6 +30,21 @@ class Game {
     /** @var Move[] $lastMoves */
     $lastMoves = $state->getMoveHistory();
     return $this->referee->makeCall($move, $lastMoves);
+  }
+
+  /**
+   * @param Move $move
+   * @param State $state
+   */
+  private function createNewState(Move $move, State $state)
+  {
+    $state->addMoveToMoveHistory($move);
+
+    $moveHistory = $state->getMoveHistory();
+    $state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
+    $state->setWinnerIsO($this->referee->winnerIsO($moveHistory));
+
+    return $state;
   }
 
 }
