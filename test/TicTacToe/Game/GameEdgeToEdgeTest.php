@@ -44,9 +44,9 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     );
     $state = $this->playMoves($this->game, $moves);
 
+    $this->assertTrue($state->isOver());
     $this->assertTrue($state->winnerIsX());
     $this->assertFalse($state->winnerIsO());
-    $this->assertTrue($state->isOver());
   }
 
 
@@ -61,9 +61,9 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     );
     $state = $this->playMoves($this->game, $moves);
 
+    $this->assertTrue($state->isOver());
     $this->assertFalse($state->winnerIsX());
-//    $this->assertFalse($state->winnerIsO());
-//    $this->assertTrue($state->isOver());
+    $this->assertTrue($state->winnerIsO());
   }
 
 

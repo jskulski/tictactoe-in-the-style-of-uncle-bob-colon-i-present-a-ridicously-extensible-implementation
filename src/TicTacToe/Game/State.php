@@ -10,6 +10,8 @@ class State {
   private $moveHistory = array();
   /** @var  boolean */
   private $winnerIsX = true;
+  /** @var  boolean */
+  private $winnerIsO = true;
 
   public function __construct() { }
 
@@ -24,7 +26,7 @@ class State {
   public function isOver()
   {
     $isBoardFull = count($this->getMoveHistory()) == 9;
-    $hasWinner = $this->winnerIsX();
+    $hasWinner = $this->winnerIsX() || $this->winnerIsO();
     return $isBoardFull || $hasWinner;
   }
 
@@ -38,11 +40,24 @@ class State {
   /**
    * @return bool
    */
-  public function winnerIsX() { return $this->winnerIsX; }
+  public function winnerIsX() {
+    return $this->winnerIsX;
+  }
 
+
+  /**
+   * @param $winnerIsO boolean
+   */
+  public function setWinnerIsO($winnerIsO) {
+    $this->winnerIsO = $winnerIsO;
+  }
+
+  /**
+   * @return bool
+   */
   public function winnerIsO()
   {
-    return false;
+    return $this->winnerIsO;
   }
 
   /**
