@@ -42,8 +42,9 @@ class GameTest extends \PHPUnit_Framework_TestCase {
 
   public function test_game_can_evaluate_move()
   {
-    $target = new Game(new RefereeSpy(), new State());
-    $target->isValidMove(PlayerMove::forX(0, 0));
+    $state = new State();
+    $target = new Game(new RefereeSpy());
+    $target->isValidMove(PlayerMove::forX(0, 0), $state);
   }
 
   public function test_playing_an_invalid_move_throws_an_exception()

@@ -22,7 +22,7 @@ class Game {
   {
     $this->state = $state;
 
-    if (!$this->isValidMove($move)) {
+    if (!$this->isValidMove($move, $state)) {
       throw new IllegalMoveException('This is not a valid move');
     }
 
@@ -40,7 +40,7 @@ class Game {
    */
   public function makeMove(Move $move)
   {
-    if (!$this->isValidMove($move)) {
+    if (!$this->isValidMove($move, $this->state)) {
       throw new IllegalMoveException('This is not a valid move');
     }
 
@@ -53,10 +53,10 @@ class Game {
     return $this->state->isOver();
   }
 
-  public function isValidMove(Move $move)
+  public function isValidMove(Move $move, State $state)
   {
     /** @var Move[] $lastMoves */
-    $lastMoves = $this->state->getMoveHistory();
+    $lastMoves = $state->getMoveHistory();
     return $this->referee->makeCall($move, $lastMoves);
   }
 
