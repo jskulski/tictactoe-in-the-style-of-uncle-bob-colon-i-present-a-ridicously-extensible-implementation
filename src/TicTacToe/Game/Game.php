@@ -35,19 +35,6 @@ class Game {
     return $this->state;
   }
 
-  /**
-   * @deprecated
-   */
-  public function makeMove(Move $move)
-  {
-    if (!$this->isValidMove($move, $this->state)) {
-      throw new IllegalMoveException('This is not a valid move');
-    }
-
-    $this->state->addMoveToMoveHistory($move);
-    return $this->state;
-  }
-
   public function isOver()
   {
     return $this->state->isOver();

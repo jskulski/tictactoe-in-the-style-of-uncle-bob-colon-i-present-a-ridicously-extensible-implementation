@@ -10,17 +10,19 @@ class GameTest extends \PHPUnit_Framework_TestCase {
   {
     $refereeSpy = new RefereeSpy();
     $target = new Game($refereeSpy);
+    $state = new State();
     $move = new PlayerMoveStub('JSK', 123, 321);
 
-    $target->makeMove($move);
+    $target->makeMoveWithState($move, $state);
     $this->assertEquals($refereeSpy->moveMakeCallCalledWith(), $move);
   }
 
   public function test_game_returns_expected_state_object()
   {
-    $target = new Game(new RefereeSpy(), new State());
+    $state = new State();
+    $target = new Game(new RefereeSpy());
     $move = PlayerMove::forX(0, 0);
-    $newState = $target->makeMove($move);
+    $newState = $target->makeMoveWithState($move, $state);
     $moveHistory = $newState->getMoveHistory();
     $this->assertEquals($move, $moveHistory[0]);
   }
@@ -51,9 +53,8 @@ class GameTest extends \PHPUnit_Framework_TestCase {
   {
     $this->setExpectedException(IllegalMoveException::class);
     $refereeSpy = new IllegalMoveRefereeStub();
-    $target = new Game($refereeSpy, new State());
-    $target->makeMove(PlayerMove::forX(0, 0));
-    $target->makeMove(PlayerMove::forO(0, 0));
+    $target = new Game($refereeSpy);
+    $target->makeMoveWithState(PlayerMove::forX(0, 0), new State());
   }
 
 }
