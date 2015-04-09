@@ -16,15 +16,18 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
 
   public function test_game_is_over_after_nine_moves_made()
   {
-    $this->game->makeMove(PlayerMove::forX(-1, -1));
-    $this->game->makeMove(PlayerMove::forO(-1,  0));
-    $this->game->makeMove(PlayerMove::forX(-1,  1));
-    $this->game->makeMove(PlayerMove::forO( 0, -1));
-    $this->game->makeMove(PlayerMove::forX( 0,  0));
-    $this->game->makeMove(PlayerMove::forO( 0,  1));
-    $this->game->makeMove(PlayerMove::forX( 1, -1));
-    $this->game->makeMove(PlayerMove::forO( 1,  1));
-    $state = $this->game->makeMove(PlayerMove::forX( 1,  0));
+    $moves = array(
+      PlayerMove::forX(-1, -1),
+      PlayerMove::forO(-1,  0),
+      PlayerMove::forX(-1,  1),
+      PlayerMove::forO( 0, -1),
+      PlayerMove::forX( 0,  0),
+      PlayerMove::forO( 0,  1),
+      PlayerMove::forX( 1, -1),
+      PlayerMove::forO( 1,  1),
+      PlayerMove::forX( 1,  0)
+    );
+    $state = $this->playMoves($this->game, $moves);
 
     $this->assertTrue($state->isOver());
   }
@@ -38,7 +41,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
       PlayerMove::forX(-1,  1)
     );
 
-    $this->playMoves($this->game, $moves);
+    $state = $this->playMoves($this->game, $moves);
   }
 
   /**
@@ -54,6 +57,5 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     }
     return $state;
   }
-
 
 }
