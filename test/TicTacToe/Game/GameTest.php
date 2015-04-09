@@ -16,14 +16,6 @@ class GameTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($refereeSpy->moveMakeCallCalledWith(), $move);
   }
 
-  public function test_game_returns_state_object()
-  {
-    $target = new Game(new RefereeSpy(), new State());
-    $move = PlayerMove::forX(0, 0);
-    $newState = $target->makeMove($move);
-    $this->assertInstanceOf(State::class, $newState);
-  }
-
   public function test_game_returns_expected_state_object()
   {
     $target = new Game(new RefereeSpy(), new State());
@@ -32,7 +24,6 @@ class GameTest extends \PHPUnit_Framework_TestCase {
     $moveHistory = $newState->getMoveHistory();
     $this->assertEquals($move, $moveHistory[0]);
   }
-
 
   public function test_game_can_evaluate_move()
   {

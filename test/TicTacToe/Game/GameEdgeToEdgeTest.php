@@ -24,9 +24,9 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game->makeMove(PlayerMove::forO( 0,  1));
     $this->game->makeMove(PlayerMove::forX( 1, -1));
     $this->game->makeMove(PlayerMove::forO( 1,  1));
-    $this->game->makeMove(PlayerMove::forX( 1,  0));
+    $state = $this->game->makeMove(PlayerMove::forX( 1,  0));
 
-    $this->assertTrue($this->game->isOver());
+    $this->assertTrue($state->isOver());
   }
 
 
