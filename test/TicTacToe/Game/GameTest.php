@@ -40,6 +40,15 @@ class GameTest extends \PHPUnit_Framework_TestCase {
     $target->isValidMove(PlayerMove::forX(0, 0));
   }
 
+  public function test_playing_an_invalid_move_throws_an_exception()
+  {
+    $this->setExpectedException(IllegalMoveException::class);
+    $refereeSpy = new IllegalMoveRefereeStub();
+    $target = new Game($refereeSpy, new State());
+    $target->makeMove(PlayerMove::forX(0, 0));
+    $target->makeMove(PlayerMove::forO(0, 0));
+  }
+
 }
 
 class RefereeSpy extends Referee {
@@ -66,6 +75,11 @@ class RefereeSpy extends Referee {
     return $this->move;
   }
 
+}
+
+class IllegalMoveRefereeStub extends Referee {
+  public function __construct() {}
+  public function makeCall(Move $move, array $moveHistory) { return false; }
 }
 
 class PlayerMoveStub extends PlayerMove {
