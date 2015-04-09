@@ -14,16 +14,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->game = $factory->createGame();
   }
 
-  public function test_game_does_not_start_already_over()
-  {
-    $this->assertFalse($this->game->isOver());
-  }
-
-  public function test_game_can_evaluate_move()
-  {
-    $this->game->isValidMove(PlayerMove::forX(0, 0));
-  }
-
   public function test_playing_an_invalid_move_throws_an_exception()
   {
     $this->setExpectedException(IllegalMoveException::class);
@@ -45,5 +35,6 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertTrue($this->game->isOver());
   }
+
 
 }

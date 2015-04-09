@@ -24,10 +24,6 @@ class Game {
     }
 
     $this->state->updateState($move);
-  }
-
-  public function getState()
-  {
     return $this->state;
   }
 
