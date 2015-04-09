@@ -26,7 +26,7 @@ class Game {
       throw new IllegalMoveException('This is not a valid move');
     }
 
-    $this->state->updateState($move);
+    $this->state->addMoveToMoveHistory($move);
 
     $moveHistory = $this->state->getMoveHistory();
     $this->state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
@@ -44,7 +44,7 @@ class Game {
       throw new IllegalMoveException('This is not a valid move');
     }
 
-    $this->state->updateState($move);
+    $this->state->addMoveToMoveHistory($move);
     return $this->state;
   }
 

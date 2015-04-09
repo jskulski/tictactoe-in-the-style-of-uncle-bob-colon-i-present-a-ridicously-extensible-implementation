@@ -82,6 +82,7 @@ class RefereeSpy extends Referee {
   }
 
   public function winnerIsX(array $moveHistory) { return false; }
+  public function winnerIsO(array $moveHistory) { return false; }
 
 }
 

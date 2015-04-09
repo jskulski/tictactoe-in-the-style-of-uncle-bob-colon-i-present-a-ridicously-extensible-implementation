@@ -64,7 +64,7 @@ class State {
    * @param Move
    * @return State
    */
-  public function updateState(Move $move) {
+  public function addMoveToMoveHistory(Move $move) {
     $moveHistory = $this->getMoveHistory();
     array_push($moveHistory, $move);
     $this->moveHistory = $moveHistory;
