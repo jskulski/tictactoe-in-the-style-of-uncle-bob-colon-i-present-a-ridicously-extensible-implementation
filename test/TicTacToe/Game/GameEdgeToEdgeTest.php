@@ -29,5 +29,22 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($state->isOver());
   }
 
+  public function test_game_where_X_wins_top_row_has_expected_outcome() {
+
+    $moves = array(
+      PlayerMove::forX(-1, -1),
+      PlayerMove::forO( 0,  0),
+      PlayerMove::forX(-1,  0),
+      PlayerMove::forO( 1,  0),
+      PlayerMove::forX(-1,  1)
+    );
+
+    $state = new State();
+    foreach ($moves as $move) {
+      $state = $this->game->makeMoveWithState($move, $state);
+    }
+  }
+
+
 
 }

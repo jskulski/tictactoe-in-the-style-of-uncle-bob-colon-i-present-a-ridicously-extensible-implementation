@@ -32,8 +32,8 @@ class GameTest extends \PHPUnit_Framework_TestCase {
     $move2 = PlayerMove::forO(0, 1);
 
     $state = new State();
-    $state = $target->makeMove($move, $state);
-    $state = $target->makeMove($move2, $state);
+    $state = $target->makeMoveWithState($move, $state);
+    $state = $target->makeMoveWithState($move2, $state);
     $moveHistory = $state->getMoveHistory();
 
     $this->assertEquals($move, $moveHistory[0]);
