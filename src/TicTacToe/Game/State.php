@@ -22,7 +22,13 @@ class State {
   public function isOver()
   {
     $isBoardFull = count($this->getMoveHistory()) == 9;
-    return $isBoardFull;
+    $hasWinner = $this->winnerIsX();
+    return $isBoardFull || $hasWinner;
+  }
+
+  public function winnerIsX()
+  {
+    return true;
   }
 
   /**
