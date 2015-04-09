@@ -43,8 +43,27 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $state = $this->playMoves($this->game, $moves);
 
     $this->assertTrue($state->winnerIsX());
+    $this->assertFalse($state->winnerIsO());
     $this->assertTrue($state->isOver());
   }
+
+
+  public function test_game_where_O_wins_left_column_has_expected_outcome() {
+    $moves = array(
+      PlayerMove::forX( 0,  0),
+      PlayerMove::forO(-1, -1),
+      PlayerMove::forX(-1,  0),
+      PlayerMove::forO( 0, -1),
+      PlayerMove::forX(-1,  1),
+      PlayerMove::forO( 1, -1)
+    );
+    $state = $this->playMoves($this->game, $moves);
+
+    $this->assertFalse($state->winnerIsX());
+//    $this->assertFalse($state->winnerIsO());
+//    $this->assertTrue($state->isOver());
+  }
+
 
   /**
    * @param Game $game

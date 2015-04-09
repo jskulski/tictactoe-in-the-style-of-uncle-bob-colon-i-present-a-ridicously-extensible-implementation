@@ -27,6 +27,9 @@ class Game {
     }
 
     $this->state->updateState($move);
+    $moveHistory = $this->state->getMoveHistory();
+    $this->state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
+
     return $this->state;
   }
 

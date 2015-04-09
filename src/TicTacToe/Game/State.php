@@ -7,7 +7,9 @@ namespace JSK\TicTacToe\Game;
 class State {
 
   /** @var  Move[] */
-  private $moveHistory;
+  private $moveHistory = array();
+  /** @var  boolean */
+  private $winnerIsX = true;
 
   public function __construct() { }
 
@@ -26,9 +28,12 @@ class State {
     return $isBoardFull || $hasWinner;
   }
 
-  public function winnerIsX()
+  public function setWinnerIsX($winnerIsX) { $this->winnerIsX = $winnerIsX; }
+  public function winnerIsX() { return $this->winnerIsX; }
+
+  public function winnerIsO()
   {
-    return true;
+    return false;
   }
 
   /**

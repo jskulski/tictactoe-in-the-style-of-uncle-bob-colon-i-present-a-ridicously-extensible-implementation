@@ -81,6 +81,8 @@ class RefereeSpy extends Referee {
     return $this->move;
   }
 
+  public function winnerIsX(array $moveHistory) { return false; }
+
 }
 
 class IllegalMoveRefereeStub extends Referee {
