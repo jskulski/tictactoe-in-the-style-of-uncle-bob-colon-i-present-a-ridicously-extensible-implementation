@@ -8,36 +8,26 @@ class Game {
 
   /** @var  Referee */
   private $referee;
-  /** @var  State */
-  private $state;
 
   function __construct(Referee $referee)
   {
-    $this->state = new State();
     $this->referee = $referee;
   }
 
 
-  public function makeMoveWithState($move, $state)
+  public function makeMoveWithState(Move $move, State $state)
   {
-    $this->state = $state;
-
     if (!$this->isValidMove($move, $state)) {
       throw new IllegalMoveException('This is not a valid move');
     }
 
-    $this->state->addMoveToMoveHistory($move);
+    $state->addMoveToMoveHistory($move);
 
-    $moveHistory = $this->state->getMoveHistory();
-    $this->state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
-    $this->state->setWinnerIsO($this->referee->winnerIsO($moveHistory));
+    $moveHistory = $state->getMoveHistory();
+    $state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
+    $state->setWinnerIsO($this->referee->winnerIsO($moveHistory));
 
-    return $this->state;
-  }
-
-  public function isOver()
-  {
-    return $this->state->isOver();
+    return $state;
   }
 
   public function isValidMove(Move $move, State $state)
