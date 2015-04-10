@@ -69,6 +69,35 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($state->isTiedGame());
   }
 
+  public function test_that_it_is_Os_turn_given_a_history_with_player_O_as_last_player()
+  {
+    $moves = array(
+      PlayerMove::forX(0, 0)
+    );
+    $state = $this->playMoves($this->game, $moves);
+
+    $this->assertTrue($state->isPlayerOTurn());
+    $this->assertFalse($state->isPlayerXTurn());
+  }
+
+//  public function test_that_it_is_Xs_turn_given_a_history_with_player_O_as_last_player()
+//  {
+//    $moves = array(
+//      PlayerMove::forX(0, 0),
+//      PlayerMove::forO(1, 1)
+//    );
+//    $state = $this->playMoves($this->game, $moves);
+//
+//    $this->assertTrue($state->isPlayerXTurn());
+//    $this->assertFalse($state->isPlayerOTurn());
+//  }
+
+//  public function test_that_it_cant_be_both_X_and_O_turn()
+//  {
+//    $this->assertTrue($this->target->isPlayerXTurn());
+//    $this->assertFalse($this->target->isPlayerOTurn());
+//  }
+
 
   /**
    * @param Game $game

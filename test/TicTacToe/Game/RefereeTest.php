@@ -351,5 +351,20 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->target->winnerIsO($moveHistory));
   }
 
+  public function test_that_it_is_Os_turn_given_a_history_with_player_O_as_last_player()
+  {
+    $moveHistory = array(
+      PlayerMove::forX( 0, 0),
+    );
+    $this->assertFalse($this->target->isPlayerXTurn($moveHistory));
+  }
+
+  public function test_that_it_is_Xs_turn_given_a_history_with_player_O_as_last_player()
+  {
+    $moveHistory = array(
+      PlayerMove::forO(-1, 1)
+    );
+    $this->assertTrue($this->target->isPlayerXTurn($moveHistory));
+  }
 
 }

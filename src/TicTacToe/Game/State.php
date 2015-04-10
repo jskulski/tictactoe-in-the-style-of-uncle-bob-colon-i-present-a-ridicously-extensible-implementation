@@ -14,6 +14,8 @@ class State {
   private $winnerIsO = true;
   /** @var  boolean */
   private $tiedGame = false;
+  /** @var  boolean */
+  private $isPlayerXTurn = true;
 
 
   public function __construct() { }
@@ -26,9 +28,22 @@ class State {
     return $this->moveHistory ? $this->moveHistory : array();
   }
 
+  /**
+   * @param boolean $playerXTurn
+   */
+  public function setPlayerXTurn($playerXTurn)
+  {
+    $this->isPlayerXTurn = $playerXTurn;
+  }
+
   public function isPlayerXTurn()
   {
-    return true;
+    return $this->isPlayerXTurn;
+  }
+
+  public function isPlayerOTurn()
+  {
+    return !$this->isPlayerXTurn();
   }
 
   /**
@@ -95,6 +110,7 @@ class State {
     array_push($moveHistory, $move);
     $this->moveHistory = $moveHistory;
   }
+
 
 }
 

@@ -100,6 +100,16 @@ class Referee {
     return $isTied;
   }
 
+
+  /**
+   * @param Move[] $moveHistory
+   */
+  public function isPlayerXTurn(array $moveHistory)
+  {
+    $lastMove = $this->getLastMove($moveHistory);
+    return $lastMove->isO();
+  }
+
   /**
    * @param Move $move
    * @param Move[] $moveHistory
