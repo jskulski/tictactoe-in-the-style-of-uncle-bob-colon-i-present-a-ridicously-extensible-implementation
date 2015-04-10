@@ -24,17 +24,27 @@ class MakeRocketGo {
   {
     /** @var Game $game */
     $game = $this->factory->createGame();
+    /** @var State $state */
+    $state = new State();
 
     $quit = false;
     $playerXTurn = true;
 
-    while (!$quit) {
-      $this->renderGameState($game->getState());
-      list($row, $column) = $this->promptUser();
+    while (true) {
+      $this->renderGameState($state);
 
-      if ($row == 'q' || $column == 'q') {
-        $quit = true;
+      $rowInput = $this->promptUserForRow();
+      if ($this->hasUserQuit($rowInput)) {
+        break;
       }
+
+      $columnInput = $this->promptUserForColumn();
+      if ($this->hasUserQuit($columnInput)) {
+        break;
+      }
+
+      $row = $this->mapInputToCoordinate($rowInput);
+      $column = $this->mapInputToCoordinate($columnInput);
 
       if ($playerXTurn) {
         $move = PlayerMove::forX($row, $column);
@@ -43,8 +53,8 @@ class MakeRocketGo {
         $move = PlayerMove::forO($row, $column);
       }
 
-      if ($game->isValidMove($move)) {
-        $game->makeMove($move);
+      if ($game->isValidMove($move, $state)) {
+        $state = $game->makeMove($move, $state);
         $playerXTurn = !$playerXTurn;
       }
       else {
@@ -54,7 +64,6 @@ class MakeRocketGo {
   }
 
   public function renderGameState(State $state) {
-    $legend = array('   ', ' -1 ', ' 0 ', ' 1 ');
     $markersOnBoard = array(
       array(' - ', ' - ', ' - '),
       array(' - ', ' - ', ' - '),
@@ -64,8 +73,8 @@ class MakeRocketGo {
     foreach ($moves as $move) {
       /** @var $move Move */
       $marker = $move->isX() ? 'X' : 'O';
-      $row = $move->getRow() - 1;
-      $col = $move->getColumn() - 1;
+      $row = $this->mapInputToBoardMarker($move->getRow());
+      $col = $this->mapInputToBoardMarker($move->getColumn());
       $markersOnBoard[$row][$col] = $marker;
     }
 
@@ -78,12 +87,47 @@ class MakeRocketGo {
   /**
    * @return array
    */
-  public function promptUser()
+  public function promptUserForRow()
   {
-    \cli\line('Make a move');
     $row = \cli\Streams::prompt('Row', null, '[1/2/3] ? ');
+    return $row;
+  }
+
+  public function promptUserForColumn() {
     $column = \cli\Streams::prompt('Column', null, '[1/2/3] ? ');
-    return array($row - 2, $column - 2);
+    return $column;
+  }
+
+  /**
+   * @param $row
+   * @param $column
+   * @return bool
+   */
+  private function hasUserQuit($input)
+  {
+    if ($input == 'q') {
+      return true;
+    }
+    return false;
+  }
+
+  private function mapInputToBoardMarker($input) {
+    $map = array(
+      '-1' => 0,
+      '0' => 1,
+      '1' => 2
+    );
+    return $map[$input];
+  }
+
+  private function mapInputToCoordinate($input)
+  {
+    $map = array(
+      '1' => -1,
+      '2' =>  0,
+      '3' =>  1
+    );
+    return $map[$input];
   }
 
 }
