@@ -19,10 +19,11 @@ the business world):
  * No! We need a GUI! (might skip cause...php)
  * No! We need a webpage!
  * No! We need a single page app!
+ * No! It's gotta be react!
  * And so on with different front pages but all the same core
  * Different datastores
  
-The goal is READABLE code. The goal is REUSABLE code. This is code golf, 
+The goal is readable code. The goal is reusable code. This is code golf, 
 but for readable code.
 
 ### Pushing State to one place
@@ -40,6 +41,15 @@ Given that they are both
     game(move, state) -> new state 
 
 get move, check board, compute new state sort of loops. It should be possible.
+
+### Use Boring Technology
+
+Sort of an afterthought, but I chose to do this (or most of this in php). I work in PHP at
+the moment so it was at hand ([easy](http://www.infoq.com/presentations/Simple-Made-Easy)).
+
+I want to learn new languages, but for this project, I wanted that not to be a hurdle. But
+it hurts. It really, really hurts. PHP is boring. But 
+[this blog post](http://mcfunley.com/choose-boring-technology) has nice points too.
 
 ## Notes
 
