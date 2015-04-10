@@ -12,6 +12,9 @@ class State {
   private $winnerIsX = true;
   /** @var  boolean */
   private $winnerIsO = true;
+  /** @var  boolean */
+  private $tiedGame = false;
+
 
   public function __construct() { }
 
@@ -57,6 +60,22 @@ class State {
   public function winnerIsO()
   {
     return $this->winnerIsO;
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isTiedGame()
+  {
+    return $this->tiedGame;
+  }
+
+  /**
+   * @param boolean $tiedGame
+   */
+  public function setTiedGame($tiedGame)
+  {
+    $this->tiedGame = $tiedGame;
   }
 
   /**

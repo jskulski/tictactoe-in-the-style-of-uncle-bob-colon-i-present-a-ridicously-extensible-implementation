@@ -32,6 +32,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($state->isOver());
     $this->assertFalse($state->winnerIsX());
     $this->assertFalse($state->winnerIsO());
+    $this->assertTrue($state->isTiedGame());
   }
 
   public function test_game_where_X_wins_top_row_has_expected_outcome() {
@@ -47,6 +48,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($state->isOver());
     $this->assertTrue($state->winnerIsX());
     $this->assertFalse($state->winnerIsO());
+    $this->assertFalse($state->isTiedGame());
   }
 
 
@@ -64,6 +66,7 @@ class GameEdgeToEdgeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($state->isOver());
     $this->assertFalse($state->winnerIsX());
     $this->assertTrue($state->winnerIsO());
+    $this->assertFalse($state->isTiedGame());
   }
 
 

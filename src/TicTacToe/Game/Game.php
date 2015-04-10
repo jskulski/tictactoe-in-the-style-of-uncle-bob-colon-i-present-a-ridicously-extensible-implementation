@@ -43,6 +43,7 @@ class Game {
     $moveHistory = $state->getMoveHistory();
     $state->setWinnerIsX($this->referee->winnerIsX($moveHistory));
     $state->setWinnerIsO($this->referee->winnerIsO($moveHistory));
+    $state->setTiedGame($this->referee->isTied($moveHistory));
 
     return $state;
   }
