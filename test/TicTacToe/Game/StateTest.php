@@ -27,4 +27,11 @@ class StateTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($move, $moveHistory[0]);
   }
 
+  public function test_initial_state_is_player_X_turn()
+  {
+    $this->assertTrue($this->target->isPlayerXTurn());
+  }
+
+
+
 }

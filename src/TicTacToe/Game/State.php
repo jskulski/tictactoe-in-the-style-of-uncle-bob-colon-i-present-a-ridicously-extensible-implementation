@@ -26,6 +26,14 @@ class State {
     return $this->moveHistory ? $this->moveHistory : array();
   }
 
+  public function isPlayerXTurn()
+  {
+    return true;
+  }
+
+  /**
+   * @return bool
+   */
   public function isOver()
   {
     $isBoardFull = count($this->getMoveHistory()) == 9;
@@ -87,5 +95,6 @@ class State {
     array_push($moveHistory, $move);
     $this->moveHistory = $moveHistory;
   }
+
 }
 
