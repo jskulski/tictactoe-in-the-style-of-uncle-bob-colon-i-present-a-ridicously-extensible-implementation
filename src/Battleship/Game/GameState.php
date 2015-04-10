@@ -6,10 +6,15 @@ namespace JSK\Battleship\Game;
 
 class GameState {
 
-
-  public function isShipAt()
+  /**
+   * @param $coordinate
+   * @ConvertToCoordinate
+   * @return bool
+   */
+  public function isShipAt($coordinate)
   {
     return true;
   }
 
 }
+

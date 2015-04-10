@@ -30,6 +30,13 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase {
 
     $this->assertTrue($state->isShipAt('A1'));
   }
+
+//  public function test_no_ship_initial_state()
+//  {
+//    $state = new GameState();
+//    $this->assertFalse($state->isShipAt('A1'));
+//  }
+
 //  public function test_sinking_a_battleship_sinks_a_battleship()
 //  {
 //    $state = new GameState();
