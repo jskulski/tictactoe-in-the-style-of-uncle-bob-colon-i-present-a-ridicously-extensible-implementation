@@ -57,6 +57,53 @@ it hurts. It really, really hurts. PHP is boring. But
 
 Decided to keep log of my monologue while building. Created readme.
 
+### List of Moves vs Array of Arrays
+
+A year ago, if I was building this, among the first lines would be 
+
+    <?php
+    $board = array(
+        array(null, null, null),
+        array(null, null, null),
+        array(null, null, null)
+    );
+    
+I've been really trying to write my tests first lately and see where it takes me without
+design decisions. I'll say I was pleasantly surprised when I ended with a core concept of
+a list of moves instead.
+
+So instead of the stateful
+
+    public function addMove($x, $y, $player) { 
+        $this->board[$x][$y] = $player;
+    }
+    
+I went with 
+    
+    public function addMove($x, $y, $player, $moveHistory) { 
+        return $this->appendArray(array($x, $y, $player), $moveHistory);
+    }
+
+where appendArray creates a new array. And I did encapsulate $x, $y, $player in a 
+Move concept. I never got around (so far) creating a MoveHistory (array of $moves).
+I tried to introduce it once (since the moveFilterer and Referee have 'utility' functions
+that are more tied to MoveHistories than their owners- like getLastMove()) but it was
+very difficult to change stuff like
+
+    /**
+     * @param Move[] $moveHistory
+     */
+    public function dependantOnMoveArray(array $moveHistory) { ... }
+
+to using an object. There are many, many places like this. I tried twice so far and have
+gotten lost both times. The benefit is nice, but not needed and I decided to work on other
+things.
+
+Regardless, working always with a list of moves is a very nice way to think about the 
+problem and led me to the MoveFilterer, which I'm proud of. It's a nice way to work and
+reminds me of declarative SQL/LINQ.
+
+
 ### Decorator pattern
 
 Last night starting the battleship ruleset, I got stuck playing with coordinates
