@@ -31,6 +31,13 @@ but for readable code.
 Reading about Haskell lately and interested in FP (but wholly ignorant of it) lately,
 interested in how side effects are handled. Want to try building this as stateless as possible.
 
+Trying to think of Tic Tac Toe, Battleship, or snake as the function 
+
+    game(move, state) -> new state 
+    
+It's actually got me excited to see if this can translate to real business cases. 
+Is it effective to think of sites like Amazon as collections of functions?
+
 Also, wtf are monads man.
 
 ### What is Open/Closed anyway? 
