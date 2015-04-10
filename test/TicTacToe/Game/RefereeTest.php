@@ -102,6 +102,39 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($this->target->makeCall($move, $moveHistory));
   }
 
+  public function test_move_is_invalid_if_all_spaces_are_filled()
+  {
+    $moveHistory = array(
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove()
+    );
+    $move = new NullMove();
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
+  }
+
+  public function test_game_is_tied_if_all_moves_filled()
+  {
+    $moveHistory = array(
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove(),
+      new NullMove()
+    );
+    $this->assertTrue($this->target->isTied($moveHistory));
+  }
+
   public function test_X_is_winner_if_they_mark_all_top_row()
   {
     $moveHistory = array(
