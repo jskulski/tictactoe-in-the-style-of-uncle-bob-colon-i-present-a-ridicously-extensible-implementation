@@ -27,7 +27,6 @@ class MakeRocketGo {
     $game = $this->factory->createGame();
     /** @var State $state */
     $state = new State();
-    $playerXTurn = true;
 
     while (true) {
       $this->renderGameState($state);
@@ -45,7 +44,7 @@ class MakeRocketGo {
       $row = $this->mapInputToCoordinate($rowInput);
       $column = $this->mapInputToCoordinate($columnInput);
 
-      if ($playerXTurn) {
+      if ($state->isPlayerXTurn()) {
         $move = PlayerMove::forX($row, $column);
       }
       else {
@@ -54,7 +53,6 @@ class MakeRocketGo {
 
       if ($game->isValidMove($move, $state)) {
         $state = $game->makeMove($move, $state);
-        $playerXTurn = !$playerXTurn;
       }
       else {
         \cli\line("Sorry that move was invalid. Try again");
