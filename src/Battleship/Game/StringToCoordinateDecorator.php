@@ -4,6 +4,7 @@
 namespace JSK\Battleship\Game;
 
 
+use Notoj\Annotation\Annotation;
 use Notoj\Annotation\Annotations;
 use Notoj\ReflectionClass;
 
@@ -23,17 +24,34 @@ class StringToCoordinateDecorator {
     $reflectedDecorated = new ReflectionClass($decoratedClass);
     /** @var Annotations $annotations */
     $annotations = $reflectedDecorated->getMethod($functionName)->getAnnotations();
-    $shouldConvert = $annotations->has('ConvertToCoordinate');
-
-    $stringCoordinate = $arguments[0];
+    /** @var Annotation $shouldConvert */
+    $shouldConvert = $annotations->getOne('ConvertArgumentToCoordinate');
 
     if ($shouldConvert) {
-      $coordinate = new Coordinate($stringCoordinate);
-    } else {
-      $coordinate = $stringCoordinate;
+      $args = $shouldConvert->getArgs();
+      if ($args) {
+        $shouldConvert = $args;
+      }
+      else {
+        $shouldConvert = array(true);
+      }
     }
 
-    return $this->decorated->$functionName($coordinate);
+    $decoratedArguments = array();
+    foreach ($arguments as $index => $argument) {
+      $stringCoordinate = $argument;
+
+      if ($shouldConvert[$index]) {
+        $decoratedArguments[] = new Coordinate($stringCoordinate);
+      } else {
+        $decoratedArguments[] = $stringCoordinate;
+      }
+    }
+
+    return call_user_func_array(
+      array($this->decorated, $functionName),
+      $decoratedArguments
+    );
   }
 
 }
