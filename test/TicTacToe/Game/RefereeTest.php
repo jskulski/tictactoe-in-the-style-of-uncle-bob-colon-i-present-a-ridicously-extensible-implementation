@@ -14,8 +14,6 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->target = new Referee(new MoveFilterer());
   }
 
-
-
   public function test_X_in_the_center_is_valid_on_empty_board()
   {
     $moveHistory = array();
@@ -89,6 +87,19 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse(
       $this->target->makeCall(PlayerMove::forO(0, 1), $moveHistory)
     );
+  }
+
+  public function test_legal_move_is_invalid_after_game_is_won()
+  {
+    $moveHistory = array(
+      PlayerMove::forX(-1, -1),
+      new NullMove(),
+      PlayerMove::forX(-1,  0),
+      new NullMove(),
+      PlayerMove::forX(-1,  1)
+    );
+    $move = PlayerMove::forO(0, 0);
+    $this->assertFalse($this->target->makeCall($move, $moveHistory));
   }
 
   public function test_X_is_winner_if_they_mark_all_top_row()
@@ -306,4 +317,6 @@ class RefereeTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue($this->target->hasWinner($moveHistory));
     $this->assertTrue($this->target->winnerIsO($moveHistory));
   }
+
+
 }

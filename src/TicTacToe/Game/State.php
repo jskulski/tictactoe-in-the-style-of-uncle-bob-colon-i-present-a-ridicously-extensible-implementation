@@ -44,7 +44,6 @@ class State {
     return $this->winnerIsX;
   }
 
-
   /**
    * @param $winnerIsO boolean
    */

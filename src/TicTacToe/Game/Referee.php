@@ -22,6 +22,10 @@ class Referee {
    */
   public function makeCall(Move $move, array $moveHistory)
   {
+    if ($this->hasWinner($moveHistory)) {
+      return false;
+    }
+
     if ($this->moveHasBeenMade($move, $moveHistory)) {
       return false;
     };
