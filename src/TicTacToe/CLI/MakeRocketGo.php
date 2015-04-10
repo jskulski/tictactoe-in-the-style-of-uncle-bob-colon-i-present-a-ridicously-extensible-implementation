@@ -6,6 +6,7 @@ namespace JSK\TicTacToe\CLI;
 
 use JSK\TicTacToe\Game\Factory;
 use JSK\TicTacToe\Game\Game;
+use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
@@ -26,8 +27,6 @@ class MakeRocketGo {
     $game = $this->factory->createGame();
     /** @var State $state */
     $state = new State();
-
-    $quit = false;
     $playerXTurn = true;
 
     while (true) {
@@ -60,6 +59,23 @@ class MakeRocketGo {
       else {
         \cli\line("Sorry that move was invalid. Try again");
       }
+
+      if ($state->winnerIsX()) {
+        \cli\line("Player X wins!");
+        $this->renderGameState($state);
+        break;
+      }
+      else if ($state->winnerIsO()) {
+        \cli\line("Player O wins!");
+        $this->renderGameState($state);
+        break;
+      }
+      else if ($state->isTiedGame()) {
+        \cli\line("Cat's Game! Tied!");
+        $this->renderGameState($state);
+        break;
+      }
+
     }
   }
 
