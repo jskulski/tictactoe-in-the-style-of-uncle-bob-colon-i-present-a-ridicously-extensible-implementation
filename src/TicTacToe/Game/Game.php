@@ -14,6 +14,12 @@ class Game {
     $this->referee = $referee;
   }
 
+  /**
+   * @param Move $move
+   * @param State $state
+   * @return State
+   * @throws IllegalMoveException
+   */
   public function makeMove(Move $move, State $state)
   {
     if (!$this->isValidMove($move, $state)) {
