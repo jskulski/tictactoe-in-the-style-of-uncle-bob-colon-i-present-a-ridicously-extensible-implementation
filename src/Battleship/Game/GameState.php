@@ -37,5 +37,9 @@ class GameState {
     return true;
   }
 
+  public function getShipsAfloatByPlayer(Player $player)
+  {
+  }
+
 }
 
