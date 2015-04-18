@@ -39,6 +39,7 @@ class GameState {
 
   public function getShipsAfloatByPlayer(Player $player)
   {
+    return new \ArrayObject(array(new Battleship()));
   }
 
 }

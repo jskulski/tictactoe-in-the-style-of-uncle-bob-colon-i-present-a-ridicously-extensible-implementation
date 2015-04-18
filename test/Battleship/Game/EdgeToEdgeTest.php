@@ -9,11 +9,6 @@ use PHPUnit_Framework_TestCase;
 class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
 {
 
-  public function test_can_create_game()
-  {
-    $game = new GameEngine();
-  }
-
   public function test_given_a_battleship_we_can_sink_it()
   {
     $gameEngine = new GameEngine();
@@ -32,6 +27,23 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
 
     $battleship = $gameState->getShips()->getAlliesBattleship();
     $this->assertTrue($battleship->isSunk());
+  }
+
+  public function test_given_shiplayout_game_reports_ships_afloat_for_player()
+  {
+    $player = new Player();
+    $battleship = new Battleship();
+    $gameEngine = new GameEngine();
+    $shipLayout = ShipLayout::start()->placeShip(
+      $battleship,
+      Coordinate::at('A1'),
+      Coordinate::at('A4')
+    );
+
+    $gameState = GameState::start()->setShipLayout($shipLayout);
+    $shipsAfloat = $gameState->getShipsAfloatByPlayer($player);
+    $this->assertInstanceOf(\ArrayObject::class, $shipsAfloat);
+    $this->assertTrue(in_array($battleship, $shipsAfloat->getArrayCopy()));
   }
 
 //  public function test_given_a_battleship_without_full_hits_is_unsunk()
