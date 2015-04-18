@@ -8,8 +8,8 @@ class StringToCoordinateDecoratorTest extends \PHPUnit_Framework_TestCase {
 
   public function test_decorator_invokes_decorated()
   {
-    $stub = new Stub();
-    /** @var Stub $decoratedObject */
+    $stub = new DecoratedStub();
+    /** @var DecoratedStub $decoratedObject */
     $decoratedObject = new StringToCoordinateDecorator($stub);
     $decoratedObject->testDecorator('A4');
     $this->assertTrue($stub->wasCalled);
@@ -17,8 +17,8 @@ class StringToCoordinateDecoratorTest extends \PHPUnit_Framework_TestCase {
 
   public function test_decorator_converts_string_to_coordinate_in_function_call()
   {
-    $stub = new Stub();
-    /** @var Stub $decoratedObject */
+    $stub = new DecoratedStub();
+    /** @var DecoratedStub $decoratedObject */
     $decoratedObject = new StringToCoordinateDecorator($stub);
     $coordinate = $decoratedObject->testDecorator('A4');
     $this->assertInstanceOf(Coordinate::class, $coordinate);
@@ -26,8 +26,8 @@ class StringToCoordinateDecoratorTest extends \PHPUnit_Framework_TestCase {
 
   public function test_decorator_is_not_invoked_on_functions_without_annotation()
   {
-    $stub = new Stub();
-    /** @var Stub $decoratedObject */
+    $stub = new DecoratedStub();
+    /** @var DecoratedStub $decoratedObject */
     $decoratedObject = new StringToCoordinateDecorator($stub);
     $string = $decoratedObject->testNotDecorated('A4');
     $this->assertEquals('A4', $string);
@@ -35,8 +35,8 @@ class StringToCoordinateDecoratorTest extends \PHPUnit_Framework_TestCase {
 
   public function test_decorator_is_invoked_only_on_arguments_specified()
   {
-    $stub = new Stub();
-    /** @var Stub $decoratedObject */
+    $stub = new DecoratedStub();
+    /** @var DecoratedStub $decoratedObject */
     $decoratedObject = new StringToCoordinateDecorator($stub);
     $decoratedObject->testArguments('A4', 'A4');
 
@@ -46,7 +46,7 @@ class StringToCoordinateDecoratorTest extends \PHPUnit_Framework_TestCase {
 
 }
 
-class Stub {
+class DecoratedStub {
 
   /** @var  boolean */
   public $wasCalled = false;
