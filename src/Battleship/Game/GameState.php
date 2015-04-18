@@ -22,7 +22,9 @@ class GameState {
 
   public function getAlliesBattleship()
   {
-    return new Battleship();
+    $battleship = new Battleship();
+    $battleship->setIsSunk(true);
+    return $battleship;
   }
 
   /**
