@@ -10,9 +10,9 @@ class ShipLayout {
     return new ShipLayout();
   }
 
-  public function placeShip() 
+  public function placeShip()
   {
-    
+    return $this;
   }
 
 }

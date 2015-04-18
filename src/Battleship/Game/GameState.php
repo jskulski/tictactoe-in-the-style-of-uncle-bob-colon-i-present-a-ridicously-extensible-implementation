@@ -13,7 +13,7 @@ class GameState {
 
   public function setShipLayout() 
   {
-    
+    return $this;
   }
 
   public function getShips() {

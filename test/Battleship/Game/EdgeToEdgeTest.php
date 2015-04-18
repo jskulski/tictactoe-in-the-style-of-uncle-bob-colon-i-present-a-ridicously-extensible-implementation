@@ -16,7 +16,7 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
 
   public function test_given_a_battleship_we_can_sink_it()
   {
-    $game = new GameEngine();
+    $gameEngine = new GameEngine();
     $shipLayout = ShipLayout::start()->placeShip(
       new Battleship(),
       Coordinate::at('A1'),
@@ -24,25 +24,30 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
     );
     $gameState = GameState::start()->setShipLayout($shipLayout);
 
-    $gameState = $game->makeMove(
-      PlayerMove::forAllies(Coordinate::at('A1')),
-      $gameState
-    );
-    $gameState = $game->makeMove(
-      PlayerMove::forAllies(Coordinate::at('A2')),
-      $gameState
-    );
-    $gameState = $game->makeMove(
-      PlayerMove::forAllies(Coordinate::at('A3')),
-      $gameState
-    );
-    $gameState = $game->makeMove(
-      PlayerMove::forAllies(Coordinate::at('A4')),
+    $gameState = $this->playMoves(
+      array('A1', 'A2', 'A3', 'A4'),
+      $gameEngine,
       $gameState
     );
 
     $battleship = $gameState->getShips()->getAlliesBattleship();
     $this->assertTrue($battleship->isSunk());
+  }
+
+  /**
+   * @param $gameEngine
+   * @param $gameState
+   * @return mixed
+   */
+  private function playMoves($moves, GameEngine $gameEngine, GameState $gameState)
+  {
+    foreach ($moves as $move) {
+      $gameState = $gameEngine->makeMove(
+        PlayerMove::forAllies(Coordinate::at($move)),
+        $gameState
+      );
+    }
+    return $gameState;
   }
 
 
