@@ -17,9 +17,8 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
   public function test_given_a_battleship_we_can_sink_it()
   {
     $game = new GameEngine();
-    $battleship = new Battleship();
     $shipLayout = ShipLayout::start()->placeShip(
-      $battleship,
+      new Battleship(),
       Coordinate::at('A1'),
       Coordinate::at('A4')
     );
@@ -42,8 +41,8 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
       $gameState
     );
 
-
-
+    $battleship = $gameState->getShips()->getAlliesBattleship();
+    $this->assertTrue($battleship->isSunk());
   }
 
 

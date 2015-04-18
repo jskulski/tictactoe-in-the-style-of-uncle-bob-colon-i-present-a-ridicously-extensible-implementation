@@ -16,6 +16,15 @@ class GameState {
     
   }
 
+  public function getShips() {
+    return $this;
+  }
+
+  public function getAlliesBattleship()
+  {
+    return new Battleship();
+  }
+
   /**
    * @param $coordinate
    * @ConvertToCoordinate
