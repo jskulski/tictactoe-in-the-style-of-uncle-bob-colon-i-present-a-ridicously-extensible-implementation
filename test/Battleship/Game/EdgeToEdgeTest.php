@@ -34,6 +34,28 @@ class EdgeToEdgeTest extends PHPUnit_Framework_TestCase
     $this->assertTrue($battleship->isSunk());
   }
 
+//  public function test_given_a_battleship_without_full_hits_is_unsunk()
+//  {
+//    $gameEngine = new GameEngine();
+//    $shipLayout = ShipLayout::start()->placeShip(
+//      new Battleship(),
+//      Coordinate::at('A1'),
+//      Coordinate::at('A4')
+//    );
+//
+//    /** @var GameState $gameState */
+//    $gameState = GameState::start()->setShipLayout($shipLayout);
+//
+//    $gameState = $this->playMoves(
+//      array(),
+//      $gameEngine,
+//      $gameState
+//    );
+//
+//    $battleship = $gameState->getShips()->getAlliesBattleship();
+//    $this->assertFalse($battleship->isSunk());
+//  }
+
   /**
    * @param $gameEngine
    * @param $gameState
