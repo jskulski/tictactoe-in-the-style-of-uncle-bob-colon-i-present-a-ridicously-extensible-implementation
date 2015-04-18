@@ -155,3 +155,26 @@ instead? What is a good API for this, anyway?
 I think I'll stick with the decorator because I'm not pulled in any other direction.
 But it was absolutely a distraction and a sidetrack based on fearing the future. But
 let's ride it because I wasn't happy with using primitives in TicTacToe-land.
+
+### Drowning a bit
+
+Ditched the decorator, too clever. Settled on this verbose but workable syntax:
+
+     $gameState = $gameEngine->makeMove(
+         PlayerMove::forAllies(Coordinate::at($move)),
+         $gameState
+     );
+     
+It's verbose but makes sense to me. I comfort myself thinking that it should only
+be in one place in the front end consumer. Anyway, kinda of drowning in details,
+the design exploded quickly and uses very little of the tic tac toe game. 
+
+Well if the design is too big, that will shake out, between the tests and usage. 
+I will trello a note to go through and delete unused classes.
+
+At some point I will have enough duplication that I can start to refactor the design between
+the two games. Trying to use it has been slowing me down. I don't think I have enough code
+to do it right now.
+
+Dark times.
+
