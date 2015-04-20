@@ -15,8 +15,6 @@ class StateRenderer {
 $app = new \Slim\Slim();
 $app->get('/', function() use ($app) {
   $stateRenderer = new StateRenderer();
-  $factory = new \JSK\TicTacToe\Game\Factory;
-  $game = $factory->createGame();
   $state = new \JSK\TicTacToe\Game\State();
   $html = $stateRenderer->render($state);
   echo $html;
