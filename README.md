@@ -184,6 +184,7 @@ I've gotten fairly stuck on abstracting an engine to use for Battleship. I'm als
 to use this as an example for a talk given at work about 'Core Apps'. I'll switch back to 
 doing the frontend and datastores, putting Battleship on hold. I think that it more 
 illustrative about the concepts than another game. And I'll switch back to Battleship, 
-or maybe something like the minitictactoe game.
+or maybe something like the hyper-tictactoe game or 
+SOS (http://en.wikipedia.org/wiki/SOS_(game)).
 
 
