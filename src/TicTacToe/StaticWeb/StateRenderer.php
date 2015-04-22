@@ -8,6 +8,7 @@ class StateRenderer {
 
   public function render(\JSK\TicTacToe\Game\State $state)
   {
+    return '---\n---\n---';
     $html =<<<EOF
 <table cellspacing="4">
   <tr>
