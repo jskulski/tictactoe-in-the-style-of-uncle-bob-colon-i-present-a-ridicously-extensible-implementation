@@ -4,6 +4,7 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
+use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
@@ -48,6 +49,18 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('---\n-X-\n---', $rendered);
   }
 
+  public function test_given_state_with_move_in_top_right_renders_mark_in_top_right()
+  {
+    $state = new State();
+    $state->addMoveToMoveHistory(
+      PlayerMove::forX(-1, -1)
+    );
+    $target = new StateRenderer(new TemplateStub());
+    $rendered = $target->render($state);
+    $this->assertEquals('X--\n---\n---', $rendered);
+  }
+
+
 }
 
 class TemplateStub {
@@ -63,8 +76,14 @@ class TemplateStub {
     if (empty($moveHistory)) {
       return '---\n---\n---';
     }
-    else {
+
+    /** @var Move $move */
+    $move = $moveHistory[0];
+    if ($move->getRow() == 0 && $move->getColumn() == 0) {
       return '---\n-X-\n---';
+    }
+    else {
+      return 'X--\n---\n---';
     }
   }
 }
