@@ -16,46 +16,7 @@ class StateRenderer {
 
   public function render(\JSK\TicTacToe\Game\State $state)
   {
-    $this->template->render();
-    return '---\n---\n---';
-    $html =<<<EOF
-<table cellspacing="4">
-  <tr>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-    <td>
-      <button>Make move</button>
-    </td>
-  </tr>
-</table>
-EOF;
-    return $html;
+    return $this->template->render($state);
   }
 
 }
