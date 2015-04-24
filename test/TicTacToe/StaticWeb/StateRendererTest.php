@@ -73,25 +73,31 @@ class TemplateStub {
   {
     $this->rendered = true;
     $moveHistory = $state->getMoveHistory();
-    $board = array(
+    $boardArray = $this->buildBoardArrayFromMoveHistory($moveHistory);
+    return implode($boardArray);
+  }
+
+  /**
+   * @param $moveHistory
+   * @return array
+   */
+  private function buildBoardArrayFromMoveHistory($moveHistory)
+  {
+    $boardArray = array(
       '-', '-', '-', '\n',
       '-', '-', '-', '\n',
       '-', '-', '-'
     );
-    if (empty($moveHistory)) {
-      return implode($board);
-    }
 
     /** @var Move $move */
-    $move = $moveHistory[0];
-    if ($move->getRow() == 0 && $move->getColumn() == 0) {
-      $board[5] = 'X';
-      return implode($board);
+    foreach ($moveHistory as $move) {
+      if ($move->getRow() == 0 && $move->getColumn() == 0) {
+        $boardArray[5] = 'X';
+      } else {
+        $boardArray[0] = 'X';
+      }
     }
-    else {
-      $board[0] = 'X';
-      return implode($board);
-    }
+    return $boardArray;
   }
 }
 
