@@ -65,6 +65,8 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
 
 class TemplateStub {
   public $rendered = false;
+  const playerXMarker = 'X';
+  const EmptyMarker = '-';
 
   /**
    * @return string
@@ -88,17 +90,17 @@ class TemplateStub {
   private function buildBoardArrayFromMoveHistory($moveHistory)
   {
     $boardArray = array(
-      '-', '-', '-',
-      '-', '-', '-',
-      '-', '-', '-'
+      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
+      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
+      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker
     );
 
     /** @var Move $move */
     foreach ($moveHistory as $move) {
       if ($move->getRow() == 0 && $move->getColumn() == 0) {
-        $boardArray[4] = 'X';
+        $boardArray[4] = self::playerXMarker;
       } else {
-        $boardArray[0] = 'X';
+        $boardArray[0] = self::playerXMarker;
       }
     }
 
