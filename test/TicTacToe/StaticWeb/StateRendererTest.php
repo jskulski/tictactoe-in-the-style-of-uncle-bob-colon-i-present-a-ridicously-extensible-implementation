@@ -73,17 +73,24 @@ class TemplateStub {
   {
     $this->rendered = true;
     $moveHistory = $state->getMoveHistory();
+    $board = array(
+      '-', '-', '-', '\n',
+      '-', '-', '-', '\n',
+      '-', '-', '-'
+    );
     if (empty($moveHistory)) {
-      return '---\n---\n---';
+      return implode($board);
     }
 
     /** @var Move $move */
     $move = $moveHistory[0];
     if ($move->getRow() == 0 && $move->getColumn() == 0) {
-      return '---\n-X-\n---';
+      $board[5] = 'X';
+      return implode($board);
     }
     else {
-      return 'X--\n---\n---';
+      $board[0] = 'X';
+      return implode($board);
     }
   }
 }
