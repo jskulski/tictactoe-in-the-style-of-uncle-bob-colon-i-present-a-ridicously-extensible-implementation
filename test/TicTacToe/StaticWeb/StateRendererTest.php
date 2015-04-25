@@ -63,6 +63,18 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
 
 }
 
+class Board {
+
+  /** @var  Move[] */
+  private $moveHistory;
+
+  function __construct($moveHistory)
+  {
+    $this->moveHistory = $moveHistory;
+  }
+
+}
+
 class TemplateStub {
 
   public $rendered = false;
@@ -76,6 +88,7 @@ class TemplateStub {
   {
     $this->rendered = true;
     $moveHistory = $state->getMoveHistory();
+    $this->board = new Board($moveHistory);
     $boardArray = $this->buildBoardArrayFromMoveHistory($moveHistory);
     return implode(array(
       $boardArray[0], $boardArray[1], $boardArray[2], '\n',
@@ -90,6 +103,7 @@ class TemplateStub {
    */
   private function buildBoardArrayFromMoveHistory($moveHistory)
   {
+//    $this->board->getBoardArray();
     $boardArray = array(
       self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
       self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
