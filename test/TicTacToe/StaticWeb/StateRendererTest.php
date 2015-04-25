@@ -8,6 +8,7 @@ use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
+
 class StateRendererTest extends \PHPUnit_Framework_TestCase {
 
   public function test_create_new_object()
@@ -60,10 +61,10 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('X--\n---\n---', $rendered);
   }
 
-
 }
 
 class TemplateStub {
+
   public $rendered = false;
   const playerXMarker = 'X';
   const EmptyMarker = '-';
