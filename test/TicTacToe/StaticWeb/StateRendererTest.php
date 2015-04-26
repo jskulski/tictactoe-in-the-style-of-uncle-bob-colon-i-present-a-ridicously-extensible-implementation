@@ -61,6 +61,13 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('X--\n---\n---', $rendered);
   }
 
+  public function test_given_a_move_for_player_one_state_renderer_renders_our_template()
+  {
+    /** @var Move $move */
+    $move = PlayerMove::forX(-1, -1);
+    $target = new StateRenderer(new TemplateStub());
+    $this->assertEquals('X', $target->renderMove($move));
+  }
 }
 
 class Board {
