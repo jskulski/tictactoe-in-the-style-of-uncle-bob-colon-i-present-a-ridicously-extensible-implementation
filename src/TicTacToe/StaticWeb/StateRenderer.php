@@ -28,14 +28,13 @@ class StateRenderer {
   public function renderMove(Move $move)
   {
     if ($move->isX()) {
-      return 'X';
-      return $this->template->render('x');
+      return $this->template->render('X');
     }
     else if ($move->isO()) {
-      return 'O';
+      return $this->template->render('O');
     }
     else if ($move->isNullObject()) {
-      return '-';
+      return $this->template->render('emptySpace');
     }
     else {
       throw new \LogicException();

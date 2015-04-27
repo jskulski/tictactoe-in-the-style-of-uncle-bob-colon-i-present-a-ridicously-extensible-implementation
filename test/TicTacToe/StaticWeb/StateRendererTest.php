@@ -128,6 +128,18 @@ class TemplateStub
   {
     $this->playerOMarker = $playerOMarker;
   }
+
+  public function render($key)
+  {
+    switch ($key) {
+      case 'X':
+        return $this->playerXMarker;
+      case 'O':
+        return $this->playerOMarker;
+      case 'emptySpace':
+        return self::EmptyMarker;
+    }
+  }
 //  /**
 //   * @return string
 //   */
