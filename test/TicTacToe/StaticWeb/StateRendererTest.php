@@ -103,6 +103,31 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals("---\n---\n---", $this->target->renderBoard($moveHistory));
   }
 
+//  public function test_given_a_move_history_with_one_move_board_is_rendered_with_that_move()
+//  {
+//    $moveHistory = array(
+//      PlayerMove::forX(1, 1)
+//    );
+//    $this->assertEquals("---\n-X-\n---", $this->target->renderBoard($moveHistory));
+//  }
+
+//  public function given_an_cats_game_render_board_renders_all_moves()
+//  {
+//    
+//$catsGameMoveHistory = array(
+//PlayerMove::forX(-1, -1),
+//PlayerMove::forO(-1,  0),
+//PlayerMove::forX(-1,  1),
+//PlayerMove::forO( 0, -1),
+//PlayerMove::forX( 0,  1),
+//PlayerMove::forO( 0,  0),
+//PlayerMove::forX( 1, -1),
+//PlayerMove::forO( 1,  1),
+//PlayerMove::forO( 1,  0)
+//);
+//
+//  }
+
 }
 
 
@@ -130,25 +155,53 @@ class TemplateStub extends Engine
   {
     switch ($name) {
       case 'X':
-        return $this->playerXMarker;
-      case 'O':
-        return $this->playerOMarker;
-      case 'emptySpace':
-        return self::EmptyMarker;
-      case 'board':
-        return $this->renderBoard($data['board']);
+        $rendered =  $this->playerXMarker;
         break;
+
+      case 'O':
+        $rendered =  $this->playerOMarker;
+        break;
+
+      case 'emptySpace':
+        $rendered =  self::EmptyMarker;
+        break;
+
+      case 'board':
+        $rendered =  $this->renderBoard(
+          $data['topLeft'],
+          $data['topMiddle'],
+          $data['topRight'],
+          $data['middleLeft'],
+          $data['middleMiddle'],
+          $data['middleRight'],
+          $data['bottomLeft'],
+          $data['bottomMiddle'],
+          $data['bottomRight']
+        );
+        break;
+
+      default:
+        throw new \Exception("Unsupported template");
     }
+
+    return $rendered;
   }
 
   /**
    * @param Board $board
    * @return string
    */
-  private function renderBoard(Board $board)
+  private function renderBoard(
+    $topLeft, $topMiddle, $topRight,
+    $middleLeft, $middleMiddle, $middleRight,
+    $bottomLeft, $bottomMiddle, $bottomRight
+  )
   {
-    return "---\n---\n---";
+    return $topLeft . $topMiddle . $topRight ."\n".
+           $middleLeft . $middleMiddle . $middleRight ."\n".
+           $bottomLeft . $bottomMiddle . $bottomRight;
   }
+
 //  /**
 //   * @return string
 //   */

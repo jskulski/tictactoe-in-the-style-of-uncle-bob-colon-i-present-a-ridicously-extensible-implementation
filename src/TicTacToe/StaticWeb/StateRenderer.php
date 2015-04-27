@@ -49,7 +49,19 @@ class StateRenderer {
   public function renderBoard(array $moveHistory)
   {
     $board = new Board($moveHistory);
-    return $this->template->render('board', array('board' => $board));
+    return $this->template->render('board', array(
+      'topLeft' => $this->renderMove($board->topLeft()),
+      'topMiddle' => $this->renderMove($board->topMiddle()),
+      'topRight' => $this->renderMove($board->topRight()),
+
+      'middleLeft' => $this->renderMove($board->middleLeft()),
+      'middleMiddle' => $this->renderMove($board->middleMiddle()),
+      'middleRight' => $this->renderMove($board->middleRight()),
+
+      'bottomLeft' => $this->renderMove($board->bottomLeft()),
+      'bottomMiddle' => $this->renderMove($board->bottomMiddle()),
+      'bottomRight' => $this->renderMove($board->bottomRight())
+    ));
   }
 
 }

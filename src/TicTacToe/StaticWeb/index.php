@@ -7,8 +7,7 @@ $app->get('/', function() use ($app) {
   $template = new League\Plates\Engine('templates');
   $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer($template);
   $state = new \JSK\TicTacToe\Game\State();
-//  $board = new Board($state->getMoveHistory());
-  $html = $stateRenderer->renderMove(\JSK\TicTacToe\Game\PlayerMove::forO(-1,-1));
+  $html = $stateRenderer->renderBoard($state->getMoveHistory());
   echo $html;
 });
 

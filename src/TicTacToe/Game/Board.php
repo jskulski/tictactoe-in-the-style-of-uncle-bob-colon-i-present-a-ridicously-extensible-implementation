@@ -14,6 +14,55 @@ class Board
     $this->moveHistory = $moveHistory;
   }
 
+  public function topLeft()
+  {
+    return new NullMove();
+  }
+
+  public function topMiddle()
+  {
+    return new NullMove();
+  }
+
+  public function topRight()
+  {
+    return new NullMove();
+  }
+
+  public function middleLeft()
+  {
+    return new NullMove();
+  }
+
+  public function middleMiddle()
+  {
+    return new NullMove();
+  }
+
+  public function middleRight()
+  {
+    return new NullMove();
+  }
+
+  public function bottomgLeft()
+  {
+    return new NullMove();
+  }
+
+  public function bottomLeft()
+  {
+    return new NullMove();
+  }
+
+  public function bottomMiddle()
+  {
+    return new NullMove();
+  }
+
+  public function bottomRight()
+  {
+    return new NullMove();
+  }
 
   /**
    * @param Move[] $moveHistory
