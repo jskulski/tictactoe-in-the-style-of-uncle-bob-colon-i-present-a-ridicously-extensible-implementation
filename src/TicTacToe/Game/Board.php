@@ -14,51 +14,78 @@ class Board
     $this->moveHistory = $moveHistory;
   }
 
+  /**
+   * @return Move
+   */
   public function topLeft()
   {
-    return new NullMove();
+    if (count($this->moveHistory) > 0) {
+      return PlayerMove::forX(-1, -1);
+    }
+    else {
+      return new NullMove();
+    }
   }
 
+  /**
+   * @return Move
+   */
   public function topMiddle()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function topRight()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function middleLeft()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function middleMiddle()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function middleRight()
   {
     return new NullMove();
   }
 
-  public function bottomgLeft()
-  {
-    return new NullMove();
-  }
-
+  /**
+   * @return Move
+   */
   public function bottomLeft()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function bottomMiddle()
   {
     return new NullMove();
   }
 
+  /**
+   * @return Move
+   */
   public function bottomRight()
   {
     return new NullMove();

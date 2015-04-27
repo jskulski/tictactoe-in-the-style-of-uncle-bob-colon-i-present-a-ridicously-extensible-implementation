@@ -103,13 +103,13 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals("---\n---\n---", $this->target->renderBoard($moveHistory));
   }
 
-//  public function test_given_a_move_history_with_one_move_board_is_rendered_with_that_move()
-//  {
-//    $moveHistory = array(
-//      PlayerMove::forX(1, 1)
-//    );
-//    $this->assertEquals("---\n-X-\n---", $this->target->renderBoard($moveHistory));
-//  }
+  public function test_given_a_move_history_with_one_move_board_is_rendered_with_that_move()
+  {
+    $moveHistory = array(
+      PlayerMove::forX(-1, -1)
+    );
+    $this->assertEquals("X--\n---\n---", $this->target->renderBoard($moveHistory));
+  }
 
 //  public function given_an_cats_game_render_board_renders_all_moves()
 //  {
