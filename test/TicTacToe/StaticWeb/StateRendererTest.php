@@ -11,24 +11,31 @@ use JSK\TicTacToe\Game\State;
 
 class StateRendererTest extends \PHPUnit_Framework_TestCase {
 
-  public function test_create_new_object()
+  /** @var  StateRenderer */
+  private $target;
+  /** @var TemplateStub */
+  private $templateStub;
+
+  /**
+   * @return StateRenderer
+   */
+  public function setUp()
   {
-    $target = new StateRenderer(new TemplateStub());
+    $this->templateStub = new TemplateStub();
+    $this->templateStub->setPlayerXMarker('X');
+    $this->target = new StateRenderer($this->templateStub);
   }
 
   public function test_given_state_without_moves_renders_empty_board()
   {
-    $target = new StateRenderer(new TemplateStub());
-    $rendered = $target->render(new State());
+    $rendered = $this->target->render(new State());
     $this->assertEquals('---\n---\n---', $rendered);
   }
 
   public function test_given_a_template_renderer_calls_render_on_template()
   {
-    $templateSpy = new TemplateStub();
-    $target = new StateRenderer($templateSpy);
-    $rendered = $target->render(new State());
-    $this->assertTrue($templateSpy->rendered);
+    $rendered = $this->target->render(new State());
+    $this->assertTrue($this->templateStub->rendered);
   }
 
   public function test_given_state_without_moves_renders_custom_board()
@@ -45,8 +52,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $state->addMoveToMoveHistory(
       PlayerMove::forX(0,0)
     );
-    $target = new StateRenderer(new TemplateStub());
-    $rendered = $target->render($state);
+    $rendered = $this->target->render($state);
     $this->assertEquals('---\n-X-\n---', $rendered);
   }
 
@@ -56,18 +62,18 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $state->addMoveToMoveHistory(
       PlayerMove::forX(-1, -1)
     );
-    $target = new StateRenderer(new TemplateStub());
-    $rendered = $target->render($state);
+    $rendered = $this->target->render($state);
     $this->assertEquals('X--\n---\n---', $rendered);
   }
 
   public function test_given_a_move_for_player_one_state_renderer_renders_our_template()
   {
     /** @var Move $move */
+    $playerXMarker = 'X';
     $move = PlayerMove::forX(-1, -1);
-    $target = new StateRenderer(new TemplateStub());
-    $this->assertEquals('X', $target->renderMove($move));
+    $this->assertEquals($playerXMarker, $this->target->renderMove($move));
   }
+
 }
 
 class Board {
@@ -84,9 +90,10 @@ class Board {
 
 class TemplateStub {
 
-  public $rendered = false;
-  const playerXMarker = 'X';
   const EmptyMarker = '-';
+  private $playerXMarker;
+
+  public $rendered = false;
 
   /**
    * @return string
@@ -110,7 +117,6 @@ class TemplateStub {
    */
   private function buildBoardArrayFromMoveHistory($moveHistory)
   {
-//    $this->board->getBoardArray();
     $boardArray = array(
       self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
       self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
@@ -120,13 +126,18 @@ class TemplateStub {
     /** @var Move $move */
     foreach ($moveHistory as $move) {
       if ($move->getRow() == 0 && $move->getColumn() == 0) {
-        $boardArray[4] = self::playerXMarker;
+        $boardArray[4] = $this->playerXMarker;
       } else {
-        $boardArray[0] = self::playerXMarker;
+        $boardArray[0] = $this->playerXMarker;
       }
     }
 
     return $boardArray;
+  }
+
+  public function setPlayerXMarker($playerXMarker)
+  {
+    $this->playerXMarker = $playerXMarker;
   }
 }
 

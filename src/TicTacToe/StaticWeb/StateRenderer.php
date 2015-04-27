@@ -30,5 +30,4 @@ class StateRenderer {
     return 'X';
   }
 
-
 }
