@@ -27,7 +27,15 @@ class StateRenderer {
 
   public function renderMove(Move $move)
   {
-    return 'X';
+    if ($move->isX()) {
+      return 'X';
+    }
+    else if ($move->isO()) {
+      return 'O';
+    }
+    else {
+
+    }
   }
 
 }

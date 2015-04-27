@@ -9,8 +9,11 @@ use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
 
-class StateRendererTest extends \PHPUnit_Framework_TestCase {
+class StateRendererTest extends \PHPUnit_Framework_TestCase
+{
+
   const X = 'X';
+  const O = 'O';
 
   /** @var  StateRenderer */
   private $target;
@@ -24,6 +27,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
   {
     $this->templateStub = new TemplateStub();
     $this->templateStub->setPlayerXMarker(self::X);
+    $this->templateStub->setPlayerOMarker(self::O);
     $this->target = new StateRenderer($this->templateStub);
   }
 
@@ -51,7 +55,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
   {
     $state = new State();
     $state->addMoveToMoveHistory(
-      PlayerMove::forX(0,0)
+      PlayerMove::forX(0, 0)
     );
     $rendered = $this->target->render($state);
     $this->assertEquals('---\n-X-\n---', $rendered);
@@ -67,16 +71,25 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('X--\n---\n---', $rendered);
   }
 
-  public function test_given_a_move_for_player_one_state_renderer_renders_our_template()
+  public function test_given_a_move_for_player_one_state_renderer_renders_our_X_template()
   {
     /** @var Move $move */
     $move = PlayerMove::forX(-1, -1);
     $this->assertEquals(self::X, $this->target->renderMove($move));
   }
 
+  public function test_given_a_move_for_player_two_state_renderer_renders_our_O_template()
+  {
+    /** @var Move $move */
+    $move = PlayerMove::forO(-1, -1);
+    $this->assertEquals(self::O, $this->target->renderMove($move));
+  }
+
+
 }
 
-class Board {
+class Board
+{
 
   /** @var  Move[] */
   private $moveHistory;
@@ -88,10 +101,12 @@ class Board {
 
 }
 
-class TemplateStub {
+class TemplateStub
+{
 
   const EmptyMarker = '-';
   private $playerXMarker;
+  private $playerOMarker;
 
   public $rendered = false;
 
@@ -139,9 +154,15 @@ class TemplateStub {
   {
     $this->playerXMarker = $playerXMarker;
   }
+
+  public function setPlayerOMarker($playerOMarker)
+  {
+    $this->playerOMarker = $playerOMarker;
+  }
 }
 
-class CustomTemplateStub {
+class CustomTemplateStub
+{
   /** @var  string */
   private $magicKey;
 
