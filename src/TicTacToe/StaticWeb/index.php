@@ -5,14 +5,10 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 $app = new \Slim\Slim();
 $app->get('/', function() use ($app) {
   $template = new League\Plates\Engine('templates');
-//  $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer();
+  $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer($template);
   $state = new \JSK\TicTacToe\Game\State();
-  $board = new Board($state->getMoveHistory());
-  $html = $template->render('board', array(
-    'topLeft' => $board->topLeft()->isX() ? $this->render('markerForX') :
-                 $board->topLeft()->isO() ? $this->render('markerForO') :
-                 $this->render('emptySquare')
-  ));
+//  $board = new Board($state->getMoveHistory());
+  $html = $stateRenderer->renderMove(\JSK\TicTacToe\Game\PlayerMove::forO(-1,-1));
   echo $html;
 });
 
