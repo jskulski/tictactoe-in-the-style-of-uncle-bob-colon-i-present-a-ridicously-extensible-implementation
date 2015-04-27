@@ -5,13 +5,14 @@ namespace JSK\TicTacToe\StaticWeb;
 
 
 use JSK\TicTacToe\Game\Move;
+use League\Plates\Engine;
 
 class StateRenderer {
 
-  /** @var  Template */
+  /** @var  Engine */
   private $template;
 
-  function __construct($template)
+  function __construct(Engine $template)
   {
     $this->template = $template;
   }

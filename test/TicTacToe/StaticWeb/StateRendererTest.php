@@ -7,6 +7,7 @@ namespace JSK\TicTacToe\StaticWeb;
 use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\NullMove;
 use JSK\TicTacToe\Game\PlayerMove;
+use League\Plates\Engine;
 
 
 class StateRendererTest extends \PHPUnit_Framework_TestCase
@@ -109,7 +110,7 @@ class Board
 
 }
 
-class TemplateStub
+class TemplateStub extends Engine
 {
 
   const EmptyMarker = '-';
@@ -129,9 +130,9 @@ class TemplateStub
     $this->playerOMarker = $playerOMarker;
   }
 
-  public function render($key)
+  public function render($name, array $data = array())
   {
-    switch ($key) {
+    switch ($name) {
       case 'X':
         return $this->playerXMarker;
       case 'O':
