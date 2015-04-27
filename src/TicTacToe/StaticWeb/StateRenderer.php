@@ -33,8 +33,11 @@ class StateRenderer {
     else if ($move->isO()) {
       return 'O';
     }
+    else if ($move->isNullObject()) {
+      return '-';
+    }
     else {
-
+      throw new \LogicException();
     }
   }
 

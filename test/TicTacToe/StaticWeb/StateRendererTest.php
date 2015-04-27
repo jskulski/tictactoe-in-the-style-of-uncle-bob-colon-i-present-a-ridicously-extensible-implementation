@@ -5,6 +5,7 @@ namespace JSK\TicTacToe\StaticWeb;
 
 
 use JSK\TicTacToe\Game\Move;
+use JSK\TicTacToe\Game\NullMove;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
@@ -14,6 +15,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
 
   const X = 'X';
   const O = 'O';
+  const emptySpace = '-';
 
   /** @var  StateRenderer */
   private $target;
@@ -83,6 +85,13 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
     /** @var Move $move */
     $move = PlayerMove::forO(-1, -1);
     $this->assertEquals(self::O, $this->target->renderMove($move));
+  }
+
+  public function test_given_a_null_move_renderer_renders_empty_space()
+  {
+    /** @var Move $move */
+    $move = new NullMove();
+    $this->assertEquals(self::emptySpace, $this->target->renderMove($move));
   }
 
 
