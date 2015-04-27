@@ -16,19 +16,20 @@ class StateRenderer {
     $this->template = $template;
   }
 
-  /**
-   * @param \JSK\TicTacToe\Game\State $state
-   * @return mixed
-   */
-  public function render(\JSK\TicTacToe\Game\State $state)
-  {
-    return $this->template->render($state);
-  }
+//  /**
+//   * @param \JSK\TicTacToe\Game\State $state
+//   * @return mixed
+//   */
+//  public function render(\JSK\TicTacToe\Game\State $state)
+//  {
+//    return $this->template->render($state);
+//  }
 
   public function renderMove(Move $move)
   {
     if ($move->isX()) {
       return 'X';
+      return $this->template->render('x');
     }
     else if ($move->isO()) {
       return 'O';
