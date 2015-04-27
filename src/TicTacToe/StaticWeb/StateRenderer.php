@@ -4,6 +4,7 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
+use JSK\TicTacToe\Game\Board;
 use JSK\TicTacToe\Game\Move;
 use League\Plates\Engine;
 
@@ -40,6 +41,15 @@ class StateRenderer {
     else {
       throw new \LogicException();
     }
+  }
+
+  /**
+   * @param Move[] $moveHistory
+   */
+  public function renderBoard(array $moveHistory)
+  {
+    $board = new Board($moveHistory);
+    return $this->template->render('board', array('board' => $board));
   }
 
 }

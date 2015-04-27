@@ -4,9 +4,11 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
+use JSK\TicTacToe\Game\Board;
 use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\NullMove;
 use JSK\TicTacToe\Game\PlayerMove;
+use JSK\TicTacToe\Game\State;
 use League\Plates\Engine;
 
 
@@ -94,21 +96,15 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(self::emptySpace, $this->target->renderMove($move));
   }
 
-
-}
-
-class Board
-{
-
-  /** @var  Move[] */
-  private $moveHistory;
-
-  function __construct($moveHistory)
+  public function test_given_an_empty_move_history_it_should_render_empty_board()
   {
-    $this->moveHistory = $moveHistory;
+    $state = new State();
+    $moveHistory = $state->getMoveHistory();
+    $this->assertEquals("---\n---\n---", $this->target->renderBoard($moveHistory));
   }
 
 }
+
 
 class TemplateStub extends Engine
 {
@@ -139,7 +135,19 @@ class TemplateStub extends Engine
         return $this->playerOMarker;
       case 'emptySpace':
         return self::EmptyMarker;
+      case 'board':
+        return $this->renderBoard($data['board']);
+        break;
     }
+  }
+
+  /**
+   * @param Board $board
+   * @return string
+   */
+  private function renderBoard(Board $board)
+  {
+    return "---\n---\n---";
   }
 //  /**
 //   * @return string
@@ -157,29 +165,6 @@ class TemplateStub extends Engine
 //    ));
 //  }
 //
-//  /**
-//   * @param Move[] $moveHistory
-//   * @return array
-//   */
-//  private function buildBoardArrayFromMoveHistory($moveHistory)
-//  {
-//    $boardArray = array(
-//      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
-//      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker,
-//      self::EmptyMarker, self::EmptyMarker, self::EmptyMarker
-//    );
-//
-//    /** @var Move $move */
-//    foreach ($moveHistory as $move) {
-//      if ($move->getRow() == 0 && $move->getColumn() == 0) {
-//        $boardArray[4] = $this->playerXMarker;
-//      } else {
-//        $boardArray[0] = $this->playerXMarker;
-//      }
-//    }
-//
-//    return $boardArray;
-//  }
 }
 
 class CustomTemplateStub
