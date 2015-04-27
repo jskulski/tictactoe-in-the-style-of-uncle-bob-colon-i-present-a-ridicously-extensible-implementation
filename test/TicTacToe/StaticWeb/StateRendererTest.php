@@ -10,6 +10,7 @@ use JSK\TicTacToe\Game\State;
 
 
 class StateRendererTest extends \PHPUnit_Framework_TestCase {
+  const X = 'X';
 
   /** @var  StateRenderer */
   private $target;
@@ -22,7 +23,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $this->templateStub = new TemplateStub();
-    $this->templateStub->setPlayerXMarker('X');
+    $this->templateStub->setPlayerXMarker(self::X);
     $this->target = new StateRenderer($this->templateStub);
   }
 
@@ -69,9 +70,8 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase {
   public function test_given_a_move_for_player_one_state_renderer_renders_our_template()
   {
     /** @var Move $move */
-    $playerXMarker = 'X';
     $move = PlayerMove::forX(-1, -1);
-    $this->assertEquals($playerXMarker, $this->target->renderMove($move));
+    $this->assertEquals(self::X, $this->target->renderMove($move));
   }
 
 }
