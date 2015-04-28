@@ -52,7 +52,7 @@ class StateRenderer {
     $moveFilterer = new MoveFilterer($moveHistory);
     $board = new Board($moveHistory);
     return $this->template->render('board', array(
-      'topLeft' => $this->renderMove($moveFilterer->movesInTopLeft()),
+      'topLeft' => $this->renderMove($moveFilterer->moveInTopLeft()),
       'topMiddle' => $this->renderMove($board->topMiddle()),
       'topRight' => $this->renderMove($board->topRight()),
 

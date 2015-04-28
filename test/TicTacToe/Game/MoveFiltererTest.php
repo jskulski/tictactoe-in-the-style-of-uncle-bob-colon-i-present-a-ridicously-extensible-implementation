@@ -32,7 +32,7 @@ class MoveFiltererTest extends \PHPUnit_Framework_TestCase {
 
   public function test_given_a_list_of_moves_we_retrieve_the_top_left()
   {
-    $move = $this->target->filter($this->moveHistory)->movesInTopLeft();
+    $move = $this->target->filter($this->moveHistory)->moveInTopLeft();
     $this->assertEquals($move, $this->topLeftMove);
   }
 }

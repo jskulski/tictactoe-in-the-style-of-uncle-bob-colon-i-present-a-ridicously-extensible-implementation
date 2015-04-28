@@ -131,7 +131,7 @@ class MoveFilterer {
     return new MoveFilterer($filtered);
   }
 
-  public function movesInTopLeft()
+  public function moveInTopLeft()
   {
     $movesFiltered = $this->movesInTopRow()->movesInLeftColumn();
     $move = array_pop($movesFiltered->moves);
