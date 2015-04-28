@@ -133,15 +133,20 @@ class MoveFilterer {
 
   public function moveInTopLeft()
   {
-    $movesFiltered = $this->movesInTopRow()->movesInLeftColumn();
-    $move = array_pop($movesFiltered->moves);
-    return $move ? $move : new NullMove();
+    return $this->movesInTopRow()->movesInLeftColumn()->getMove();
   }
 
   public function moveInTopMiddle()
   {
-    $movesFiltered = $this->movesInTopRow()->movesInMiddleColumn();
-    $move = array_pop($movesFiltered->moves);
+    return $this->movesInTopRow()->movesInMiddleColumn()->getMove();
+  }
+
+  /**
+   * @return Move
+   */
+  private function getMove()
+  {
+    $move = array_pop($this->moves);
     return $move ? $move : new NullMove();
   }
 
