@@ -130,5 +130,13 @@ class MoveFilterer {
     });
     return new MoveFilterer($filtered);
   }
+
+  public function movesInTopLeft()
+  {
+    $movesFiltered = $this->movesInTopRow()->movesInLeftColumn();
+    $move = array_pop($movesFiltered->moves);
+    return $move;
+  }
+
 }
 
