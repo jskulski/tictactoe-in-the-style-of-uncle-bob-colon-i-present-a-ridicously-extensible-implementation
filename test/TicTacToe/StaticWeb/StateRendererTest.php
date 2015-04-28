@@ -161,23 +161,6 @@ class TemplateStub extends Engine
            $middleLeft . $middleMiddle . $middleRight ."\n".
            $bottomLeft . $bottomMiddle . $bottomRight;
   }
-
-//  /**
-//   * @return string
-//   */
-//  public function render(State $state)
-//  {
-//    $this->rendered = true;
-//    $moveHistory = $state->getMoveHistory();
-//    $this->board = new Board($moveHistory);
-//    $boardArray = $this->buildBoardArrayFromMoveHistory($moveHistory);
-//    return implode(array(
-//      $boardArray[0], $boardArray[1], $boardArray[2], '\n',
-//      $boardArray[3], $boardArray[4], $boardArray[5], '\n',
-//      $boardArray[6], $boardArray[7], $boardArray[8]
-//    ));
-//  }
-//
 }
 
 class CustomTemplateStub
