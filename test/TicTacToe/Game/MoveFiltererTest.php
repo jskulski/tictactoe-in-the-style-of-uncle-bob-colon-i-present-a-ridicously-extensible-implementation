@@ -90,4 +90,40 @@ class MoveFiltererTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($move, $this->topRightMove);
   }
 
+  public function test_given_a_list_of_moves_we_retrieve_the_middle_left()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInMiddleLeft();
+    $this->assertEquals($move, $this->middleLeftMove);
+  }
+
+  public function test_given_a_list_of_moves_we_retrieve_the_middle_middle()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInMiddleMiddle();
+    $this->assertEquals($move, $this->middleMiddleMove);
+  }
+
+  public function test_given_a_list_of_moves_we_retrieve_the_middle_right()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInMiddleRight();
+    $this->assertEquals($move, $this->middleRightMove);
+  }
+
+  public function test_given_a_list_of_moves_we_retrieve_the_bottom_left()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInBottomLeft();
+    $this->assertEquals($move, $this->bottomLeftMove);
+  }
+
+  public function test_given_a_list_of_moves_we_retrieve_the_bottom_middle()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInBottomMiddle();
+    $this->assertEquals($move, $this->bottomMiddleMove);
+  }
+
+  public function test_given_a_list_of_moves_we_retrieve_the_bottom_right()
+  {
+    $move = $this->target->filter($this->moveHistory)->moveInBottomRight();
+    $this->assertEquals($move, $this->bottomRightMove);
+  }
+
 }
