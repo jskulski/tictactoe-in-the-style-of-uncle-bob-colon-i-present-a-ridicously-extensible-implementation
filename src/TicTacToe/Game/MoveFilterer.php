@@ -74,6 +74,58 @@ class MoveFilterer {
 
 
   /**
+   * @return MoveFilterer
+   */
+  public function movesInLeftToRightDiagonal()
+  {
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return
+        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
+        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
+        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
+    });
+    return new MoveFilterer($filtered);
+  }
+
+  /**
+   * @return MoveFilterer
+   */
+  public function movesInRightToLeftDiagonal()
+  {
+    $filtered = array_filter($this->moves, function($move) {
+      /** @var $move Move */
+      return
+        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
+        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
+        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
+    });
+    return new MoveFilterer($filtered);
+  }
+
+  /** @return Move */
+  public function moveInTopLeft() { return $this->movesInTopRow()->movesInLeftColumn()->getMove(); }
+  /** @return Move */
+  public function moveInTopMiddle() { return $this->movesInTopRow()->movesInMiddleColumn()->getMove(); }
+  /** @return Move */
+  public function moveInTopRight() { return $this->movesInTopRow()->movesInRightColumn()->getMove(); }
+
+  /** @return Move */
+  public function moveInMiddleLeft() { return $this->movesInMiddleRow()->movesInLeftColumn()->getMove(); }
+  /** @return Move */
+  public function moveInMiddleMiddle() { return $this->movesInMiddleRow()->movesInMiddleColumn()->getMove(); }
+  /** @return Move */
+  public function moveInMiddleRight() { return $this->movesInMiddleRow()->movesInRightColumn()->getMove(); }
+
+  /** @return Move */
+  public function moveInBottomLeft() { return $this->movesInBottomRow()->movesInLeftColumn()->getMove(); }
+  /** @return Move */
+  public function moveInBottomMiddle() { return $this->movesInBottomRow()->movesInMiddleColumn()->getMove(); }
+  /** @return Move */
+  public function moveInBottomRight() { return $this->movesInBottomRow()->movesInRightColumn()->getMove(); }
+
+
+  /**
    * @return int
    */
   public function count() {  return count($this->moves); }
@@ -104,77 +156,6 @@ class MoveFilterer {
     return new MoveFilterer($filtered);
   }
 
-  /**
-   * @return MoveFilterer
-   */
-  public function movesInLeftToRightDiagonal()
-  {
-    $filtered = array_filter($this->moves, function($move) {
-      /** @var $move Move */
-      return
-        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
-        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
-        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
-    });
-    return new MoveFilterer($filtered);
-  }
-
-  public function movesInRightToLeftDiagonal()
-  {
-    $filtered = array_filter($this->moves, function($move) {
-      /** @var $move Move */
-      return
-        ($move->getColumn() == self::RIGHT_COLUMN && $move->getRow()  == self::TOP_ROW) ||
-        ($move->getColumn() == self::MIDDLE_COLUMN && $move->getRow() == self::MIDDLE_ROW) ||
-        ($move->getColumn() == self::LEFT_COLUMN && $move->getRow()  == self::BOTTOM_ROW);
-    });
-    return new MoveFilterer($filtered);
-  }
-
-  public function moveInTopLeft()
-  {
-    return $this->movesInTopRow()->movesInLeftColumn()->getMove();
-  }
-
-  public function moveInTopMiddle()
-  {
-    return $this->movesInTopRow()->movesInMiddleColumn()->getMove();
-  }
-
-  public function moveInTopRight()
-  {
-    return $this->movesInTopRow()->movesInRightColumn()->getMove();
-  }
-
-  public function moveInMiddleLeft()
-  {
-    return $this->movesInMiddleRow()->movesInLeftColumn()->getMove();
-  }
-
-  public function moveInMiddleMiddle()
-  {
-    return $this->movesInMiddleRow()->movesInMiddleColumn()->getMove();
-  }
-
-  public function moveInMiddleRight()
-  {
-    return $this->movesInMiddleRow()->movesInRightColumn()->getMove();
-  }
-
-  public function moveInBottomLeft()
-  {
-    return $this->movesInBottomRow()->movesInLeftColumn()->getMove();
-  }
-
-  public function moveInBottomMiddle()
-  {
-    return $this->movesInBottomRow()->movesInMiddleColumn()->getMove();
-  }
-
-  public function moveInBottomRight()
-  {
-    return $this->movesInBottomRow()->movesInRightColumn()->getMove();
-  }
 
   /**
    * @return Move
