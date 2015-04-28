@@ -6,6 +6,7 @@ namespace JSK\TicTacToe\StaticWeb;
 
 use JSK\TicTacToe\Game\Board;
 use JSK\TicTacToe\Game\Move;
+use JSK\TicTacToe\Game\MoveFilterer;
 use League\Plates\Engine;
 
 class StateRenderer {
@@ -48,9 +49,10 @@ class StateRenderer {
    */
   public function renderBoard(array $moveHistory)
   {
+    $moveFilterer = new MoveFilterer($moveHistory);
     $board = new Board($moveHistory);
     return $this->template->render('board', array(
-      'topLeft' => $this->renderMove($board->topLeft()),
+      'topLeft' => $this->renderMove($moveFilterer->movesInTopLeft()),
       'topMiddle' => $this->renderMove($board->topMiddle()),
       'topRight' => $this->renderMove($board->topRight()),
 

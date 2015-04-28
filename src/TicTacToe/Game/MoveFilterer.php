@@ -135,7 +135,7 @@ class MoveFilterer {
   {
     $movesFiltered = $this->movesInTopRow()->movesInLeftColumn();
     $move = array_pop($movesFiltered->moves);
-    return $move;
+    return $move ? $move : new NullMove();
   }
 
 }
