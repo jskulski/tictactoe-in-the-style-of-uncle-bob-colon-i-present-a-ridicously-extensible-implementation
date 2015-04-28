@@ -149,6 +149,14 @@ class TemplateStub extends Engine
 
   /**
    * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
+   * @param Move
    * @return string
    */
   private function renderBoard(
