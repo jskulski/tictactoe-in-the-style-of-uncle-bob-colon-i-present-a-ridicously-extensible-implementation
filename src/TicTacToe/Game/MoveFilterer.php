@@ -141,6 +141,41 @@ class MoveFilterer {
     return $this->movesInTopRow()->movesInMiddleColumn()->getMove();
   }
 
+  public function moveInTopRight()
+  {
+    return $this->movesInTopRow()->movesInRightColumn()->getMove();
+  }
+
+  public function moveInMiddleLeft()
+  {
+    return $this->movesInMiddleRow()->movesInLeftColumn()->getMove();
+  }
+
+  public function moveInMiddleMiddle()
+  {
+    return $this->movesInMiddleRow()->movesInMiddleColumn()->getMove();
+  }
+
+  public function moveInMiddleRight()
+  {
+    return $this->movesInMiddleRow()->movesInRightColumn()->getMove();
+  }
+
+  public function moveInBottomLeft()
+  {
+    return $this->movesInBottomRow()->movesInLeftColumn()->getMove();
+  }
+
+  public function moveInBottomMiddle()
+  {
+    return $this->movesInBottomRow()->movesInMiddleColumn()->getMove();
+  }
+
+  public function moveInBottomRight()
+  {
+    return $this->movesInBottomRow()->movesInRightColumn()->getMove();
+  }
+
   /**
    * @return Move
    */

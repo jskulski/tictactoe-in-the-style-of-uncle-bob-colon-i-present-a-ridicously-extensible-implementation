@@ -54,15 +54,15 @@ class StateRenderer {
     return $this->template->render('board', array(
       'topLeft' => $this->renderMove($moveFilterer->moveInTopLeft()),
       'topMiddle' => $this->renderMove($moveFilterer->moveInTopMiddle()),
-      'topRight' => $this->renderMove($board->topRight()),
+      'topRight' => $this->renderMove($moveFilterer->moveInTopRight()),
 
-      'middleLeft' => $this->renderMove($board->middleLeft()),
-      'middleMiddle' => $this->renderMove($board->middleMiddle()),
-      'middleRight' => $this->renderMove($board->middleRight()),
+      'middleLeft' => $this->renderMove($moveFilterer->moveInMiddleLeft()),
+      'middleMiddle' => $this->renderMove($moveFilterer->moveInMiddleMiddle()),
+      'middleRight' => $this->renderMove($moveFilterer->moveInMiddleRight()),
 
-      'bottomLeft' => $this->renderMove($board->bottomLeft()),
-      'bottomMiddle' => $this->renderMove($board->bottomMiddle()),
-      'bottomRight' => $this->renderMove($board->bottomRight())
+      'bottomLeft' => $this->renderMove($moveFilterer->moveInBottomLeft()),
+      'bottomMiddle' => $this->renderMove($moveFilterer->moveInMiddleMiddle()),
+      'bottomRight' => $this->renderMove($moveFilterer->moveInBottomRight()),
     ));
   }
 
