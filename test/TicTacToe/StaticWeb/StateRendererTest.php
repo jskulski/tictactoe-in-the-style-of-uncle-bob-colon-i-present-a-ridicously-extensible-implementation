@@ -4,8 +4,8 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
-use JSK\TicTacToe\Game\Board;
 use JSK\TicTacToe\Game\Move;
+use JSK\TicTacToe\Game\MoveFilterer;
 use JSK\TicTacToe\Game\NullMove;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
@@ -32,7 +32,7 @@ class StateRendererTest extends \PHPUnit_Framework_TestCase
     $this->templateStub = new TemplateStub();
     $this->templateStub->setPlayerXMarker(self::X);
     $this->templateStub->setPlayerOMarker(self::O);
-    $this->target = new StateRenderer($this->templateStub);
+    $this->target = new StateRenderer($this->templateStub, new MoveFilterer());
   }
 
   public function test_given_a_move_for_player_one_state_renderer_renders_our_X_template()
@@ -148,7 +148,7 @@ class TemplateStub extends Engine
   }
 
   /**
-   * @param Board $board
+   * @param Move
    * @return string
    */
   private function renderBoard(

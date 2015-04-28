@@ -16,10 +16,10 @@ class StateRenderer {
   /** @var MoveFilterer */
   private $moveFilterer;
 
-  function __construct(Engine $template)
+  function __construct(Engine $template, MoveFilterer $moveFilterer)
   {
     $this->template = $template;
-    $this->moveFilterer = new MoveFilterer();
+    $this->moveFilterer = $moveFilterer;
   }
 
 //  /**
