@@ -50,7 +50,6 @@ class StateRenderer {
   public function renderBoard(array $moveHistory)
   {
     $moveFilterer = new MoveFilterer($moveHistory);
-    $board = new Board($moveHistory);
     return $this->template->render('board', array(
       'topLeft' => $this->renderMove($moveFilterer->moveInTopLeft()),
       'topMiddle' => $this->renderMove($moveFilterer->moveInTopMiddle()),
