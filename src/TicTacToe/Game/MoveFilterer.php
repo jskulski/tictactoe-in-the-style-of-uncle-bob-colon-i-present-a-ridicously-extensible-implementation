@@ -138,5 +138,13 @@ class MoveFilterer {
     return $move ? $move : new NullMove();
   }
 
+  public function moveInTopMiddle()
+  {
+    $movesFiltered = $this->movesInTopRow()->movesInMiddleColumn();
+    $move = array_pop($movesFiltered->moves);
+    return $move ? $move : new NullMove();
+  }
+
+
 }
 
