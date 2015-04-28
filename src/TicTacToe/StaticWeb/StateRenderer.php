@@ -13,10 +13,13 @@ class StateRenderer {
 
   /** @var  Engine */
   private $template;
+  /** @var MoveFilterer */
+  private $moveFilterer;
 
   function __construct(Engine $template)
   {
     $this->template = $template;
+    $this->moveFilterer = new MoveFilterer();
   }
 
 //  /**
@@ -49,19 +52,18 @@ class StateRenderer {
    */
   public function renderBoard(array $moveHistory)
   {
-    $moveFilterer = new MoveFilterer($moveHistory);
     return $this->template->render('board', array(
-      'topLeft' => $this->renderMove($moveFilterer->moveInTopLeft()),
-      'topMiddle' => $this->renderMove($moveFilterer->moveInTopMiddle()),
-      'topRight' => $this->renderMove($moveFilterer->moveInTopRight()),
+      'topLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopLeft()),
+      'topMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopMiddle()),
+      'topRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopRight()),
 
-      'middleLeft' => $this->renderMove($moveFilterer->moveInMiddleLeft()),
-      'middleMiddle' => $this->renderMove($moveFilterer->moveInMiddleMiddle()),
-      'middleRight' => $this->renderMove($moveFilterer->moveInMiddleRight()),
+      'middleLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleLeft()),
+      'middleMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle()),
+      'middleRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleRight()),
 
-      'bottomLeft' => $this->renderMove($moveFilterer->moveInBottomLeft()),
-      'bottomMiddle' => $this->renderMove($moveFilterer->moveInMiddleMiddle()),
-      'bottomRight' => $this->renderMove($moveFilterer->moveInBottomRight()),
+      'bottomLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInBottomLeft()),
+      'bottomMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle()),
+      'bottomRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInBottomRight()),
     ));
   }
 
