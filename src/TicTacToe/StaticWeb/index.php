@@ -12,5 +12,21 @@ $app->get('/', function() use ($app) {
   echo $html;
 });
 
+$app->post('/move', function() use ($app) {
+  echo "hello world mofo";exit;
+
+  $row = $app->request->params('row');
+  $column = $app->request->params('column');
+  $player = $app->request->params('player');
+
+
+  $template = new League\Plates\Engine('templates');
+  $moveFilterer = new \JSK\TicTacToe\Game\MoveFilterer();
+  $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer($template, $moveFilterer);
+  $state = new \JSK\TicTacToe\Game\State();
+  $html = $stateRenderer->renderBoard($state->getMoveHistory());
+  echo $html;
+});
+
 $app->run();
 

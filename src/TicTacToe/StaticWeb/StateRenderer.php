@@ -4,7 +4,6 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
-use JSK\TicTacToe\Game\Board;
 use JSK\TicTacToe\Game\Move;
 use JSK\TicTacToe\Game\MoveFilterer;
 use League\Plates\Engine;
@@ -44,17 +43,17 @@ class StateRenderer {
   public function renderBoard(array $moveHistory)
   {
     return $this->template->render('board', array(
-      'topLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopLeft()),
-      'topMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopMiddle()),
-      'topRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInTopRight()),
+      'topLeft' => $this->moveFilterer->filter($moveHistory)->moveInTopLeft(),
+      'topMiddle' => $this->moveFilterer->filter($moveHistory)->moveInTopMiddle(),
+      'topRight' => $this->moveFilterer->filter($moveHistory)->moveInTopRight(),
 
-      'middleLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleLeft()),
-      'middleMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle()),
-      'middleRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleRight()),
+      'middleLeft' => $this->moveFilterer->filter($moveHistory)->moveInMiddleLeft(),
+      'middleMiddle' => $this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle(),
+      'middleRight' => $this->moveFilterer->filter($moveHistory)->moveInMiddleRight(),
 
-      'bottomLeft' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInBottomLeft()),
-      'bottomMiddle' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle()),
-      'bottomRight' => $this->renderMove($this->moveFilterer->filter($moveHistory)->moveInBottomRight()),
+      'bottomLeft' => $this->moveFilterer->filter($moveHistory)->moveInBottomLeft(),
+      'bottomMiddle' => $this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle(),
+      'bottomRight' => $this->moveFilterer->filter($moveHistory)->moveInBottomRight(),
     ));
   }
 
