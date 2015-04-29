@@ -114,16 +114,30 @@ class TemplateStub extends Engine
   public function render($name, array $data = array())
   {
     switch ($name) {
+      case 'move':
+        /** @var Move $move */
+        $move = $data['move'];
+        if ($move->isX()) {
+          $rendered =  $this->playerXMarker;
+        }
+        elseif ($move->isO()) {
+          $rendered =  $this->playerOMarker;
+        }
+        elseif ($move->isNullObject()) {
+          $rendered =  self::EmptyMarker;
+        }
+        break;
+
       case 'X':
-        $rendered =  $this->playerXMarker;
+        $rendered = $this->playerXMarker;
         break;
 
       case 'O':
-        $rendered =  $this->playerOMarker;
+        $rendered = $this->playerOMarker;
         break;
 
       case 'emptySpace':
-        $rendered =  self::EmptyMarker;
+        $rendered = self::EmptyMarker;
         break;
 
       case 'board':
@@ -165,9 +179,19 @@ class TemplateStub extends Engine
     $bottomLeft, $bottomMiddle, $bottomRight
   )
   {
-    return $topLeft . $topMiddle . $topRight ."\n".
-           $middleLeft . $middleMiddle . $middleRight ."\n".
-           $bottomLeft . $bottomMiddle . $bottomRight;
+    $renderedTopLeft = $this->render('move', array('move' => $topLeft));
+    $renderedTopMiddle = $this->render('move', array('move' => $topMiddle));
+    $renderedTopRight = $this->render('move', array('move' => $topRight));
+    $renderedMiddleLeft = $this->render('move', array('move' => $middleLeft));
+    $renderedMiddleMiddle = $this->render('move', array('move' => $middleMiddle));
+    $renderedMiddleRight = $this->render('move', array('move' => $middleRight));
+    $renderedBottomLeft = $this->render('move', array('move' => $bottomLeft));
+    $renderedBottomMiddle = $this->render('move', array('move' => $bottomMiddle));
+    $renderedBottomRight = $this->render('move', array('move' => $bottomRight));
+
+    return $renderedTopLeft . $renderedTopMiddle . $renderedTopRight ."\n".
+           $renderedMiddleLeft . $renderedMiddleMiddle . $renderedMiddleRight ."\n".
+           $renderedBottomLeft . $renderedBottomMiddle . $renderedBottomRight;
   }
 }
 
