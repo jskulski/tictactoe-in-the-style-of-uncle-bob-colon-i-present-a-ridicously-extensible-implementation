@@ -7,7 +7,7 @@ class SlimApplicationHandlerBatman {
   public function displayGame() {
     $template = new League\Plates\Engine('templates');
     $moveFilterer = new \JSK\TicTacToe\Game\MoveFilterer();
-    $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer($template, $moveFilterer);
+    $stateRenderer = new \JSK\TicTacToe\Game\StateRenderer($template, $moveFilterer);
     $state = new \JSK\TicTacToe\Game\State();
     return $stateRenderer->renderBoard($state->getMoveHistory());
   }
@@ -20,7 +20,7 @@ class SlimApplicationHandlerBatman {
 
     $template = new League\Plates\Engine('templates');
     $moveFilterer = new \JSK\TicTacToe\Game\MoveFilterer();
-    $stateRenderer = new \JSK\TicTacToe\StaticWeb\StateRenderer($template, $moveFilterer);
+    $stateRenderer = new \JSK\TicTacToe\Game\StateRenderer($template, $moveFilterer);
     return $stateRenderer->renderBoard($state->getMoveHistory());
   }
 
