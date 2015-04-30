@@ -16,7 +16,7 @@
         <?php $this->insert('partials/move', array('moveName' => 'middleLeft', 'move' => $middleLeft)) ?>
       </td>
       <td>
-        <?php $this->insert('partials/move', array('moveName' => 'middleMiddle', 'move' => $middleRight)) ?>
+        <?php $this->insert('partials/move', array('moveName' => 'middleMiddle', 'move' => $middleMiddle)) ?>
       </td>
       <td>
         <?php $this->insert('partials/move', array('moveName' => 'middleRight', 'move' => $middleRight)) ?>

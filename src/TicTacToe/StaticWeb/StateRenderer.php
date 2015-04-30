@@ -52,7 +52,7 @@ class StateRenderer {
       'middleRight' => $this->moveFilterer->filter($moveHistory)->moveInMiddleRight(),
 
       'bottomLeft' => $this->moveFilterer->filter($moveHistory)->moveInBottomLeft(),
-      'bottomMiddle' => $this->moveFilterer->filter($moveHistory)->moveInMiddleMiddle(),
+      'bottomMiddle' => $this->moveFilterer->filter($moveHistory)->moveInBottomMiddle(),
       'bottomRight' => $this->moveFilterer->filter($moveHistory)->moveInBottomRight(),
     ));
   }
