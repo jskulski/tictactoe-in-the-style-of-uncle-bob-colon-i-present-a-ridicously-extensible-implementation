@@ -4,9 +4,8 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 $app = new \Slim\Slim();
 $app->get('/', function() use ($app) {
-  $templates = new League\Plates\Engine('templates');
-  $handler = new \JSK\TicTacToe\StaticWeb\MakeRocketGo($templates);
-  $html = $handler->displayGame($templates);
+  $handler = new \JSK\TicTacToe\StaticWeb\MakeRocketGo();
+  $html = $handler->displayGame();
   echo $html;
 });
 
