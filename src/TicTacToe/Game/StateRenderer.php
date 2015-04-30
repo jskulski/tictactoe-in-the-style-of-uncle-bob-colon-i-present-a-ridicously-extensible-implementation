@@ -1,11 +1,8 @@
 <?php
 
 
-namespace JSK\TicTacToe\StaticWeb;
+namespace JSK\TicTacToe\Game;
 
-
-use JSK\TicTacToe\Game\Move;
-use JSK\TicTacToe\Game\MoveFilterer;
 use League\Plates\Engine;
 
 class StateRenderer {

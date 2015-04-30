@@ -1,14 +1,9 @@
 <?php
 
 
-namespace JSK\TicTacToe\StaticWeb;
+namespace JSK\TicTacToe\Game;
 
 
-use JSK\TicTacToe\Game\Move;
-use JSK\TicTacToe\Game\MoveFilterer;
-use JSK\TicTacToe\Game\NullMove;
-use JSK\TicTacToe\Game\PlayerMove;
-use JSK\TicTacToe\Game\State;
 use League\Plates\Engine;
 
 
