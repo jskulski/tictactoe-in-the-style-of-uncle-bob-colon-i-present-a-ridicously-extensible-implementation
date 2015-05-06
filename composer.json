@@ -16,7 +16,7 @@
     "require": {
         "wp-cli/php-cli-tools": "v0.10.4",
         "slim/slim": "2.6.2",
-        "crodas/notoj": "1.0.x-dev",
-        "league/plates": "3.1.0"
+        "league/plates": "3.1.0",
+	    "doctrine/orm": "v2.4.7"
     }
 }
