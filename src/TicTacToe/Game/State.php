@@ -2,10 +2,18 @@
 
 
 namespace JSK\TicTacToe\Game;
+use Doctrine\ORM\Mapping\Entity;
 
 
+/**
+ * Class State
+ * @package JSK\TicTacToe\Game
+ * @Entity
+ */
 class State {
 
+  /** @var int @Id @Column(type="integer") @GeneratedValue */
+  private $stateId;
   /** @var  Move[] */
   private $moveHistory = array();
   /** @var  boolean */
@@ -111,6 +119,21 @@ class State {
     $this->moveHistory = $moveHistory;
   }
 
+  /**
+   * @return int
+   */
+  public function getStateId()
+  {
+    return $this->stateId;
+  }
+
+  /**
+   * @param int $stateId
+   */
+  public function setStateId($stateId)
+  {
+    $this->stateId = $stateId;
+  }
 
 }
 
