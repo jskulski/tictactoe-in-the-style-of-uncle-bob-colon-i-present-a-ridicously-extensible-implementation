@@ -59,6 +59,18 @@ class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($retrievedState, $state);
   }
 
+  public function test_that_two_saves_increment_the_id()
+  {
+    $firstState = new State();
+    $secondState = new State();
+
+    $this->target->save($firstState);
+    $this->target->save($secondState);
+
+    $this->assertEquals(1, $firstState->getStateId());
+    $this->assertEquals(2, $secondState->getStateId());
+  }
+
 
 
   private function createEntityTables()
