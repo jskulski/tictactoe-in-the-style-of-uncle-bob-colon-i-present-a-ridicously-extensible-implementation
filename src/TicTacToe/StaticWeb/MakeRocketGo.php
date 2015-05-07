@@ -12,7 +12,7 @@ use JSK\TicTacToe\Game\StateRenderer;
 class MakeRocketGo {
 
   public function displayGame() {
-    $templates = new \League\Plates\Engine('templates');
+    $templates = new \League\Plates\Engine(__DIR__ .'/templates');
     $moveFilterer = new MoveFilterer();
     $stateRenderer = new StateRenderer($templates, $moveFilterer);
     $state = new State();
