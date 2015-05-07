@@ -71,8 +71,6 @@ class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals(2, $secondState->getStateId());
   }
 
-
-
   private function createEntityTables()
   {
     $metadata = $this->entityManager->getClassMetadata(State::class);
