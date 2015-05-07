@@ -5,6 +5,7 @@ namespace JSK\TicTacToe\StaticWeb;
 
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\SchemaTool;
 use PDO;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
@@ -19,7 +20,9 @@ class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
   public function setUp()
   {
     $factory = new Factory();
-    $this->entityManager = $factory->createEntityManager();
+    $pdo = new PDO('sqlite::memory:');
+    $this->entityManager = $factory->createEntityManagerWithPDO($pdo);
+    $this->createEntityTables();
     $this->target = new StateRepositoryDoctrineImpl($this->entityManager);
   }
 
@@ -33,6 +36,7 @@ class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
     $stateId = $this->target->save($state);
     $retrievedState = $this->target->retrieveById($stateId);
 
+    $this->assertEquals(1, $stateId);
     $this->assertInstanceOf(State::class, $retrievedState);
     $this->assertEquals($retrievedState, $state);
   }
@@ -53,6 +57,16 @@ class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
 
     $this->assertInstanceOf(State::class, $retrievedState);
     $this->assertEquals($retrievedState, $state);
+  }
+
+
+
+  private function createEntityTables()
+  {
+    $metadata = $this->entityManager->getClassMetadata(State::class);
+    $metadata->setPrimaryTable(array('name' => $metadata->getTableName() . 'test'));
+    $schemaTool = new SchemaTool($this->entityManager);
+    $schemaTool->createSchema(array($metadata));
   }
 
 }

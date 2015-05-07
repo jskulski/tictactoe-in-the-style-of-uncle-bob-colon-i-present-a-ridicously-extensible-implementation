@@ -10,12 +10,31 @@ use Doctrine\ORM\Tools\Setup;
 
 class Factory {
 
-  public function createEntityManager()
+  /** @var PDO */
+  private $pdo;
+  /** @var  EntityManager */
+  private $entityManager;
+
+  public function createPDO()
   {
-    $pdo = new \PDO('sqlite:/Users/jskulski/tmp/tictactoe/db.sqlite');
-    $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../../src/TicTacToe/Game"), true);
-    $connection = DriverManager::getConnection(array('pdo' => $pdo), $config);
-    return EntityManager::create($connection, $config);
+    if (!$this->pdo) {
+      $this->pdo = new \PDO('sqlite:/Users/jskulski/tmp/tictactoe/db.sqlite');
+    }
+    return $this->pdo;
+  }
+
+  public function createEntityManager() {
+    return $this->createEntityManagerWithPDO($this->createPDO());
+  }
+
+  public function createEntityManagerWithPDO(PDO $pdo)
+  {
+    if (!$this->entityManager) {
+      $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../../src/TicTacToe/Game"), true);
+      $connection = DriverManager::getConnection(array('pdo' => $pdo), $config);
+      $this->entityManager = EntityManager::create($connection, $config);
+    }
+    return $this->entityManager;
   }
 
 }
