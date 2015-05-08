@@ -4,14 +4,14 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
+use PDO;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use PDO;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
-class StateRepositorySQLLiteIntegrationTest extends \PHPUnit_Framework_TestCase
-{
+
+class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
   /** @var EntityManager */
   private $entityManager;
   /** @var StateRepositoryDoctrineImpl */
