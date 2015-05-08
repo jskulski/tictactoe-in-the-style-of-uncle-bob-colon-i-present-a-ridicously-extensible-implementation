@@ -3,7 +3,9 @@
 
 namespace JSK\TicTacToe\StaticWeb;
 
+use Doctrine\ORM\Configuration;
 use PDO;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
@@ -16,6 +18,10 @@ class Factory {
   private $entityManager;
   /** @var  StateRepository */
   private $stateRepository;
+  /** @var  Connection */
+  private $doctrineConnection;
+  /** @var  Configuration */
+  private $doctrineConfiguration;
 
   public function createPDO()
   {
@@ -32,11 +38,31 @@ class Factory {
   public function createEntityManagerWithPDO(PDO $pdo)
   {
     if (!$this->entityManager) {
-      $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../../src/TicTacToe/Game"), true);
-      $connection = DriverManager::getConnection(array('pdo' => $pdo), $config);
-      $this->entityManager = EntityManager::create($connection, $config);
+      $this->entityManager = EntityManager::create($this->createDoctrineConnection($pdo), $this->createDoctrineConfig());
     }
     return $this->entityManager;
+  }
+
+  public function createDoctrineConfig()
+  {
+    if (!$this->doctrineConnection) {
+      $this->doctrineConfiguration = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/../../../src/TicTacToe/Game"), true);
+    }
+    return $this->doctrineConfiguration;
+  }
+
+  public function createDoctrineConnection(PDO $pdo)
+  {
+    if (!$this->doctrineConnection) {
+      $this->doctrineConnection = DriverManager::getConnection(array('pdo' => $pdo), $this->createDoctrineConfig());
+    }
+    return $this->doctrineConnection;
+  }
+
+
+  public function createSchemaManager(PDO $pdo)
+  {
+    return $this->createDoctrineConnection($pdo)->getSchemaManager();
   }
 
   public function createStateRepository() {

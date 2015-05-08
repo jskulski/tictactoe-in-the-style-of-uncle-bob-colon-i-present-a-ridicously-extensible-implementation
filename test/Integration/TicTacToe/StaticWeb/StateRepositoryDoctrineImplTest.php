@@ -12,18 +12,34 @@ use JSK\TicTacToe\Game\State;
 
 
 class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
-  /** @var EntityManager */
-  private $entityManager;
+
   /** @var StateRepositoryDoctrineImpl */
   private $target;
+  /** @var EntityManager */
+  private $entityManager;
+
+  /** @var SchemaTool */
+  private $schemaTool;
+  /** @var ClassMetadata */
+  private $metadata;
 
   public function setUp()
   {
     $factory = new Factory();
     $pdo = new PDO('sqlite::memory:');
     $this->entityManager = $factory->createEntityManagerWithPDO($pdo);
-    $this->createEntityTables();
+
+    $this->metadata = $this->entityManager->getClassMetadata(State::class);
+    $this->metadata->setPrimaryTable(array('name' => $this->metadata->getTableName() . 'test'));
+
+    $this->schemaTool = new SchemaTool($this->entityManager);
+    $this->schemaTool->createSchema(array($this->metadata));
+
     $this->target = new StateRepositoryDoctrineImpl($this->entityManager);
+  }
+
+  public function tearDown() {
+    $this->schemaTool->dropSchema(array($this->metadata));
   }
 
 
@@ -87,13 +103,22 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($secondState, $arrayOfStates[1]);
     $this->assertEquals($thirdState, $arrayOfStates[2]);
   }
-
-  private function createEntityTables()
+  
+  public function test_that_states_persisted_have_accurate_move_histories()
   {
-    $metadata = $this->entityManager->getClassMetadata(State::class);
-    $metadata->setPrimaryTable(array('name' => $metadata->getTableName() . 'test'));
-    $schemaTool = new SchemaTool($this->entityManager);
-    $schemaTool->createSchema(array($metadata));
+    $state = new State();
+    $moveHistory = array(
+      PlayerMove::forX(-1, -1),
+      PlayerMove::forO( 0,  0),
+      PlayerMove::forX( 1,  1)
+    );
+    $state->setMoveHistory($moveHistory);
+
+    $stateId = $this->target->save($state);
+    $retrievedState = $this->target->retrieveById($stateId);
+
+    $retrievedMoveHistory = $retrievedState->getMoveHistory();
+    $this->assertEquals($moveHistory[0], $retrievedMoveHistory[0]);
   }
 
 

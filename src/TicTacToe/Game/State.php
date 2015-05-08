@@ -37,6 +37,15 @@ class State {
   }
 
   /**
+   * @param Move[] $moveHistory
+   */
+  public function setMoveHistory($moveHistory)
+  {
+    $this->moveHistory = $moveHistory;
+  }
+
+
+  /**
    * @param boolean $playerXTurn
    */
   public function setPlayerXTurn($playerXTurn)
@@ -118,6 +127,8 @@ class State {
     array_push($moveHistory, $move);
     $this->moveHistory = $moveHistory;
   }
+
+
 
   /**
    * @return int
