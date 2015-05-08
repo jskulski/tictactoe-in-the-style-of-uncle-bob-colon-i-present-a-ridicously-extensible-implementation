@@ -14,6 +14,8 @@ class Factory {
   private $pdo;
   /** @var  EntityManager */
   private $entityManager;
+  /** @var  StateRepository */
+  private $stateRepository;
 
   public function createPDO()
   {
@@ -35,6 +37,13 @@ class Factory {
       $this->entityManager = EntityManager::create($connection, $config);
     }
     return $this->entityManager;
+  }
+
+  public function createStateRepository() {
+    if (!$this->stateRepository) {
+      $this->stateRepository = new StateRepositoryDoctrineImpl($this->createEntityManager());
+    }
+    return $this->stateRepository;
   }
 
 }

@@ -68,4 +68,11 @@ class MakeRocketGo {
     return $move;
   }
 
+  public function displayList()
+  {
+    $factory = new Factory();
+    $stateRepository = $factory->createStateRepository();
+//    $stateRepository->findAll();
+  }
+
 }
