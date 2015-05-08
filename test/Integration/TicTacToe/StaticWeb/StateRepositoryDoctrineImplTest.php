@@ -71,6 +71,23 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(2, $secondState->getStateId());
   }
 
+  public function test_that_we_can_retrieve_all_games()
+  {
+    $firstState = new State();
+    $secondState = new State();
+    $thirdState = new State();
+
+    $this->target->save($firstState);
+    $this->target->save($secondState);
+    $this->target->save($thirdState);
+
+    $arrayOfStates = $this->target->retrieveAll();
+
+    $this->assertEquals($firstState, $arrayOfStates[0]);
+    $this->assertEquals($secondState, $arrayOfStates[1]);
+    $this->assertEquals($thirdState, $arrayOfStates[2]);
+  }
+
   private function createEntityTables()
   {
     $metadata = $this->entityManager->getClassMetadata(State::class);
@@ -78,5 +95,6 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $schemaTool = new SchemaTool($this->entityManager);
     $schemaTool->createSchema(array($metadata));
   }
+
 
 }

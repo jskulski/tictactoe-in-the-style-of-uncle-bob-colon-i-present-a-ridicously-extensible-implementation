@@ -25,6 +25,16 @@ class StateRepositoryDoctrineImpl {
   }
 
   /**
+   * @return null|object
+   * @throws \Doctrine\ORM\ORMException
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Doctrine\ORM\TransactionRequiredException
+   */
+  public function retrieveAll() {
+    return $this->entityManager->getRepository(State::class)->findAll();
+  }
+
+  /**
    * @param State $state
    * @return int
    */
