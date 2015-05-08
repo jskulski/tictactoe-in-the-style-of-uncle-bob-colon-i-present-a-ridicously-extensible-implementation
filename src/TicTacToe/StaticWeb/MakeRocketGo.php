@@ -72,7 +72,8 @@ class MakeRocketGo {
   {
     $factory = new Factory();
     $stateRepository = $factory->createStateRepository();
-//    $stateRepository->findAll();
+    $allStates = $stateRepository->retrieveAll();
+    var_dump($allStates);
   }
 
 }
