@@ -4,6 +4,7 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 use Doctrine\ORM\EntityManager;
+use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
 class StateRepositoryDoctrineImpl {
@@ -21,7 +22,12 @@ class StateRepositoryDoctrineImpl {
    * @return State
    */
   public function retrieveById($id) {
-    return $this->entityManager->find(State::class, $id);
+    /** @var array $moveHistory */
+    $moveHistory = $this->entityManager->getRepository(PlayerMove::class)->findBy(array('stateId' => $id));
+    /** @var State $state */
+    $state = $this->entityManager->find(State::class, $id);
+    $state->setMoveHistory($moveHistory);
+    return $state;
   }
 
   /**
@@ -31,6 +37,7 @@ class StateRepositoryDoctrineImpl {
    * @throws \Doctrine\ORM\TransactionRequiredException
    */
   public function retrieveAll() {
+//    var_dump($this->entityManager->getRepository(State::class)->findAll());
     return $this->entityManager->getRepository(State::class)->findAll();
   }
 
@@ -42,7 +49,17 @@ class StateRepositoryDoctrineImpl {
   {
     $this->entityManager->persist($state);
     $this->entityManager->flush();
-    return $state->getStateId();
+    $stateId = $state->getStateId();
+
+    $moveHistory = $state->getMoveHistory();
+    foreach ($moveHistory as $move) {
+      /** @var PlayerMove $move */
+      $move->setStateId($stateId);
+      $this->entityManager->persist($move);
+      $this->entityManager->flush();
+    }
+
+    return $stateId;
   }
 
 }

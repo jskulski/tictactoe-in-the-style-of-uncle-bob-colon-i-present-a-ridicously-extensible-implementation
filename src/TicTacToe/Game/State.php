@@ -4,7 +4,6 @@
 namespace JSK\TicTacToe\Game;
 use Doctrine\ORM\Mapping\Entity;
 
-
 /**
  * Class State
  * @package JSK\TicTacToe\Game
@@ -14,7 +13,9 @@ class State {
 
   /** @var int @Id @Column(type="integer") @GeneratedValue */
   private $stateId;
-  /** @var  Move[] */
+  /**
+   * @var  PlayerMove[]
+   */
   private $moveHistory = array();
   /** @var  boolean */
   private $winnerIsX = true;
@@ -37,13 +38,12 @@ class State {
   }
 
   /**
-   * @param Move[] $moveHistory
+   * @param PlayerMove[] $moveHistory
    */
   public function setMoveHistory($moveHistory)
   {
     $this->moveHistory = $moveHistory;
   }
-
 
   /**
    * @param boolean $playerXTurn

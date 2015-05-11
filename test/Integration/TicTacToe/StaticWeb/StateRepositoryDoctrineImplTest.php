@@ -9,9 +9,11 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 
-class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
+class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase
+{
 
   /** @var StateRepositoryDoctrineImpl */
   private $target;
@@ -20,7 +22,7 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
 
   /** @var SchemaTool */
   private $schemaTool;
-  /** @var ClassMetadata */
+  /** @var ClassMetadata[] */
   private $metadata;
 
   public function setUp()
@@ -29,19 +31,24 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $pdo = new PDO('sqlite::memory:');
     $this->entityManager = $factory->createEntityManagerWithPDO($pdo);
 
-    $this->metadata = $this->entityManager->getClassMetadata(State::class);
-    $this->metadata->setPrimaryTable(array('name' => $this->metadata->getTableName() . 'test'));
+    $this->metadata = array(
+      $this->entityManager->getClassMetadata(State::class),
+      $this->entityManager->getClassMetadata(PlayerMove::class)
+    );
+    $this->metadata[0]->setPrimaryTable(array('name' => $this->metadata[0]->getTableName() . 'test'));
+    $this->metadata[1]->setPrimaryTable(array('name' => $this->metadata[1]->getTableName() . 'test'));
 
     $this->schemaTool = new SchemaTool($this->entityManager);
-    $this->schemaTool->createSchema(array($this->metadata));
+    $this->schemaTool->dropSchema($this->metadata);
+    $this->schemaTool->createSchema($this->metadata);
 
     $this->target = new StateRepositoryDoctrineImpl($this->entityManager);
   }
 
-  public function tearDown() {
-    $this->schemaTool->dropSchema(array($this->metadata));
+  public function tearDown()
+  {
+//    $this->schemaTool->dropSchema(array($this->metadata));
   }
-
 
   public function test_can_save_and_retrieve_state_on_new_database()
   {
@@ -50,6 +57,7 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $state->addMoveToMoveHistory(PlayerMove::forO(0, 1));
 
     $stateId = $this->target->save($state);
+    $this->clearDoctrineCache();
     $retrievedState = $this->target->retrieveById($stateId);
 
     $this->assertEquals(1, $stateId);
@@ -103,14 +111,14 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($secondState, $arrayOfStates[1]);
     $this->assertEquals($thirdState, $arrayOfStates[2]);
   }
-  
+
   public function test_that_states_persisted_have_accurate_move_histories()
   {
     $state = new State();
     $moveHistory = array(
       PlayerMove::forX(-1, -1),
-      PlayerMove::forO( 0,  0),
-      PlayerMove::forX( 1,  1)
+      PlayerMove::forO(0, 0),
+      PlayerMove::forX(1, 1)
     );
     $state->setMoveHistory($moveHistory);
 
@@ -121,5 +129,9 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($moveHistory[0], $retrievedMoveHistory[0]);
   }
 
+  private function clearDoctrineCache()
+  {
+    $this->entityManager->clear();
+  }
 
 }

@@ -3,16 +3,48 @@
 
 namespace JSK\TicTacToe\Game;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
+
+/**
+ * Class PlayerMove
+ * @package JSK\TicTacToe\Game
+ * @Entity
+ */
 class PlayerMove implements Move {
 
   const X = 'X';
   const O = 'O';
 
-  /** @var  int */
+  /**
+   * @var int
+   * @Id
+   * @Column(type="integer")
+   * @GeneratedValue
+   */
+  private $playerMoveId;
+  /**
+   * @var int
+   * @Column(type="integer")
+   */
+  private $stateId;
+
+  /**
+   * @var  int
+   * @Column(type="string")
+   */
   private $player;
-  /** @var  int */
+  /**
+   * @var  int
+   * @Column(type="integer")
+   */
   private $row;
-  /** @var  int */
+  /**
+   * @var  int
+   * @Column(type="integer")
+   */
   private $column;
 
   /**
@@ -92,4 +124,29 @@ class PlayerMove implements Move {
   {
     return false;
   }
+
+  /**
+   * @return int
+   */
+  public function getPlayerMoveId()
+  {
+    return $this->playerMoveId;
+  }
+
+  /**
+   * @return int
+   */
+  public function getStateId()
+  {
+    return $this->stateId;
+  }
+
+  /**
+   * @param int $stateId
+   */
+  public function setStateId($stateId)
+  {
+    $this->stateId = $stateId;
+  }
+
 }
