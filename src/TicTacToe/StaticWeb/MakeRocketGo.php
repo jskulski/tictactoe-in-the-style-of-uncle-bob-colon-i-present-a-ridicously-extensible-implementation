@@ -14,9 +14,11 @@ class MakeRocketGo {
   public function displayList()
   {
     $factory = new Factory();
+    $templateEngine = $factory->createTemplateEngine();
     $stateRepository = $factory->createStateRepository();
     $allStates = $stateRepository->retrieveAll();
-    var_dump($allStates);
+    $html = $templateEngine->render('list', array('states' => $allStates));
+    return $html;
   }
 
   public function displayState($stateId) {
