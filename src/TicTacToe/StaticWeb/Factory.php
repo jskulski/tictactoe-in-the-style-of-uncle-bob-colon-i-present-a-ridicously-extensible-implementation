@@ -4,6 +4,7 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 use Doctrine\ORM\Configuration;
+use League\Plates\Engine;
 use PDO;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -16,12 +17,14 @@ class Factory {
   private $pdo;
   /** @var  EntityManager */
   private $entityManager;
-  /** @var  StateRepository */
+  /** @var  StateRepositoryDoctrineImpl */
   private $stateRepository;
   /** @var  Connection */
   private $doctrineConnection;
   /** @var  Configuration */
   private $doctrineConfiguration;
+  /** @var  Engine */
+  private $templateEngine;
 
   public function createPDO()
   {
@@ -71,5 +74,19 @@ class Factory {
     }
     return $this->stateRepository;
   }
+
+  /**
+   * @return Engine
+   */
+  public function createTemplateEngine()
+  {
+    if (!$this->templateEngine) {
+      $this->templateEngine = new \League\Plates\Engine(__DIR__ .'/templates');
+    }
+    return $this->templateEngine;
+  }
+
+
+
 
 }

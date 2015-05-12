@@ -11,12 +11,31 @@ use JSK\TicTacToe\Game\StateRenderer;
 
 class MakeRocketGo {
 
-  public function displayGame() {
-    $templates = new \League\Plates\Engine(__DIR__ .'/templates');
+  public function displayList()
+  {
+    $factory = new Factory();
+    $stateRepository = $factory->createStateRepository();
+    $allStates = $stateRepository->retrieveAll();
+    var_dump($allStates);
+  }
+
+  public function displayState($stateId) {
+    $factory = new Factory();
+    $templateEngine = $factory->createTemplateEngine();
     $moveFilterer = new MoveFilterer();
-    $stateRenderer = new StateRenderer($templates, $moveFilterer);
-    $state = new State();
-    return $stateRenderer->renderBoard($state->getMoveHistory());
+    $stateRenderer = new StateRenderer($templateEngine, $moveFilterer);
+    $stateRepository = $factory->createStateRepository();
+
+    try {
+      $state = $stateRepository->retrieveById($stateId);
+      $html = $stateRenderer->renderBoard($state->getMoveHistory());
+      $html .= '<form action="/state" method="POST"><button value="New Game">New Game</button></form>';
+    }
+    catch(\Exception $exception) {
+      $html = 'Sorry game not found! Start a new game?';
+    }
+
+    return $html;
   }
 
   public function makeMove($moveName) {
@@ -68,12 +87,13 @@ class MakeRocketGo {
     return $move;
   }
 
-  public function displayList()
+  public function createNewState()
   {
     $factory = new Factory();
     $stateRepository = $factory->createStateRepository();
-    $allStates = $stateRepository->retrieveAll();
-    var_dump($allStates);
+    $state = new State();
+    $stateId = $stateRepository->save($state);
+    return $stateId;
   }
 
 }
