@@ -24,8 +24,13 @@ class StateRepositoryDoctrineImpl {
   public function retrieveById($id) {
     /** @var array $moveHistory */
     $moveHistory = $this->entityManager->getRepository(PlayerMove::class)->findBy(array('stateId' => $id));
+
     /** @var State $state */
     $state = $this->entityManager->find(State::class, $id);
+    if (!$state) {
+      throw new \Exception("No game state with that id found");
+    }
+
     $state->setMoveHistory($moveHistory);
     return $state;
   }
