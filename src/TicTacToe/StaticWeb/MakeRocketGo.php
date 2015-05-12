@@ -30,7 +30,14 @@ class MakeRocketGo {
 
     try {
       $state = $stateRepository->retrieveById($stateId);
-      $html = $stateRenderer->renderBoard($state->getMoveHistory());
+      $boardHtml = $stateRenderer->renderBoard($state->getMoveHistory());
+      $html = $templateEngine->render(
+        'layout', array(
+          'stateId' => $stateId,
+          'board' => $boardHtml
+        )
+      );
+
       $html .= '<form action="/state" method="POST"><button value="New Game">New Game</button></form>';
     }
     catch(\Exception $exception) {
@@ -40,10 +47,13 @@ class MakeRocketGo {
     return $html;
   }
 
-  public function makeMove($moveName) {
+  public function makeMove($stateId, $moveName) {
+    $factory = new Factory();
+    $stateRepository = $factory->createStateRepository();
+    $state = $stateRepository->retrieveById($stateId);
     $move = $this->convertMoveNameParameterToMove($moveName);
-    $state = new State();
     $state->addMoveToMoveHistory($move);
+    $stateRepository->save($state);
   }
 
   /**
