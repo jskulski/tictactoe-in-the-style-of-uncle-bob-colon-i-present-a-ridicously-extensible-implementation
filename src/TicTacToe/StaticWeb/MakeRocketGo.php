@@ -4,8 +4,9 @@
 namespace JSK\TicTacToe\StaticWeb;
 
 
+use JSK\TicTacToe\Game\Factory as GameFactory;
+use JSK\TicTacToe\Game\Game;
 use JSK\TicTacToe\Game\MoveFilterer;
-use JSK\TicTacToe\Game\NullMove;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 use JSK\TicTacToe\Game\StateRenderer;
@@ -50,11 +51,14 @@ class MakeRocketGo {
 
   public function makeMove($stateId, $moveName) {
     $factory = new Factory();
+    $gameFactory = new GameFactory();
     $stateRepository = $factory->createStateRepository();
     $state = $stateRepository->retrieveById($stateId);
+    /** @var Game $game */
     $move = $this->convertMoveNameParameterToMove($moveName, $state->isPlayerXTurn());
-    $state->addMoveToMoveHistory($move);
-    $stateRepository->save($state);
+    $game = $gameFactory->createGame();
+    $newState = $game->makeMove($move, $state);
+    $stateRepository->save($newState);
   }
 
   /**
@@ -105,7 +109,7 @@ class MakeRocketGo {
         break;
 
       default:
-        throw new Exception("Move name not supported");
+        throw new \Exception("Move name not supported");
         break;
     }
 
