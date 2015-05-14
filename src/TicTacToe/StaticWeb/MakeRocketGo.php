@@ -39,8 +39,6 @@ class MakeRocketGo {
           'board' => $boardHtml
         )
       );
-
-      $html .= '<form action="/state" method="POST"><button value="New Game">New Game</button></form>';
     }
     catch(\Exception $exception) {
       $html = 'Sorry game not found! Start a new game?';
