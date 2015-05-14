@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManager;
 use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 
-class StateRepositoryDoctrineImpl {
+class StateRepositoryDoctrineImpl
+{
 
   /** @var  EntityManager */
   private $entityManager;
@@ -21,7 +22,8 @@ class StateRepositoryDoctrineImpl {
    * @param int $id
    * @return State
    */
-  public function retrieveById($id) {
+  public function retrieveById($id)
+  {
     /** @var array $moveHistory */
     $moveHistory = $this->entityManager->getRepository(PlayerMove::class)->findBy(array('stateId' => $id));
 
@@ -41,8 +43,8 @@ class StateRepositoryDoctrineImpl {
    * @throws \Doctrine\ORM\OptimisticLockException
    * @throws \Doctrine\ORM\TransactionRequiredException
    */
-  public function retrieveAll() {
-//    var_dump($this->entityManager->getRepository(State::class)->findAll());
+  public function retrieveAll()
+  {
     return $this->entityManager->getRepository(State::class)->findAll();
   }
 

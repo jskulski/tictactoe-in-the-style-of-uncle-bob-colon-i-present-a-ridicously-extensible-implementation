@@ -6,6 +6,7 @@ namespace JSK\TicTacToe\StaticWeb;
 
 use JSK\TicTacToe\Game\MoveFilterer;
 use JSK\TicTacToe\Game\NullMove;
+use JSK\TicTacToe\Game\PlayerMove;
 use JSK\TicTacToe\Game\State;
 use JSK\TicTacToe\Game\StateRenderer;
 
@@ -51,51 +52,71 @@ class MakeRocketGo {
     $factory = new Factory();
     $stateRepository = $factory->createStateRepository();
     $state = $stateRepository->retrieveById($stateId);
-    $move = $this->convertMoveNameParameterToMove($moveName);
+    $move = $this->convertMoveNameParameterToMove($moveName, $state->isPlayerXTurn());
     $state->addMoveToMoveHistory($move);
     $stateRepository->save($state);
   }
 
   /**
    * @param $moveName
+   * @param boolean $isPlayerXTurn
    * @return \JSK\TicTacToe\Game\PlayerMove
    */
-  private function convertMoveNameParameterToMove($moveName)
+  private function convertMoveNameParameterToMove($moveName, $isPlayerXTurn)
   {
     switch ($moveName) {
       case 'topLeft':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(-1, -1);
+        $row = -1;
+        $column = -1;;
         break;
       case 'topMiddle':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(-1, 0);
+        $row = -1;
+        $column = 0;
         break;
       case 'topRight':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(-1, 1);
+        $row = -1;
+        $column = 1;
         break;
 
       case 'middleLeft':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(0, -1);
+        $row = 0;
+        $column = -1;
         break;
       case 'middleMiddle':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(0, 0);
+        $row = 0;
+        $column = 0;
         break;
       case 'middleRight':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(0, 1);
+        $row = 0;
+        $column = 1;
         break;
 
       case 'bottomLeft':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(1, -1);
+        $row = 1;
+        $column = -1;
         break;
       case 'bottomMiddle':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(1, 0);
+        $row = 1;
+        $column = 0;
         break;
       case 'bottomRight':
-        $move = \JSK\TicTacToe\Game\PlayerMove::forX(1, 1);
+        $row = 1;
+        $column = 1;
         break;
+
       default:
-        $move = new NullMove();
+        throw new Exception("Move name not supported");
         break;
     }
+
+    if ($isPlayerXTurn) {
+      $move = PlayerMove::forX($row, $column);
+    }
+    else {
+      $move = PlayerMove::forO($row, $column);
+    }
+
+
     return $move;
   }
 

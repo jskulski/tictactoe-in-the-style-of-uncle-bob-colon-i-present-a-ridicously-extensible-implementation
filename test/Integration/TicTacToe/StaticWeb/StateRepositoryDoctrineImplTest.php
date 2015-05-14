@@ -129,6 +129,8 @@ class StateRepositoryDoctrineImplTest extends \PHPUnit_Framework_TestCase
     $this->assertEquals($moveHistory[0], $retrievedMoveHistory[0]);
   }
 
+
+
   private function clearDoctrineCache()
   {
     $this->entityManager->clear();

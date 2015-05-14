@@ -9,4 +9,8 @@
       <?php $this->insert('partials/state', array('state' => $state)); ?>
     </tr>
   <?php endforeach; ?>
+  OR
+  <form action="/state" method="POST">
+    <button>Start New Game</button>
+  </form>
 </table>
