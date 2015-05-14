@@ -5,5 +5,5 @@ Welcome to tic tac toe
   <?= $board ?>
 </form>
 
-<a href="/list">Back to the list</a>
+<a href="/">Back to the list</a>
 <form action="/state" method="POST"><button value="New Game">Create new Game</button></form>
